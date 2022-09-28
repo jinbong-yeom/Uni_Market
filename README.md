@@ -20,7 +20,7 @@
 
 ## TBD
 
-* ## __contributor__
-### 염진봉, 충북대학교(재학), wlftj13@naver.com
-### 강인우, 충북대학교(재학), mingureion06@gmail.com
-### 이석범, 충북대학교(재학), seokbeom0912@gmail.com
+* ## __contributors__
+#### 염진봉, 충북대학교(재학), wlftj13@naver.com
+#### 강인우, 충북대학교(재학), mingureion06@gmail.com
+#### 이석범, 충북대학교(재학), seokbeom0912@gmail.com
