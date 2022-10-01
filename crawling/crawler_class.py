@@ -1,13 +1,10 @@
-from crawling.crawler_module import Crawler
+from crawler_module import Crawler
 import requests
 from bs4 import BeautifulSoup
 
 class Danngn(Crawler):
     
     crawler_data = []
-
-    def __init__(self):
-        self.crawler_data = []
 
     def crawler_search(self, search_word):
         
@@ -33,17 +30,27 @@ class Danngn(Crawler):
                 self.crawler_data.append(tmp)
     
 
-    def find_all(self):
-        for one in len(self.crawler_data):
-            print("item_id:" + one[0] + "title:" + one[1] + "picture:"+one[2] + "region" + one[3] + "price:" + one[4] + "link:"+one[5])
 
-    def find_one(self, item_id):
-        for one in len(self.crawler_data):
-            if one[0] == item_id:
-                return one
-            else:
-                return 
 
-    def data_clean(self):
-        self.crawler_data = []
+class Bunjang(Crawler):
+    crawler_data = []
+
+    def crawler_search(self, search_word):
     
+        url = 'https://api.bunjang.co.kr/api/1/find_v2.json?q={}'.format(search_word)
+
+        r = requests.get(url)
+
+        
+        contents = r.json().get("list")
+        for i in contents:
+            item_id = i.get("pid")
+            title = i.get("name")
+            picture = i.get("product_image")
+            region = i.get("location")
+            price = i.get("price")
+            link = 'https://m.bunjang.co.kr/products/' + item_id
+
+            tmp = [item_id, title, picture, region, price, link]
+
+            self.crawler_data.append(tmp)

@@ -1,12 +1,12 @@
-from abc import *
+from abc import ABC, abstractmethod
 
-class Crawler(metaClass=ABCMeta):
+class Crawler(ABC):
     crawler_data = []
 
     #생성자
-    @abstractmethod
     def __init__(self):
-        self.crawler_data = []
+        super().__init__()
+
 
     #크롤링
     @abstractmethod
@@ -14,26 +14,38 @@ class Crawler(metaClass=ABCMeta):
         pass
 
     #모든 크롤링데이터 찾기
-    @abstractmethod
     def find_all(self):
-        pass
+        for one in self.crawler_data:
+            print("item_id: " + str(one[0]) + "\n" + 
+            "title: " + str(one[1]) + "\n" +
+            "picture: " + str(one[2]) + "\n" +
+            "region: " + str(one[3]) + "\n" +
+            "price: " + str(one[4]) + "\n" +
+            "link: " + str(one[5]) + "\n")
+ 
 
     #item_id가져와 찾기
-    @abstractmethod
     def find_one(self, item_id):
-        pass
+        for one in len(self.crawler_data):
+            if one[0] == item_id:
+                return one
+            else:
+                return 
 
-    #최저가 찾기
+
+    #크롤링한 데이터 초기화
+    def data_clean(self):
+        self.crawler_data = []
+
+"""   #최저가 찾기
     @abstractmethod
     def find_smallest_price(self):
         pass
-    
-    #크롤링한 데이터 초기화
-    @abstractmethod
-    def data_clean(self):
-        pass
+"""
 
-    #크롤링한 데이터 보내기
+
+"""    #크롤링한 데이터 보내기
     @abstractmethod
     def serve_data(self):
         pass
+"""
