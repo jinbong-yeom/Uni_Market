@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //프래그먼트생성
         fragment1 = new Fragment1();
         fragment2 = new Fragment2();
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, fragment1).commit();
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavi);
 
-        // 하단 네비게이터 터치시 fragment 변경
+        // 하단 네비게이터 터치 시 프래그먼트 전환
         bottomNavigation.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
