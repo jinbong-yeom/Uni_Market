@@ -2,6 +2,7 @@ from crawler_module import Crawler
 from bs4 import BeautifulSoup
 import requests
 import datetime
+import re
 
 
 class Danngn(Crawler):
@@ -26,10 +27,24 @@ class Danngn(Crawler):
                 region = i.find('p', class_ = "article-region-name").text.strip()
                 price = i.find('p', class_ = "article-price").text.strip()
                 link = 'https://www.daangn.com' + item_id
-
-                tmp = [item_id, title, picture, region, price, link]
+                time = self.renewal_time(link)
+                tmp = [item_id, title, picture, region, price, link, time]
 
                 self.crawler_data.append(tmp)
+
+
+
+    def renewal_time(self, link):
+        r = requests.get(link)
+
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+        time = soup.find('time').text.strip()
+
+        time = re.sub(r'[^0-9]', '', time)
+        print(time)
+
+        
     
 
 
@@ -52,7 +67,7 @@ class Bunjang(Crawler):
             region = i.get("location")
             price = i.get("price")
             link = 'https://m.bunjang.co.kr/products/' + item_id
-
+            
             tmp = [item_id, title, picture, region, price, link]
 
             self.crawler_data.append(tmp)
