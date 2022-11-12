@@ -6,12 +6,12 @@ import re
 
 
 class Danngn(Crawler):
-    
+    app_name = "당근"
     crawler_data = []
 
     def crawler_search(self, search_word):
         
-        for n in range(1, 4):
+        for n in range(1, 5):
             url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(search_word, n)
 
             r = requests.get(url)
@@ -23,16 +23,15 @@ class Danngn(Crawler):
             for i in contents:
                 item_id = i.find('a')['href']
                 title = i.find("span").text.strip()
+                
+
                 picture = i.find("img").get("src")
                 region = i.find('p', class_ = "article-region-name").text.strip()
                 price = i.find('p', class_ = "article-price").text.strip()
                 link = 'https://www.daangn.com' + item_id
-                time = self.renewal_time(link)
-                tmp = [item_id, title, picture, region, price, link, time]
-
+                #time = self.renewal_time(link)
+                tmp = [item_id, title, picture, region, price, link, self.app_name]
                 self.crawler_data.append(tmp)
-
-
 
     def renewal_time(self, link):
         r = requests.get(link)
@@ -42,7 +41,6 @@ class Danngn(Crawler):
         time = soup.find('time').text.strip()
 
         time = re.sub(r'[^0-9]', '', time)
-        print(time)
 
         
     
@@ -50,6 +48,8 @@ class Danngn(Crawler):
 
 
 class Bunjang(Crawler):
+
+    app_name = "번개"
     crawler_data = []
 
     def crawler_search(self, search_word):
@@ -63,19 +63,20 @@ class Bunjang(Crawler):
         for i in contents:
             item_id = i.get("pid")
             title = i.get("name")
+            
             picture = i.get("product_image")
             region = i.get("location")
             price = i.get("price")
             link = 'https://m.bunjang.co.kr/products/' + item_id
             
-            tmp = [item_id, title, picture, region, price, link]
+            tmp = [item_id, title, picture, region, price, link, self.app_name]
 
             self.crawler_data.append(tmp)
 
 
 class Joongna(Crawler):
     crawler_data = []
-
+    app_name = "중고"
     def crawler_search(self, search_word):
         now = datetime.datetime.now().replace(microsecond=0)
 
@@ -121,15 +122,15 @@ class Joongna(Crawler):
         contents = response.json().get("data").get("items")
         
         for i in contents:
-            print(i)
             item_id = str(i.get("seq"))
             title = i.get("title")
+
             picture = i.get("detailImgUrl")
             region = i.get("locationNames")
             price = i.get("price")
             link = 'https://web.joongna.com/product/detail/' + item_id
 
 
-            tmp = [item_id, title, picture, region, price, link]
+            tmp = [item_id, title, picture, region, price, link, self.app_name]
 
             self.crawler_data.append(tmp)

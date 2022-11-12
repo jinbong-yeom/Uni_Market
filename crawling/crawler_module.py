@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from pymongo import MongoClient
-import pprint
+
 
 class Crawler(ABC):
     crawler_data = []
@@ -60,14 +60,8 @@ class Crawler(ABC):
         db.list_collection_names()
 
 
-
-
-"""    #필터
-    def filter(self):
-        pass
-"""
-
 """   #최저가 찾기
     def find_smallest_price(self):
         pass
 """
+
