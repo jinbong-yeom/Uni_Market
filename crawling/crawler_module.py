@@ -39,6 +39,21 @@ class Crawler(ABC):
     def data_clean(self):
         self.crawler_data = []
 
+    #포함할 데이터 찾기
+    def add_filter(self, title, add_filter):
+        for filter in add_filter:
+            if filter not in title:
+                break
+        else:
+            return True
+
+    #제외할 데이터 찾기
+    def sub_filter(self, title, sub_filter):
+        for filter in sub_filter:
+            if filter not in title:
+                break
+        else:
+            return True
 
 
     #크롤링한 데이터 보내기 
