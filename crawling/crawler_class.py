@@ -36,6 +36,7 @@ class Danngn(Crawler):
                 picture = i.find("img").get("src")
                 region = i.find('p', class_ = "article-region-name").text.strip()
                 price = i.find('p', class_ = "article-price").text.strip()
+                price = self.price_filtering(price)
                 link = 'https://www.daangn.com' + item_id
                 #time = self.renewal_time(link)
                 tmp = [item_id, title, picture, region, price, link, self.app_name]

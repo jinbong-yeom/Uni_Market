@@ -74,9 +74,24 @@ class Crawler(ABC):
         
         db.list_collection_names()
 
+    #가격 통합 함수
+    def price_filtering(self, price):
+        if '만' in price:
+            price = price.replace('만', "0000")
 
-"""   #최저가 찾기
-    def find_smallest_price(self):
-        pass
-"""
+        if '천' in price:
+            price = price.replace('천', "000")
+        
+        if ',' in price:
+            price = price.replace(',','')
+
+        if '원' in price:
+            price = price.replace('원','')
+        
+        if ' ' in price:
+            price = price.replace(' ', '')
+
+        return price
+        
+
 
