@@ -106,7 +106,6 @@ class Joongna(Crawler):
         contents = response.json().get("data").get("items")
         
         for i in contents:
-            print(i)
             item_id = str(i.get("seq"))
             title = i.get("title")
             picture = i.get("detailImgUrl")
