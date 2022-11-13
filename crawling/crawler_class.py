@@ -86,6 +86,7 @@ class Bunjang(Crawler):
             picture = i.get("product_image")
             region = i.get("location")
             price = i.get("price")
+            price = self.price_filtering(price)
             link = 'https://m.bunjang.co.kr/products/' + item_id
             
             tmp = [item_id, title, picture, region, price, link, self.app_name]
@@ -157,6 +158,7 @@ class Joongna(Crawler):
             picture = i.get("detailImgUrl")
             region = i.get("locationNames")
             price = i.get("price")
+            price = self.price_filtering(str(price))
             link = 'https://web.joongna.com/product/detail/' + item_id
 
 

@@ -91,7 +91,5 @@ class Crawler(ABC):
         if ' ' in price:
             price = price.replace(' ', '')
 
+        price = '{0:,}'.format(int(price))
         return price
-        
-
-

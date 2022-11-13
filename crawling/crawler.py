@@ -14,7 +14,7 @@ danngn.crawler_search(search_word, add_filter, sub_filter)
 danngn.find_all()
 danngn.serve_data()
 print("당근")
-"""
+
 #번개장터 검색
 bunjang = Bunjang()
 bunjang.crawler_search(search_word, add_filter, sub_filter)
@@ -27,4 +27,4 @@ joongna = Joongna()
 joongna.crawler_search(search_word, add_filter, sub_filter)
 joongna.find_all()
 joongna.serve_data()
-print("중고나라")"""
+print("중고나라")
