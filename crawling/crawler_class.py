@@ -11,7 +11,6 @@ class Danngn(Crawler):
     max_item_id = 0
 
     def crawler_search(self, region_keyword):
-        self.crawler_data = []
 
         url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(region_keyword, 1)
 
@@ -62,7 +61,6 @@ class Bunjang(Crawler):
     max_last_id = 0
 
     def crawler_search(self):
-        self.crawler_data = []
         
         url = 'https://api.bunjang.co.kr/api/1/find_v2.json?q={}'
 
@@ -97,7 +95,6 @@ class Joongna(Crawler):
     max_last_id = 0
 
     def crawler_search(self):
-        self.crawler_data = []
         now = datetime.datetime.now().replace(microsecond=0)
 
         headers = {
