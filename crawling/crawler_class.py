@@ -9,8 +9,7 @@ class Danngn(Crawler):
     app_name = "당근"
     crawler_data = []
 
-
-    def crawler_search(self, search_word, add_filter, sub_filter):
+    def crawler_search(self, search_word, sub_filter):
         
         for n in range(1, 5):
             url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(search_word, n)
@@ -58,7 +57,7 @@ class Bunjang(Crawler):
     app_name = "번개"
     crawler_data = []
 
-    def crawler_search(self, search_word, add_filter, sub_filter):
+    def crawler_search(self, search_word, sub_filter):
     
         url = 'https://api.bunjang.co.kr/api/1/find_v2.json?q={}'.format(search_word)
 
@@ -70,10 +69,6 @@ class Bunjang(Crawler):
             item_id = i.get("pid")
             title = i.get("name")
             
-            if add_filter:
-                isTrue = self.add_filter(title, add_filter)
-                if not isTrue:
-                    continue
             if sub_filter:
                 isTrue = self.sub_filter(title, sub_filter)
                 if isTrue:
@@ -94,7 +89,7 @@ class Bunjang(Crawler):
 class Joongna(Crawler):
     crawler_data = []
     app_name = "중고"
-    def crawler_search(self, search_word, add_filter, sub_filter):
+    def crawler_search(self, search_word, sub_filter):
         now = datetime.datetime.now().replace(microsecond=0)
 
         headers = {
@@ -142,10 +137,6 @@ class Joongna(Crawler):
             item_id = str(i.get("seq"))
             title = i.get("title")
 
-            if add_filter:
-                isTrue = self.add_filter(title, add_filter)
-                if not isTrue:
-                    continue
             if sub_filter:
                 isTrue = self.sub_filter(title, sub_filter)
                 if isTrue:
