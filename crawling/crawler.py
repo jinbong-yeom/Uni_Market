@@ -1,16 +1,21 @@
-import time
+from crawler_bunjang import start_bunjang
+from crawler_daangn import start_daangn
+from crawler_joongna import start_joongna
+import argparse
 
-from crawler_class import Joongna
+BUNJANG = 1
+DAANGN = 2
+JOONGNA = 3
 
+parser = argparse.ArgumentParser()
+parser.add_argument("-t", "--type", dest="type", action="store")
+args = parser.parse_args()
 
-joongna = Joongna()
-count = 0
-while True:
-    #중고나라 검색
-    joongna.crawler_search()
-    joongna.serve_data()
-    print("중고나라")
+type: int = args.type
 
-    time.sleep(5)
-    print(count)
-    count += 1
+if int(args.type) == BUNJANG:
+    start_bunjang()
+elif int(args.type) == DAANGN:
+    start_daangn()
+elif int(args.type) == JOONGNA:
+    start_joongna()
