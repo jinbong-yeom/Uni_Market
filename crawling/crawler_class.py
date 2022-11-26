@@ -9,6 +9,7 @@ class Danngn(Crawler):
     app_name = "당근"
     crawler_data = []
 
+
     def crawler_search(self, search_word, add_filter, sub_filter):
         
         for n in range(1, 5):
@@ -23,11 +24,7 @@ class Danngn(Crawler):
             for i in contents:
                 item_id = i.find('a')['href']
                 title = i.find("span").text.strip()
-                
-                if add_filter:
-                    isTrue = self.add_filter(title, add_filter)
-                    if not isTrue:
-                        continue
+
                 if sub_filter:
                     isTrue = self.sub_filter(title, sub_filter)
                     if isTrue:

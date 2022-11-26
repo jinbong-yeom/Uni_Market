@@ -6,7 +6,7 @@ class Crawler(ABC):
     crawler_data = []
 
     #생성자
-    def __init__(self):
+    def __init__(self, client):
         super().__init__()
 
 
@@ -38,14 +38,6 @@ class Crawler(ABC):
     #크롤링한 데이터 초기화
     def data_clean(self):
         self.crawler_data = []
-
-    #포함할 데이터 찾기
-    def add_filter(self, title, add_filter):
-        for filter in add_filter:
-            if filter not in title:
-                break
-        else:
-            return True
 
     #제외할 데이터 찾기
     def sub_filter(self, title, sub_filter):
