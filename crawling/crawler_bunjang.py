@@ -1,7 +1,7 @@
 import time
 from crawler_class import Bunjang
 
-def start_bunjang() -> None:
+def start_bunjang():
     bunjang = Bunjang()
     count = 0
 
@@ -14,3 +14,5 @@ def start_bunjang() -> None:
 
         time.sleep(5)
         count += 1
+
+    return

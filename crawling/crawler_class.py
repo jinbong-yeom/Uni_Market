@@ -10,10 +10,10 @@ class Danngn(Crawler):
     crawler_data = []
     max_item_id = 0
 
-    def crawler_search(self, region_keyword):
+    def crawler_search(self):
         self.crawler_data = []
 
-        url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(region_keyword, 1)
+        url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format("청주", 1)
 
         r = requests.get(url)
 
