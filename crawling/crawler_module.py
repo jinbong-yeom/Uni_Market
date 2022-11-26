@@ -43,8 +43,10 @@ class Crawler(ABC):
 
     #크롤링한 데이터 보내기 
     def serve_data(self):
-        client = MongoClient(host='localhost',port=27017)
-        db = client['UniMarketDB']
+        uri = "" % (
+                '', '', '')
+        client=MongoClient(uri)
+        db = client['onlineJudgeDB']
         collection=db['data']
         for tmp in self.crawler_data:
             post={"item_id":str(tmp[0]),

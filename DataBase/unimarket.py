@@ -1,6 +1,9 @@
 from pymongo import MongoClient
-client=MongoClient(host='localhost',port=27017)
-db=client['UniMarketDB']
+
+uri = "" % (
+                '', '', '')
+client=MongoClient(uri)
+db=client['onlineJudgeDB']
 collection=db['data']
 posts=db.data
 for i in posts.find():

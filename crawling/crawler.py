@@ -5,8 +5,6 @@ import datetime
 from crawler_class import Bunjang, Danngn, Joongna
 
 
-
-
 #당근마켓 검색
 danngn = Danngn()
 danngn.crawler_search("노트북")
