@@ -6,7 +6,9 @@ class Crawler(ABC):
     crawler_data = []
     #생성자
     def __init__(self):
-        self.client=MongoClient(host='localhost',port=27017)
+        uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
+                'uni', 'uni1234', 'db.yoonleeverse.com')
+        self.client=MongoClient(uri)
 
 
     #크롤링
