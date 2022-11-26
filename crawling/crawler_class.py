@@ -8,30 +8,38 @@ import re
 class Danngn(Crawler):
     app_name = "당근"
     crawler_data = []
+    max_item_id = 0
 
     def crawler_search(self, region_keyword):
-        
-        for n in range(1, 10):
-            url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(region_keyword, n)
+        self.crawler_data = []
 
-            r = requests.get(url)
+        url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(region_keyword, 1)
 
-            soup = BeautifulSoup(r.text, 'html.parser')
+        r = requests.get(url)
 
-            contents = soup.find_all('article', class_ = "flea-market-article flat-card")
+        soup = BeautifulSoup(r.text, 'html.parser')
 
-            for i in contents:
-                item_id = i.find('a')['href']
-                title = i.find("span").text.strip()
-                
-                picture = i.find("img").get("src")
-                region = i.find('p', class_ = "article-region-name").text.strip()
-                price = i.find('p', class_ = "article-price").text.strip()
-                price = self.price_filtering(price)
-                link = 'https://www.daangn.com' + item_id
-                #time = self.renewal_time(link)
-                tmp = [item_id, title, picture, region, price, link, self.app_name]
-                self.crawler_data.append(tmp)
+        contents = soup.find_all('article', class_ = "flea-market-article flat-card")
+
+        for i in contents:
+            item_id = i.find('a')['href']
+            item_id = int(re.sub(r"[^0-9]", "", item_id))
+            if self.max_item_id >= item_id:
+                continue
+            title = i.find("span").text.strip()
+
+            picture = i.find("img").get("src")
+            region = i.find('p', class_ = "article-region-name").text.strip()
+            price = i.find('p', class_ = "article-price").text.strip()
+            price = self.price_filtering(price)
+            if price == -1:
+                continue
+            link = 'https://www.daangn.com/articles/' + str(item_id)
+            #time = self.renewal_time(link)
+            tmp = [item_id, title, picture, region, price, link, self.app_name]
+            self.crawler_data.append(tmp)
+
+            self.max_item_id = item_id
 
     def renewal_time(self, link):
         r = requests.get(link)
@@ -51,40 +59,45 @@ class Bunjang(Crawler):
 
     app_name = "번개"
     crawler_data = []
+    max_last_id = 0
 
-    def crawler_search(self, search_word, sub_filter):
-    
-        url = 'https://api.bunjang.co.kr/api/1/find_v2.json?q={}'.format(search_word)
+    def crawler_search(self):
+        self.crawler_data = []
+        
+        url = 'https://api.bunjang.co.kr/api/1/find_v2.json?q={}'
 
         r = requests.get(url)
 
         
         contents = r.json().get("list")
         for i in contents:
-            item_id = i.get("pid")
+            item_id = int(i.get("pid"))
+            if self.max_last_id >= item_id:
+                continue
             title = i.get("name")
             
-            if sub_filter:
-                isTrue = self.sub_filter(title, sub_filter)
-                if isTrue:
-                    continue
-
-
             picture = i.get("product_image")
             region = i.get("location")
             price = i.get("price")
             price = self.price_filtering(price)
-            link = 'https://m.bunjang.co.kr/products/' + item_id
+            if price == -1:
+                    continue
+            link = 'https://m.bunjang.co.kr/products/' + str(item_id)
             
             tmp = [item_id, title, picture, region, price, link, self.app_name]
 
             self.crawler_data.append(tmp)
+            self.max_last_id = item_id
+    
 
 
 class Joongna(Crawler):
     crawler_data = []
     app_name = "중고"
-    def crawler_search(self, search_word, sub_filter):
+    max_last_id = 0
+
+    def crawler_search(self):
+        self.crawler_data = []
         now = datetime.datetime.now().replace(microsecond=0)
 
         headers = {
@@ -120,7 +133,7 @@ class Joongna(Crawler):
             'categoryName3': '',
             'quantity': 20,
             'firstQuantity': 20,
-            'searchWord': "{}".format(search_word),
+            'searchWord': '',
             'osType': 2,
         }
 
@@ -129,22 +142,21 @@ class Joongna(Crawler):
         contents = response.json().get("data").get("items")
         
         for i in contents:
-            item_id = str(i.get("seq"))
+            item_id = int(i.get("seq"))
+            if self.max_last_id >= item_id:
+                continue
             title = i.get("title")
-
-            if sub_filter:
-                isTrue = self.sub_filter(title, sub_filter)
-                if isTrue:
-                    continue
-
 
             picture = i.get("detailImgUrl")
             region = i.get("locationNames")
             price = i.get("price")
             price = self.price_filtering(str(price))
-            link = 'https://web.joongna.com/product/detail/' + item_id
+            if price == -1:
+                continue
+            link = 'https://web.joongna.com/product/detail/' + str(item_id)
 
 
             tmp = [item_id, title, picture, region, price, link, self.app_name]
 
             self.crawler_data.append(tmp)
+            self.max_last_id = item_id

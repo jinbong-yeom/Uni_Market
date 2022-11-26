@@ -1,13 +1,12 @@
 from abc import ABC, abstractmethod
 from pymongo import MongoClient
-
+import re
 
 class Crawler(ABC):
     crawler_data = []
-
     #생성자
-    def __init__(self, client):
-        super().__init__()
+    def __init__(self):
+        self.client=MongoClient(host='localhost',port=27017)
 
 
     #크롤링
@@ -50,17 +49,17 @@ class Crawler(ABC):
 
     #크롤링한 데이터 보내기 
     def serve_data(self):
-        client = MongoClient(host='localhost',port=27017)
-        db = client['UniMarketDB']
-        collection=db['data']
+        db = self.client['UniMarketDB']
+        posts=db['data']
         for tmp in self.crawler_data:
             post={"item_id":str(tmp[0]),
                 "title":str(tmp[1]),
                 "picture":str(tmp[2]),
                 "region":str(tmp[3]),
                 "price":str(tmp[4]),
-                "link":str(tmp[5])}
-            posts=db.data
+                "link":str(tmp[5]),
+                "app_name":str(tmp[6])}
+
             post_id=posts.insert_one(post).inserted_id
         
         
@@ -68,20 +67,27 @@ class Crawler(ABC):
 
     #가격 통합 함수
     def price_filtering(self, price):
-        if '만' in price:
-            price = price.replace('만', "0000")
+        try:
+            if '백' in price:
+                price = price.replace('백', "00")
 
-        if '천' in price:
-            price = price.replace('천', "000")
-        
-        if ',' in price:
-            price = price.replace(',','')
+            if '만' in price:
+                price = price.replace('만', "0000")
 
-        if '원' in price:
-            price = price.replace('원','')
-        
-        if ' ' in price:
-            price = price.replace(' ', '')
+            if '천' in price:
+                price = price.replace('천', "000")
+            
+            if ',' in price:
+                price = price.replace(',','')
 
-        price = '{0:,}'.format(int(price))
+            if '원' in price:
+                price = price.replace('원','')
+            
+            if ' ' in price:
+                price = price.replace(' ', '')
+
+            price = re.sub(r"[^0-9]", "", price)
+            price = '{0:,}'.format(int(price))
+        except:
+            price = -1
         return price
