@@ -4,12 +4,11 @@ import requests
 from crawler_class import Bunjang, Danngn, Joongna
 
 
-search_word = "노트북"
-sub_filter = ["게이밍"]
+region_keyword = "청주"
 
 #당근마켓 검색
 danngn = Danngn()
-danngn.crawler_search(search_word, sub_filter)
+danngn.crawler_search(region_keyword)
 danngn.find_all()
 danngn.serve_data()
 print("당근")

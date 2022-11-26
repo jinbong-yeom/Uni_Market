@@ -9,10 +9,10 @@ class Danngn(Crawler):
     app_name = "당근"
     crawler_data = []
 
-    def crawler_search(self, search_word, sub_filter):
+    def crawler_search(self, region_keyword):
         
-        for n in range(1, 5):
-            url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(search_word, n)
+        for n in range(1, 10):
+            url = 'https://www.daangn.com/search/{}/more/flea_market?page={}'.format(region_keyword, n)
 
             r = requests.get(url)
 
@@ -23,12 +23,7 @@ class Danngn(Crawler):
             for i in contents:
                 item_id = i.find('a')['href']
                 title = i.find("span").text.strip()
-
-                if sub_filter:
-                    isTrue = self.sub_filter(title, sub_filter)
-                    if isTrue:
-                        continue
-
+                
                 picture = i.find("img").get("src")
                 region = i.find('p', class_ = "article-region-name").text.strip()
                 price = i.find('p', class_ = "article-price").text.strip()
