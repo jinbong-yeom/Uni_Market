@@ -1,6 +1,3 @@
-from crawler_bunjang import start_bunjang
-from crawler_daangn import start_daangn
-from crawler_joongna import start_joongna
 from crawler_class import *
 from threading import Thread
 
@@ -14,15 +11,13 @@ JOONGNA = 3
 REGION = "청주"
 
 def start(crawler_instance):
-    count = 0
 
     while True:
-
+        start = time.time()
         crawler_instance.crawler_search()
         crawler_instance.serve_data()
-        print("번개")
-        count += 1
-        print(count)
+        print(time.time() - start)
+        
         time.sleep(5)
 
     return

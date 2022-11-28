@@ -35,8 +35,8 @@ class Danngn(Crawler):
             if price == -1:
                 continue
             link = 'https://www.daangn.com/articles/' + str(item_id)
-            #time = self.renewal_time(link)
-            tmp = [item_id, title, picture, region, price, link, self.app_name]
+            time = self.renewal_time(link)
+            tmp = [item_id, title, picture, region, price, link, time, self.app_name]
             self.crawler_data.append(tmp)
 
             self.max_item_id = item_id
@@ -49,6 +49,7 @@ class Danngn(Crawler):
         time = soup.find('time').text.strip()
 
         time = re.sub(r'[^0-9]', '', time)
+        return time
 
         
     
