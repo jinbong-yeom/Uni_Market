@@ -24,7 +24,9 @@ class Crawler(ABC):
             "picture: " + str(one[2]) + "\n" +
             "region: " + str(one[3]) + "\n" +
             "price: " + str(one[4]) + "\n" +
-            "link: " + str(one[5]) + "\n")
+            "link: " + str(one[5]) + "\n" +
+            "time" + str(one[6]) + "\n" + 
+            "app_name" + str(one[7]) + "\n")
  
 
     #item_id가져와 찾기

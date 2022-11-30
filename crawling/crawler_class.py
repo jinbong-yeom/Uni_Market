@@ -83,12 +83,23 @@ class Bunjang(Crawler):
             if price == -1:
                     continue
             link = 'https://m.bunjang.co.kr/products/' + str(item_id)
-            
-            tmp = [item_id, title, picture, region, price, link, self.app_name]
+            time = self.renewal_time(item_id)
+            tmp = [item_id, title, picture, region, price, link, time, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
-    
+
+    def renewal_time(self, item_id):
+        r = requests.get('https://api.bunjang.co.kr/api/pms/v1/products-detail/{}?viewerUid=-1'.format(item_id))
+
+        contents = r.json().get("data").get("product")
+
+        times = contents.get("updatedAt")
+        temp = times.find('T')
+        times = times[:temp]
+
+        return times
+
 
 
 class Joongna(Crawler):
@@ -160,3 +171,13 @@ class Joongna(Crawler):
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
+
+    def renewal_time(self, link):
+        r = requests.get(link)
+
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+        time = soup.find('time').text.strip()
+
+        time = re.sub(r'[^0-9]', '', time)
+        return time
