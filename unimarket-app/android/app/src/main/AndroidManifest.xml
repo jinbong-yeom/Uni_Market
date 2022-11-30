@@ -13,6 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unimarket"
         tools:targetApi="31">
+        <activity android:name=".IntroActivity" android:exported="true">
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
