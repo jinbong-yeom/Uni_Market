@@ -5,7 +5,9 @@ uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
 
 client=MongoClient(uri)
 db=client['UniMarketDB']
-collection=db['data']
-posts=db.data.find()
+
+myquery = { "title": { "$regex": ".*노트북.*" }}
+posts=db.data.find(myquery)
+
 for i in posts:
       print(i)

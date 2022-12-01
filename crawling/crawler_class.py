@@ -54,7 +54,7 @@ class Danngn(Crawler):
             description=re.sub('<.+?>', '', str(description), 0).strip()
 
         except(AttributeError):
-            description = " "
+            description = "상세 설명 없음"
 
         time = soup.find('time').text.strip()
 
