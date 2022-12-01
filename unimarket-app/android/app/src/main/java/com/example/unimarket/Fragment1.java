@@ -20,16 +20,18 @@ public class Fragment1 extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 // 입력받은 문자열 처리
-                Toast.makeText(getActivity(),s, Toast.LENGTH_LONG).show();
-                return true;
+                Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                return true;    //리스너로 처리할 떄 true반환?
             }
             @Override
             public boolean onQueryTextChange(String s) {
+                // 입력란의 문자열이 바뀔 때 처리
+                //Toast.makeText(getActivity(), "입력값 수정", Toast.LENGTH_LONG).show();
                 return false;
             }
         });
 
-        return inflater.inflate(R.layout.fragment1, container, false);
+        return frag1V;
     }
-    
+
 }
