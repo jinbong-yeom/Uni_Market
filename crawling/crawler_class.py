@@ -205,7 +205,8 @@ class Joongna(Crawler):
             detail_list = self.detail_page(item_id)
             description = detail_list[0]
             date = detail_list[1]
-            tmp = [item_id, title, picture, region, price, link, description, date, self.app_name]
+            seller_info = detail_list[2]
+            tmp = [item_id, title, picture, region, price, link, description, date, seller_info, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
@@ -226,5 +227,6 @@ class Joongna(Crawler):
         temp = date.find(' ')
         date = date[:temp]
 
-        detail_list = [description, date]
+        seller_info = json_parser['store']['levelName']
+        detail_list = [description, date, seller_info]
         return detail_list
