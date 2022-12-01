@@ -1,7 +1,7 @@
 from crawler_module import Crawler
 from bs4 import BeautifulSoup
 import requests
-import datetime
+from datetime import datetime,timedelta
 import re
 import json
 
@@ -36,8 +36,8 @@ class Danngn(Crawler):
             if price == -1:
                 continue
             link = 'https://www.daangn.com/articles/' + str(item_id)
-            time = self.renewal_time(link)
-            tmp = [item_id, title, picture, region, price, link, time, self.app_name]
+            date = self.renewal_time(link)
+            tmp = [item_id, title, picture, region, price, link, date, self.app_name]
             self.crawler_data.append(tmp)
 
             self.max_item_id = item_id
@@ -48,9 +48,23 @@ class Danngn(Crawler):
         soup = BeautifulSoup(r.text, 'html.parser')
 
         time = soup.find('time').text.strip()
+        
+        if '일' in time:
+            time = int(re.sub(r'[^0-9]', '', time))
+            date = datetime.today() - timedelta(time)
+            date = date.strftime("%Y-%m-%d")
 
-        time = re.sub(r'[^0-9]', '', time)
-        return time
+        elif '시간' in time:
+            time = int(re.sub(r'[^0-9]', '', time))
+            date = datetime.today() - timedelta(hours=time)
+            date = date.strftime("%Y-%m-%d")
+            
+        elif '분' in time:
+            time = int(re.sub(r'[^0-9]', '', time))
+            date = datetime.today() - timedelta(minutes=time)
+            date = date.strftime("%Y-%m-%d")
+
+        return date
 
         
     
@@ -187,5 +201,5 @@ class Joongna(Crawler):
         sortDate = json_parser['sortDate']
 
         temp = sortDate.find(' ')
-        sortDate["temp"]
+        sortDate[:temp]
         return sortDate
