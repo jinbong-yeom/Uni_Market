@@ -36,19 +36,24 @@ class Danngn(Crawler):
             if price == -1:
                 continue
             link = 'https://www.daangn.com/articles/' + str(item_id)
-            date = self.renewal_time(link)
-            tmp = [item_id, title, picture, region, price, link, date, self.app_name]
+            detail_list = self.detail_page(link)
+            description = detail_list[0]
+            date = detail_list[1]
+            tmp = [item_id, title, picture, region, price, link, description, date, self.app_name]
             self.crawler_data.append(tmp)
 
             self.max_item_id = item_id
 
-    def renewal_time(self, link):
+    def detail_page(self, link):
         r = requests.get(link)
 
         soup = BeautifulSoup(r.text, 'html.parser')
 
+        description = soup.find('div', id='article-detail').find('p')
+        description=re.sub('<.+?>', '', str(description), 0).strip()
+
         time = soup.find('time').text.strip()
-        
+
         if '일' in time:
             time = int(re.sub(r'[^0-9]', '', time))
             date = datetime.today() - timedelta(time)
@@ -64,7 +69,8 @@ class Danngn(Crawler):
             date = datetime.today() - timedelta(minutes=time)
             date = date.strftime("%Y-%m-%d")
 
-        return date
+        detail_list = [description, date]
+        return detail_list
 
         
     
@@ -98,13 +104,13 @@ class Bunjang(Crawler):
             if price == -1:
                     continue
             link = 'https://m.bunjang.co.kr/products/' + str(item_id)
-            date = self.renewal_time(item_id)
+            date = self.detail_page(item_id)
             tmp = [item_id, title, picture, region, price, link, date, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
 
-    def renewal_time(self, item_id):
+    def detail_page(self, item_id):
         r = requests.get('https://api.bunjang.co.kr/api/pms/v1/products-detail/{}?viewerUid=-1'.format(item_id))
 
         contents = r.json().get("data").get("product")
@@ -124,7 +130,7 @@ class Joongna(Crawler):
 
     def crawler_search(self):
         self.crawler_data = []
-        now = datetime.datetime.now().replace(microsecond=0)
+        now = datetime.now().replace(microsecond=0)
 
         headers = {
             'Accept': 'application/json, text/plain, */*',
@@ -181,25 +187,25 @@ class Joongna(Crawler):
                 continue
             link = 'https://web.joongna.com/product/detail/' + str(item_id)
 
-            date = self.renewal_time(item_id)
+            date = self.detail_page(item_id)
             tmp = [item_id, title, picture, region, price, link, date, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
 
-    def renewal_time(self, item_id):
+    def detail_page(self, item_id):
         response = requests.post('https://web.joongna.com/product/{}'.format(item_id))
 
         response = BeautifulSoup(response.text, 'html.parser')
 
         json_parser = str(response.find("script", id='__NEXT_DATA__'))
-        json_parser=re.sub('<.+?>', '', a, 0).strip()
+        json_parser=re.sub('<.+?>', '', json_parser, 0).strip()
 
-        json_parser = json.loads(a)
+        json_parser = json.loads(json_parser)
         json_parser = json_parser['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['data']
 
         sortDate = json_parser['sortDate']
 
         temp = sortDate.find(' ')
-        sortDate[:temp]
+        sortDate = sortDate[:temp]
         return sortDate

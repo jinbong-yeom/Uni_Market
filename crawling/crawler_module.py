@@ -62,8 +62,9 @@ class Crawler(ABC):
                 "region":str(tmp[3]),
                 "price":str(tmp[4]),
                 "link":str(tmp[5]),
-                "date":str(tmp[6]),
-                "app_name":str(tmp[7])}
+                "description":str(tmp[6]),
+                "date":str(tmp[7]),
+                "app_name":str(tmp[8])}
 
             post_id=posts.insert_one(post).inserted_id
         
