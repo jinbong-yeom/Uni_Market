@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 import datetime
 import re
+import json
 
 
 class Danngn(Crawler):
@@ -83,8 +84,8 @@ class Bunjang(Crawler):
             if price == -1:
                     continue
             link = 'https://m.bunjang.co.kr/products/' + str(item_id)
-            time = self.renewal_time(item_id)
-            tmp = [item_id, title, picture, region, price, link, time, self.app_name]
+            date = self.renewal_time(item_id)
+            tmp = [item_id, title, picture, region, price, link, date, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
@@ -166,18 +167,25 @@ class Joongna(Crawler):
                 continue
             link = 'https://web.joongna.com/product/detail/' + str(item_id)
 
-
-            tmp = [item_id, title, picture, region, price, link, self.app_name]
+            date = self.renewal_time(item_id)
+            tmp = [item_id, title, picture, region, price, link, date, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
 
-    def renewal_time(self, link):
-        r = requests.get(link)
+    def renewal_time(self, item_id):
+        response = requests.post('https://web.joongna.com/product/{}'.format(item_id))
 
-        soup = BeautifulSoup(r.text, 'html.parser')
+        response = BeautifulSoup(response.text, 'html.parser')
 
-        time = soup.find('time').text.strip()
+        json_parser = str(response.find("script", id='__NEXT_DATA__'))
+        json_parser=re.sub('<.+?>', '', a, 0).strip()
 
-        time = re.sub(r'[^0-9]', '', time)
-        return time
+        json_parser = json.loads(a)
+        json_parser = json_parser['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['data']
+
+        sortDate = json_parser['sortDate']
+
+        temp = sortDate.find(' ')
+        sortDate["temp"]
+        return sortDate

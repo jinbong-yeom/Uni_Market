@@ -5,8 +5,8 @@ import argparse
 import time
 
 
-BUNJANG = 1
-DAANGN = 2
+DAANGN = 1
+BUNJANG = 2
 JOONGNA = 3
 REGION = "청주"
 
@@ -30,10 +30,10 @@ type: int = args.type
 
 crawler = None
 
-if int(args.type) == BUNJANG:
-    crawler = Bunjang()
-elif int(args.type) == DAANGN:
+if int(args.type) == DAANGN:
     crawler = Danngn()
+elif int(args.type) == BUNJANG:
+    crawler = Bunjang()
 elif int(args.type) == JOONGNA:
     crawler = Joongna()
 else:
