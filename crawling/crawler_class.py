@@ -110,8 +110,10 @@ class Bunjang(Crawler):
             if price == -1:
                     continue
             link = 'https://m.bunjang.co.kr/products/' + str(item_id)
-            date = self.detail_page(item_id)
-            tmp = [item_id, title, picture, region, price, link, date, self.app_name]
+            detail_list = self.detail_page(item_id)
+            description = detail_list[0]
+            date = detail_list[1]
+            tmp = [item_id, title, picture, region, price, link, description, date, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
@@ -119,13 +121,16 @@ class Bunjang(Crawler):
     def detail_page(self, item_id):
         r = requests.get('https://api.bunjang.co.kr/api/pms/v1/products-detail/{}?viewerUid=-1'.format(item_id))
 
-        contents = r.json().get("data").get("product")
-
-        times = contents.get("updatedAt")
-        temp = times.find('T')
-        times = times[:temp]
-
-        return times
+        contents = r.json().get("data")
+        product = contents.get("product")
+        
+        date = product.get("updatedAt")
+        temp = date.find('T')
+        date = date[:temp]
+        
+        description = product.get("description")
+        detail_list = [description, date]
+        return detail_list
 
 
 

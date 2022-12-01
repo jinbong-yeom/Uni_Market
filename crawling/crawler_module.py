@@ -64,6 +64,7 @@ class Crawler(ABC):
                 "link":str(tmp[5]),
                 "description":str(tmp[6]),
                 "date":str(tmp[7]),
+                
                 "app_name":str(tmp[8])}
 
             post_id=posts.insert_one(post).inserted_id
