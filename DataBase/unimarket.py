@@ -3,8 +3,9 @@ from pymongo import MongoClient
 uri = "" % (
                 '', '', '')
 client=MongoClient(uri)
-db=client['onlineJudgeDB']
+db=client['UniMarketDB']
 collection=db['data']
-posts=db.data
-for i in posts.find():
+sanghan=400000
+hahan=100000
+for i in collection.find({"price":{"$lt":sanghan},"price":{"$gt":hahan}}).sort("price"):
       print(i)
