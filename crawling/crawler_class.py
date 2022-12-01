@@ -39,7 +39,8 @@ class Danngn(Crawler):
             detail_list = self.detail_page(link)
             description = detail_list[0]
             date = detail_list[1]
-            tmp = [item_id, title, picture, region, price, link, description, date, self.app_name]
+            seller_info = detail_list[2]
+            tmp = [item_id, title, picture, region, price, link, description, date, seller_info, self.app_name]
             self.crawler_data.append(tmp)
 
             self.max_item_id = item_id
@@ -69,7 +70,12 @@ class Danngn(Crawler):
             date = datetime.today() - timedelta(minutes=time)
             date = date.strftime("%Y-%m-%d")
 
-        detail_list = [description, date]
+
+        seller_info = soup.find('dd')
+        seller_info = re.sub('<.+?>', '', str(seller_info), 0).strip()
+        seller_info = re.sub(r"\s+",'',str(seller_info), 0)
+
+        detail_list = [description, date, seller_info]
         return detail_list
 
         
