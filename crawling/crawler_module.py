@@ -60,7 +60,7 @@ class Crawler(ABC):
                 "title":str(tmp[1]),
                 "picture":str(tmp[2]),
                 "region":str(tmp[3]),
-                "price":str(tmp[4]),
+                "price":int(tmp[4]),
                 "link":str(tmp[5]),
                 "description":str(tmp[6]),
                 "date":str(tmp[7]),
@@ -94,7 +94,7 @@ class Crawler(ABC):
                 price = price.replace(' ', '')
 
             price = re.sub(r"[^0-9]", "", price)
-            price = '{0:,}'.format(int(price))
+            
         except:
             price = -1
-        return price
+        return int(price)

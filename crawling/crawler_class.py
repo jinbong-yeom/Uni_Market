@@ -113,7 +113,8 @@ class Bunjang(Crawler):
             detail_list = self.detail_page(item_id)
             description = detail_list[0]
             date = detail_list[1]
-            tmp = [item_id, title, picture, region, price, link, description, date, self.app_name]
+            seller_info = detail_list[2]
+            tmp = [item_id, title, picture, region, price, link, description, date, seller_info, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
@@ -129,7 +130,10 @@ class Bunjang(Crawler):
         date = date[:temp]
         
         description = product.get("description")
-        detail_list = [description, date]
+        
+        seller_info = contents.get("shop").get("grade")
+        
+        detail_list = [description, date, seller_info]
         return detail_list
 
 
@@ -198,8 +202,10 @@ class Joongna(Crawler):
                 continue
             link = 'https://web.joongna.com/product/detail/' + str(item_id)
 
-            date = self.detail_page(item_id)
-            tmp = [item_id, title, picture, region, price, link, date, self.app_name]
+            detail_list = self.detail_page(item_id)
+            description = detail_list[0]
+            date = detail_list[1]
+            tmp = [item_id, title, picture, region, price, link, description, date, self.app_name]
 
             self.crawler_data.append(tmp)
             self.max_last_id = item_id
@@ -214,9 +220,11 @@ class Joongna(Crawler):
 
         json_parser = json.loads(json_parser)
         json_parser = json_parser['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['data']
+        description = json_parser['productDescription']
+        date = json_parser['sortDate']
 
-        sortDate = json_parser['sortDate']
+        temp = date.find(' ')
+        date = date[:temp]
 
-        temp = sortDate.find(' ')
-        sortDate = sortDate[:temp]
-        return sortDate
+        detail_list = [description, date]
+        return detail_list
