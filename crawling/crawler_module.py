@@ -95,6 +95,8 @@ class Crawler(ABC):
 
             price = re.sub(r"[^0-9]", "", price)
             
-        except:
+            price = int(price)
+        except (ValueError):
             price = -1
-        return int(price)
+
+        return price

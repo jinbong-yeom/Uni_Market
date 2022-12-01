@@ -49,9 +49,12 @@ class Danngn(Crawler):
         r = requests.get(link)
 
         soup = BeautifulSoup(r.text, 'html.parser')
+        try:
+            description = soup.find('div', id='article-detail').find('p')
+            description=re.sub('<.+?>', '', str(description), 0).strip()
 
-        description = soup.find('div', id='article-detail').find('p')
-        description=re.sub('<.+?>', '', str(description), 0).strip()
+        except(AttributeError):
+            description = " "
 
         time = soup.find('time').text.strip()
 
