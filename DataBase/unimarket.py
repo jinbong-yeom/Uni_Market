@@ -1,5 +1,9 @@
 from pymongo import MongoClient
-client=MongoClient(host='localhost',port=27017)
+
+uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
+                'uni', 'uni1234', 'db.yoonleeverse.com')
+
+client=MongoClient(uri)
 db=client['UniMarketDB']
 collection=db['data']
 posts=db.data.find()

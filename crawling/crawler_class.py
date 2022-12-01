@@ -220,7 +220,7 @@ class Joongna(Crawler):
         response = BeautifulSoup(response.text, 'html.parser')
 
         json_parser = str(response.find("script", id='__NEXT_DATA__'))
-        json_parser=re.sub('<.+?>', '', json_parser, 0).strip()
+        json_parser = re.sub('<.+?>', '', json_parser, 0).strip()
 
         json_parser = json.loads(json_parser)
         json_parser = json_parser['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['data']
