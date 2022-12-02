@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/sky_</item>
         <item name="colorPrimaryVariant">@color/sky_u</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:fontFamily">@font/jua</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>

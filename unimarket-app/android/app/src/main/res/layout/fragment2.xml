@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="77dp"
         android:text="알림해제"
-        android:textStyle="bold"
+        android:fontFamily="@font/jua"
         app:icon="@drawable/ic_notoff_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
