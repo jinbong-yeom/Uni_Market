@@ -29,6 +29,9 @@ class Danngn(Crawler):
                 continue
             title = i.find("span").text.strip()
 
+            if self.isPurchase(title):
+                continue
+            
             picture = i.find("img").get("src")
             region = i.find('p', class_ = "article-region-name").text.strip()
             price = i.find('p', class_ = "article-price").text.strip()
@@ -106,6 +109,10 @@ class Bunjang(Crawler):
                 continue
             title = i.get("name")
             
+            if self.isPurchase(title):
+                continue
+            
+
             picture = i.get("product_image")
             region = i.get("location")
             price = i.get("price")
@@ -196,6 +203,9 @@ class Joongna(Crawler):
             if self.max_last_id >= item_id:
                 continue
             title = i.get("title")
+
+            if self.isPurchase(title):
+                continue
 
             picture = i.get("detailImgUrl")
             region = i.get("locationNames")
