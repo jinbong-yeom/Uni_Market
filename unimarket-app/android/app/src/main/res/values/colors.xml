@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!--    테마 색 -->
+    <color name="sky_">#FF5BC4E8</color>
+    <color name="sky_u">#FF4682B4</color>
 </resources>
