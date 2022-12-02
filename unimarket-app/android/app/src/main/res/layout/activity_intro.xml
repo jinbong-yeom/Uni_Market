@@ -25,6 +25,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="유니마켓"
+            android:fontFamily="@font/jua"
             android:textColor="#03A9F4"
             android:textSize="30sp" />
 
