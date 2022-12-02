@@ -100,3 +100,12 @@ class Crawler(ABC):
             price = -1
 
         return price
+
+    def isPurchase(self, title):
+        purchase_word = ['구매합니다', '삽니다', ]
+        for i in purchase_word:
+            if i in title:
+                return True
+            
+        else:
+            return False
