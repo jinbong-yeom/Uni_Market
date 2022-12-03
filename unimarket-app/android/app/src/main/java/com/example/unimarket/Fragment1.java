@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.gson.JsonSyntaxException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,22 +71,19 @@ public class Fragment1 extends Fragment {
                 Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
 
                 call.enqueue(new Callback<PostResponse>() {
+
                     @Override
                     public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                         if (!response.isSuccessful()) {
-                            Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(),"없음", Toast.LENGTH_SHORT).show();
                             return;
                         }
                         PostResponse postResponse = response.body();
                         Toast.makeText(getActivity(),postResponse.getResult().get(0).getTitle(), Toast.LENGTH_SHORT).show();
-
                     }
-
-
                     @Override
                     public void onFailure(Call<PostResponse> call, Throwable t) {
-                        t.printStackTrace();
-                        Toast.makeText(getActivity(), "오류", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "없다.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
