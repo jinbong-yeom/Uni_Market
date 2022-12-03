@@ -9,4 +9,16 @@ public class PostData {
     @SerializedName("userId")
     private String userId;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public PostData(String title, String userId) {
+        this.title = title;
+        this.userId = userId;
+    }
 }
