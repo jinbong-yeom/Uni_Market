@@ -30,4 +30,28 @@ public class PostResponseData {
         this.link = link;
         this.app_name = app_name;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public String getApp_name() {
+        return app_name;
+    }
 }
