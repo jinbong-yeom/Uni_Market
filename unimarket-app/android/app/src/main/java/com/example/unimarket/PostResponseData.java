@@ -21,5 +21,9 @@ public class PostResponseData {
 
     @SerializedName("app_name")
     private String app_name;
-    
+
+    public PostResponseData(String title, String picture) {
+        this.title = title;
+        this.picture = picture;
+    }
 }
