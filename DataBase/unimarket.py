@@ -1,13 +1,18 @@
 from pymongo import MongoClient
+import json
 
-uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
-                'uni', 'uni1234', 'db.yoonleeverse.com')
+def DB_find(word):
+      uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
+            'uni', 'uni1234', 'db.yoonleeverse.com')
 
-client=MongoClient(uri)
-db=client['UniMarketDB']
+      client=MongoClient(uri)
+      db=client['UniMarketDB']
 
-myquery = { "title": { "$regex": ".*노트북.*" }}
-posts=db.data.find(myquery)
+      send_list = []
 
-for i in posts:
-      print(i)
+      myquery = { "title": { "$regex": ".*{}.*".format(word) }}
+      posts = db.data.find(myquery)
+      for post in posts:
+            temp_dict = {'title': post['title'], 'picture': post['picture'], 'region': post['region'], 'price': post['price'], 'link':post['link'], 'app_name': post['app_name']}
+            send_list.append(temp_dict)
+      return send_list
