@@ -16,7 +16,15 @@ def hello():
 @app.route("/post",methods=['POST'])
 def post():
     params = request.get_json()
-    print(params)
+    filteringData = params['filteringData']['excludeKeyword']
+    for i in filteringData:
+        if filteringData == []:
+            print("없음")
+            break
+        else:
+            print(i)
+
+
     word = params['title']
     result = DB_find(word)
     print(result)
