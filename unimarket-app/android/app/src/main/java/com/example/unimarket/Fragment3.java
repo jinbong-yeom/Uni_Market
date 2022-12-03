@@ -24,15 +24,12 @@ public class Fragment3 extends Fragment {
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick() {
-
+            public void onClick(View view) {
+                regstr = reginput.getText().toString();
+                Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
+                regshow.setText(regstr);
             }
         });
-
-
-
-
-
 
         return frag3V;
     }
