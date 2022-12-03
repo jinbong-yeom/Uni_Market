@@ -13,6 +13,15 @@ def DB_find(word):
       myquery = { "title": { "$regex": ".*{}.*".format(word) }}
       posts = db.data.find(myquery)
       for post in posts:
-            temp_dict = {'title': post['title'], 'picture': post['picture'], 'region': post['region'], 'price': post['price'], 'link':post['link'], 'app_name': post['app_name']}
+            temp_dict = {'title': post['title'], 
+            'picture': post['picture'], 
+            'region': post['region'],
+            'price': post['price'], 
+            'link':post['link'], 
+            'app_name': post['app_name'], 
+            'description': post['description'],
+            'date': post['date'],
+            'seller_info': post['seller_info']
+            }
             send_list.append(temp_dict)
       return send_list
