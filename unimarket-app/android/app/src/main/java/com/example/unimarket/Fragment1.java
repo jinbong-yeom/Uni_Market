@@ -12,6 +12,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -23,8 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
 
-    String srinput;
-    private final String BASEURL = "http://172.27.0.194:60000";
+    String srinput; // 검색 키워드드
+
+   private final String BASEURL = "http://172.27.0.194:60000";
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -85,7 +87,16 @@ public class Fragment1 extends Fragment {
         snbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),srinput +"fragment2로 전송", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(),srinput +" fragment2로 전송", Toast.LENGTH_LONG).show();
+
+                // 번들 생성하여 검색어 fragment2에 넘기기
+                Bundle bundle = new Bundle();
+                bundle.putString("srinput",srinput);
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                Fragment2 fragment2 = new Fragment2();//프래그먼트2 선언
+                fragment2.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
+                transaction.replace(R.id.main_frame, fragment2);
+                transaction.commit();
             }
         });
 
