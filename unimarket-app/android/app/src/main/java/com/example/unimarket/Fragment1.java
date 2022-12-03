@@ -18,6 +18,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -79,7 +82,10 @@ public class Fragment1 extends Fragment {
 
             private void createPost(String s) {
                 String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
-                PostData postData = new PostData(s, android_id);
+                List<String> region = new ArrayList<>();
+                region.add("청주");
+                region.add("서울");
+                PostData postData = new PostData(s, android_id, region);
 
                 Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
 
