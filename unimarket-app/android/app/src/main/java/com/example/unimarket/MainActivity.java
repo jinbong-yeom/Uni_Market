@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //프래그먼트생성
-//        fragment1 = new Fragment1();    // new 연산자 사용하더라도 바로 프래그먼트로 동작하는건 아님
+        fragment1 = new Fragment1();    // new 연산자 사용하더라도 바로 프래그먼트로 동작하는건 아님
 //        fragment2 = new Fragment2();
 //        fragment3 = new Fragment3();
 
@@ -58,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
                             fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag("notice2"));
                         if (fragmentManager.findFragmentByTag("setting3") != null)
                             fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag("notice2"));
-                        return true;
 
                     }
+                    return true;
+
 
                     case R.id.setting3: {
                         if (fragmentManager.findFragmentByTag("setting3") != null)
@@ -71,9 +72,8 @@ public class MainActivity extends AppCompatActivity {
                             fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag("notice2"));
                         if (fragmentManager.findFragmentByTag("notice2") != null)
                             fragmentManager.beginTransaction().hide(fragmentManager.findFragmentByTag("notice2"));
-                        return true;
-
                     }
+                    return true;
 
                 }
                 return false;
