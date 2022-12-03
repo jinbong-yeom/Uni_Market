@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 
 public class Fragment3 extends Fragment {
     String regstr;
+    Globalstr reg1,reg2,reg3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,6 +29,8 @@ public class Fragment3 extends Fragment {
                 regstr = reginput.getText().toString();
                 Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
                 regshow.setText(regstr);
+
+
             }
         });
 

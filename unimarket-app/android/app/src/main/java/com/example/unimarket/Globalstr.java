@@ -3,9 +3,22 @@ package com.example.unimarket;
 import android.app.Application;
 
 public class Globalstr extends  Application {
-    private String id;
+    private String region1;
+//    private String region2;
+//    private String region3;
 
-    public String getId() {return id;}
-    public void setId( String id ) {this.id = id; }
+    public String getregion1() {return region1;}
+//    public String getregion2() {return region2;}
+//    public String getregion3() {return region3;}
+
+
+    public void setregion1( String id ) { this.region1 = id; }
+
+    public Globalstr(){
+        this.region1 = "";
+//        this.region2 = "";
+//        this.region3 = "";
+
+    }
 
 }
