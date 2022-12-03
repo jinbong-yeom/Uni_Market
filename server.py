@@ -22,22 +22,23 @@ def post():
     Max=params['filteringData']['maxPrice']
     Min=params['filteringData']['minPrice']
     Filter=params['filteringData']['excludeKeyword']
-    result = search(title,Max,Min,Filter)
+    region=params['filteringData']['region']
+    result = search(title,Max,Min,Filter,region)
     print(result)
     return {"result":result}
-'''
-@app.route("/post",methods=['POST2'])
-def post2():
+@app.route("/notice",methods=['NOTICE'])
+def notice():
     params = request.get_json()
     print(params)
+    user=params['userId']
     title = params['title']
     Max=params['filteringData']['maxPrice']
     Min=params['filteringData']['minPrice']
     Filter=params['filteringData']['excludeKeyword']
-    result = monitor(title,Max,Min,Filter)
+    region=params['filteringData']['region']
+    result = monitor(user,title,Max,Min,Filter,region)
     print(result)
     return result
-'''
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=60000)
