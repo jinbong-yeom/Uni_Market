@@ -9,7 +9,10 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class Fragment1 extends Fragment {
+    String srinput;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +33,15 @@ public class Fragment1 extends Fragment {
                 return false;
             }
         });
+
+        FloatingActionButton snbutton = frag1V.findViewById(R.id.floatingActionButton);
+        snbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),srinput, Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         return frag1V;
     }
