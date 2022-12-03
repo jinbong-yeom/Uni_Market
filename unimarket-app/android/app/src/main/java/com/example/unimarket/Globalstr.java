@@ -12,13 +12,11 @@ public class Globalstr extends  Application {
 //    public String getregion3() {return region3;}
 
 
-    public void setregion1( String id ) { this.region1 = id; }
+    public void setregion1( String input ) { this.region1 = input; }
 
     public Globalstr(){
         this.region1 = "";
 //        this.region2 = "";
 //        this.region3 = "";
-
     }
-
 }
