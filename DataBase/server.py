@@ -1,6 +1,8 @@
 from flask import Flask, make_response, jsonify, request, make_response
 from unimarket import *
+from send import send
 import json
+import time
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -16,9 +18,20 @@ def hello():
 @app.route("/post",methods=['POST'])
 def post():
     params = request.get_json()
-    print(params)
+    print(params['region'][0])
     word = params['title']
     result = DB_find(word)
+    print(result)
+    return {"result": result}
+
+@app.route("/notice",methods=['POST'])
+def notice():
+    params = request.get_json()
+    print(params['userId'],end='\n')
+    word = params['title']
+    result = DB_find(word)
+    time.sleep(10)
+    send(params['userId'])
     print(result)
     return {"result": result}
 
