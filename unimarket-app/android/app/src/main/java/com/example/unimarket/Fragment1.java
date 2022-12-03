@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,7 +59,12 @@ public class Fragment1 extends Fragment {
 
             private void createPost(String s) {
                 String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
-                PostData postData = new PostData(s, android_id);
+                List<String> test =  new ArrayList<>();
+                test.add("note");
+                test.add("book");
+                FilteringData filteringData = new FilteringData(test, 1500000, 500000);
+                PostData postData = new PostData(s, android_id, filteringData);
+
 
                 Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
 
