@@ -8,4 +8,5 @@ public interface JsonPlaceHolderApi {
 
     @POST("post")
     Call<PostResponse> createPost(@Body PostData postData);
+
 }
