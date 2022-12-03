@@ -10,10 +10,17 @@ public class FilteringData {
 
     private int minPrice;
 
-    public FilteringData(List<String> excludeKeyword, int maxPrice, int minPrice) {
+    private List<String> region;
+
+    public FilteringData(List<String> excludeKeyword, int maxPrice, int minPrice, List<String> region) {
         this.excludeKeyword = excludeKeyword;
         this.maxPrice = maxPrice;
         this.minPrice = minPrice;
+        this.region = region;
+    }
+
+    public List<String> getRegion() {
+        return region;
     }
 
     public List<String> getExcludeKeyword() {
