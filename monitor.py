@@ -4,7 +4,7 @@ from threading import Thread
 uri = "" % (
                     '', '', '')
 client=MongoClient(uri)
-while(1):
+def monitor(instance):
     db=client['UniMarketDB']
     collection=db['data']
     data=[]
@@ -27,5 +27,6 @@ while(1):
                 # 알림 보내기
                 with open('item_id_list.txt','a',encoding='UTF-8')as f:#알림 보내고 리스트 파일 갱신
                     f.write(i['item_id']+'\n')
-    
-    break
+#if 모니터링 요청이 오면: 
+thread = Thread(target=monitor, args=(), daemon=True)
+thread.start()
