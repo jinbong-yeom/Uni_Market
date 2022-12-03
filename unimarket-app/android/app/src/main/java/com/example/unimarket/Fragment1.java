@@ -7,10 +7,13 @@ import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
 
+    String srinput;
     private final String BASEURL = "http://172.27.0.194:60000";
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
@@ -35,12 +39,11 @@ public class Fragment1 extends Fragment {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-
-
         SearchView searchBar = frag1V.findViewById(R.id.searchView1);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                srinput = s;
                 createPost(s);
                 // 입력받은 문자열 처리
 //                Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
@@ -52,7 +55,6 @@ public class Fragment1 extends Fragment {
                 //Toast.makeText(getActivity(), "입력값 수정", Toast.LENGTH_LONG).show();
                 return false;
             }
-
 
             private void createPost(String s) {
                 String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
@@ -69,10 +71,7 @@ public class Fragment1 extends Fragment {
                         }
                         PostResponse postResponse = response.body();
                         Toast.makeText(getActivity(),postResponse.getResult().get(0).getTitle(), Toast.LENGTH_SHORT).show();
-
                     }
-
-
                     @Override
                     public void onFailure(Call<PostResponse> call, Throwable t) {
                         t.printStackTrace();
@@ -82,7 +81,13 @@ public class Fragment1 extends Fragment {
             }
         });
 
-
+        FloatingActionButton snbutton = frag1V.findViewById(R.id.floatingActionButton);
+        snbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),srinput +"fragment2로 전송", Toast.LENGTH_LONG).show();
+            }
+        });
 
         return frag1V;
     }
