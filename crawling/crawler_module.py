@@ -1,13 +1,14 @@
 from abc import ABC, abstractmethod
 from pymongo import MongoClient
-import pprint
+import re
 
 class Crawler(ABC):
     crawler_data = []
-
     #생성자
     def __init__(self):
-        super().__init__()
+        uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
+                'uni', 'uni1234', 'db.yoonleeverse.com')
+        self.client=MongoClient(uri)
 
 
     #크롤링
@@ -23,7 +24,9 @@ class Crawler(ABC):
             "picture: " + str(one[2]) + "\n" +
             "region: " + str(one[3]) + "\n" +
             "price: " + str(one[4]) + "\n" +
-            "link: " + str(one[5]) + "\n")
+            "link: " + str(one[5]) + "\n" +
+            "date" + str(one[6]) + "\n" + 
+            "app_name" + str(one[7]) + "\n")
  
 
     #item_id가져와 찾기
@@ -39,37 +42,70 @@ class Crawler(ABC):
     def data_clean(self):
         self.crawler_data = []
 
+    #제외할 데이터 찾기
+    def sub_filter(self, title, sub_filter):
+        for filter in sub_filter:
+            if filter not in title:
+                break
+        else:
+            return True
 
 
     #크롤링한 데이터 보내기 
     def serve_data(self):
-        uri = "" % (
-                '', '', '')
-        client=MongoClient(uri)
-        db = client['onlineJudgeDB']
-        collection=db['data']
+        db = self.client['UniMarketDB']
+        posts=db['data']
         for tmp in self.crawler_data:
             post={"item_id":str(tmp[0]),
                 "title":str(tmp[1]),
                 "picture":str(tmp[2]),
                 "region":str(tmp[3]),
-                "price":str(tmp[4]),
-                "link":str(tmp[5])}
-            posts=db.data
+                "price":int(tmp[4]),
+                "link":str(tmp[5]),
+                "description":str(tmp[6]),
+                "date":str(tmp[7]),
+                "seller_info":str(tmp[8]),
+                "app_name":str(tmp[9])}
+
             post_id=posts.insert_one(post).inserted_id
         
         
         db.list_collection_names()
 
+    #가격 통합 함수
+    def price_filtering(self, price):
+        try:
+            if '백' in price:
+                price = price.replace('백', "00")
 
+            if '만' in price:
+                price = price.replace('만', "0000")
 
+            if '천' in price:
+                price = price.replace('천', "000")
+            
+            if ',' in price:
+                price = price.replace(',','')
 
-"""    #필터
-    def filter(self):
-        pass
-"""
+            if '원' in price:
+                price = price.replace('원','')
+            
+            if ' ' in price:
+                price = price.replace(' ', '')
 
-"""   #최저가 찾기
-    def find_smallest_price(self):
-        pass
-"""
+            price = re.sub(r"[^0-9]", "", price)
+            
+            price = int(price)
+        except (ValueError):
+            price = -1
+
+        return price
+
+    def isPurchase(self, title):
+        purchase_word = ['구매합니다', '삽니다']
+        for i in purchase_word:
+            if i in title:
+                return True
+            
+        else:
+            return False

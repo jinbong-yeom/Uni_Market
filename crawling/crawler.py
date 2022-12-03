@@ -1,21 +1,53 @@
-from bs4 import BeautifulSoup
-import requests
-import datetime
+from crawler_class import *
+from threading import Thread
 
-from crawler_class import Bunjang, Danngn, Joongna
+import argparse
+import time
 
 
-#당근마켓 검색
-danngn = Danngn()
-danngn.crawler_search("노트북")
-danngn.serve_data()
+DAANGN = 1
+BUNJANG = 2
+JOONGNA = 3
+REGION = "청주"
 
-#번개장터 검색
-bunjang = Bunjang()
-bunjang.crawler_search("노트북")
-bunjang.serve_data()
+def start(crawler_instance):
 
-#중고나라 검색
-joongna = Joongna()
-joongna.crawler_search("노트북")
-joongna.serve_data()
+    while True:
+        start = time.time()
+        crawler_instance.crawler_search()
+        crawler_instance.serve_data()
+        print(time.time() - start)
+        
+        time.sleep(5)
+
+    return
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-t", "--type", dest="type", action="store")
+args = parser.parse_args()
+
+type: int = args.type
+
+crawler = None
+
+if int(args.type) == DAANGN:
+    crawler = Danngn()
+elif int(args.type) == BUNJANG:
+    crawler = Bunjang()
+elif int(args.type) == JOONGNA:
+    crawler = Joongna()
+else:
+    print("")
+
+if crawler is not None:
+    thread = Thread(target=start, args=(crawler, ), daemon=True)
+    thread.start()
+
+    while True:
+        try:
+            command = input()
+
+            if command == 'q':
+                break
+        except KeyboardInterrupt as ki:
+            pass
