@@ -13,7 +13,7 @@ public class Fragment2 extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup frag2V = (ViewGroup) inflater.inflate(R.layout.fragment3, container, false);
+        ViewGroup frag2V = (ViewGroup) inflater.inflate(R.layout.fragment2, container, false);
         TextView nkeyword = frag2V.findViewById(R.id.frag2_textView2);
 
         if (getArguments() != null) {
@@ -21,7 +21,6 @@ public class Fragment2 extends Fragment {
             //Toast.makeText(getActivity(),trans +"넘겨받은 문자열", Toast.LENGTH_LONG).show();
             nkeyword.setText(trans);
         }
-
         return frag2V;
     }
 }
