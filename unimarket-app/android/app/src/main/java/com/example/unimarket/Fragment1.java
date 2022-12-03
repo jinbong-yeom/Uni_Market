@@ -47,6 +47,7 @@ public class Fragment1 extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                //파이어베이스 토큰확인
                 FirebaseMessaging.getInstance().getToken()
                         .addOnCompleteListener(new OnCompleteListener<String>() {
                             @Override
@@ -55,7 +56,6 @@ public class Fragment1 extends Fragment {
                                     Log.w("TAG", "Fetching FCM registration token failed", task.getException());
                                     return;
                                 }
-
                                 // Get new FCM registration token
                                 String token = task.getResult();
                                 Toast.makeText(getActivity(),token, Toast.LENGTH_SHORT).show();
