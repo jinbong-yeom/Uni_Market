@@ -1,8 +1,10 @@
 import firebase_admin
+import os
 from firebase_admin import credentials
 from firebase_admin import messaging
 
-cred_path = "unimarket-f5678-5b01da3d723f.json"
+current_path = os.getcwd()
+cred_path = current_path+"/DataBase/unimarket_firebase.json"
 cred = credentials.Certificate(cred_path)
 firebase_admin.initialize_app(cred)
 
