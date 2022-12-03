@@ -84,8 +84,8 @@ class Danngn(Crawler):
         detail_list = [description, date, seller_info]
         return detail_list
 
-        
-    
+
+
 
 
 
