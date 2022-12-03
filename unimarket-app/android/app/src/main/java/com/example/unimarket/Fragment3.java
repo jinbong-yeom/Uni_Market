@@ -26,7 +26,7 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 regstr = reginput.getText().toString();
-                Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
                 regshow.setText(regstr);
 
                 ( (Globalstr) getActivity().getApplication() ).setregion1(regstr);

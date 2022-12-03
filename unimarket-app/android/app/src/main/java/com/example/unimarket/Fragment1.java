@@ -68,7 +68,9 @@ public class Fragment1 extends Fragment {
                 List<String> test =  new ArrayList<>();
                 test.add("note");
                 test.add("book");
-                FilteringData filteringData = new FilteringData(test, 1500000, 500000);
+                List<String> test1 = new ArrayList<>();
+                test1.add("청주");
+                FilteringData filteringData = new FilteringData(test, 1500000, 500000, test1);
                 PostData postData = new PostData(s, android_id, filteringData);
 
 
@@ -99,7 +101,9 @@ public class Fragment1 extends Fragment {
             public void onClick(View view) {
                 Toast.makeText(getActivity(),srinput +" fragment2로 전송", Toast.LENGTH_LONG).show();
 
-                // 번들 생성하여 검색어 fragment2에 넘기기
+                //알림 설정하는 파트
+
+                // 번들 생성하여 검색어 fragment2에 넘기기 -  강제이동안되도록 수정 필요
                 Bundle bundle = new Bundle();
                 bundle.putString("srinput",srinput);
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
