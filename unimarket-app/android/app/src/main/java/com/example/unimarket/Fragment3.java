@@ -5,6 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -15,7 +18,19 @@ public class Fragment3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag3V = (ViewGroup) inflater.inflate(R.layout.fragment3, container, false);
 
+        EditText reginput = frag3V.findViewById(R.id.reg_input);
         Button button1 = frag3V.findViewById(R.id.regionplus);
+        TextView regshow = frag3V.findViewById(R.id.regshow);
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick() {
+
+            }
+        });
+
+
+
 
 
 
