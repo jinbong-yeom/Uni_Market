@@ -14,13 +14,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-<<<<<<< HEAD
 import com.google.gson.JsonSyntaxException;
-=======
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
->>>>>>> Feature_Firebase_Test
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,19 +67,10 @@ public class Fragment1 extends Fragment {
 
             private void createPost(String s) {
                 String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
-<<<<<<< HEAD
-                List<String> test =  new ArrayList<>();
-                test.add("note");
-                test.add("book");
-                FilteringData filteringData = new FilteringData(test, 1500000, 500000);
-                PostData postData = new PostData(s, android_id, filteringData);
-
-=======
                 List<String> region = new ArrayList<>();
                 region.add("청주");
                 region.add("서울");
                 PostData postData = new PostData(s, android_id, region);
->>>>>>> Feature_Firebase_Test
 
                 Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
 
