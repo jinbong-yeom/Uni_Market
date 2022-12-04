@@ -21,7 +21,12 @@ public class MainActivity extends AppCompatActivity {
         fragment2 = new Fragment2();
         fragmentManager.beginTransaction().add(R.id.main_frame, fragment2).commit();
         Toast.makeText(getApplicationContext(), "make frag2", Toast.LENGTH_LONG).show();
-
+    }
+    public void removefrag2() {
+        if (fragment2 != null) {
+            fragmentManager.beginTransaction().remove(fragment2).commit();
+            Toast.makeText(getApplicationContext(), "removefrag2", Toast.LENGTH_LONG).show();
+        }
     }
 
 
