@@ -148,6 +148,15 @@ public class Fragment1 extends Fragment {
         EditText minv = frag1V.findViewById(R.id.filter_et2);
         EditText maxv = frag1V.findViewById(R.id.filter_et3);
 
+        Button filterb = frag1V.findViewById(R.id.filter_button1);
+        filterb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"적용버튼 클릭", Toast.LENGTH_LONG).show();
+            }
+        });
+
+
 
 
         return frag1V;

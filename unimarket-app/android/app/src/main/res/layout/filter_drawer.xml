@@ -102,7 +102,7 @@
             app:layout_constraintTop_toBottomOf="@+id/filter_et1" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/filter_button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="63dp"
