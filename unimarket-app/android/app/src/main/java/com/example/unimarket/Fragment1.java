@@ -29,7 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
 
-    private final String BASEURL = "http://192.168.0.7:60000";
+    private final String BASEURL = "http://115.85.181.251:60000";
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -96,50 +96,38 @@ public class Fragment1 extends Fragment {
 
             private void createNotice(String s) {
                 //파이어베이스 토큰확인
-                FirebaseMessaging.getInstance().getToken()
-                        .addOnCompleteListener(new OnCompleteListener<String>() {
-                            @Override
-                            public void onComplete(@NonNull Task<String> task) {
-                                if (!task.isSuccessful()) {
-                                    Log.w("TAG", "Fetching FCM registration token failed", task.getException());
-                                    return;
-                                }
-                                // Get new FCM registration token
-                                String token = task.getResult();
-                                Toast.makeText(getActivity(),token, Toast.LENGTH_SHORT).show();
-                                send(token);
-                            }
+                String token = FirebaseMessaging.getInstance().getToken().getResult();
+                Toast.makeText(getActivity(),token, Toast.LENGTH_SHORT).show();
+                send(s, token);
+            }
 
-                            public void send(String token){
-                                List<String> region = new ArrayList<>();
-                                region.add("청주");
-                                region.add("서울");
+            public void send(String s, String token){
+                List<String> region = new ArrayList<>();
+                region.add("청주");
+                region.add("서울");
 
-                                PostData postData = new PostData(s, token, region);
+                PostData postData = new PostData(s, token, region);
 
 
-                                Call<PostResponse> call = jsonPlaceHolderApi.createNotice(postData);
+                Call<PostResponse> call = jsonPlaceHolderApi.createNotice(postData);
 
-                                call.enqueue(new Callback<PostResponse>() {
-                                    @Override
-                                    public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
-                                        if (!response.isSuccessful()) {
-                                            Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
-                                            return;
-                                        }
-                                        PostResponse postResponse = response.body();
-                                    }
+                call.enqueue(new Callback<PostResponse>() {
+                    @Override
+                    public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                        if (!response.isSuccessful()) {
+                            Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        PostResponse postResponse = response.body();
+                    }
 
 
-                                    @Override
-                                    public void onFailure(Call<PostResponse> call, Throwable t) {
-                                        t.printStackTrace();
-                                        Toast.makeText(getActivity(), "오류", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-
-                        });
+                    @Override
+                    public void onFailure(Call<PostResponse> call, Throwable t) {
+                        t.printStackTrace();
+                        Toast.makeText(getActivity(), "오류", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
