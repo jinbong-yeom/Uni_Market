@@ -48,19 +48,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/filter_text1" />
 
-        <EditText
-            android:id="@+id/filter_et1"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="최소 금액"
-            android:inputType="text"
-            android:textColorHint="@color/gray"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/filter_text2" />
 
 
         <EditText
@@ -71,6 +58,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:ems="10"
+            android:maxLength="20"
             android:hint="필터 단어"
             android:inputType="text"
             android:textColorHint="@color/gray"
@@ -89,6 +77,20 @@
             app:layout_constraintTop_toBottomOf="@+id/filter_et1" />
 
         <EditText
+            android:id="@+id/filter_et1"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="최소 금액"
+            android:inputType="number"
+            android:textColorHint="@color/gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_text2" />
+
+        <EditText
             android:id="@+id/filter_et3"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -96,10 +98,11 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="최대 금액"
-            android:inputType="text"
+            android:inputType="number"
             android:textColorHint="@color/gray"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/filter_et1" />
+
 
         <Button
             android:id="@+id/filter_button1"
