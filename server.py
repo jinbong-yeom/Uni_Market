@@ -6,14 +6,6 @@ import json
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 
-@app.route('/posts/207092540')
-def hello():
-    test = {'userId': '207092540'}
-    data = json.dumps(test, ensure_ascii=False).encode('utf8')
-    
-    return data
-
-
 @app.route("/post",methods=['POST'])
 def post():
     params = request.get_json()
