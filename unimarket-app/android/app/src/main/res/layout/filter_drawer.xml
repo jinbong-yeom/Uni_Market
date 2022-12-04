@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="260dp"
     android:layout_height="match_parent"
-    android:layout_gravity="start"
+    android:layout_gravity="end"
     android:id="@+id/drawerView"
     android:background="@color/white">
 
@@ -34,16 +34,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
-    <TextView
-        android:id="@+id/filter_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="71dp"
-        android:text="가격 범위"
-        android:textSize="14dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="71dp"
+            android:text="가격 범위"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_text1" />
 
 
 
