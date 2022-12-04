@@ -1,5 +1,6 @@
 package com.example.unimarket;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,12 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"이메일 버튼 눌림", Toast.LENGTH_SHORT).show();
-
+                Intent mail_intent = new Intent(Intent.ACTION_SEND);
+                mail_intent .setType("*/*");
+                mail_intent.putExtra(Intent.EXTRA_EMAIL, "mingureion@gmail.com"); // 받는 사람 이메일
+                mail_intent.putExtra(Intent.EXTRA_SUBJECT, "Email Title"); // 메일 제목
+                mail_intent.putExtra(Intent.EXTRA_TEXT, "Email Text"); // 메일 내용
+                startActivity(mail_intent);
             }
         });
 
