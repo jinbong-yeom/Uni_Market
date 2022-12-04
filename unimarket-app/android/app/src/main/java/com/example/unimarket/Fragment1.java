@@ -111,7 +111,7 @@ public class Fragment1 extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 Fragment1 fragment1 = ((MainActivity)getActivity()).fragment1;
                 Fragment2 fragment2 = ((MainActivity)getActivity()).fragment2;
-                
+
                 // 알림 탭으로 이동
                 fragmentManager.beginTransaction().hide(fragment1).commit();
                 fragmentManager.beginTransaction().show(fragment2).commit();

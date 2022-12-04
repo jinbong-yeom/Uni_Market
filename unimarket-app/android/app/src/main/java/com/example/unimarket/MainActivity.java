@@ -17,6 +17,13 @@ public class MainActivity extends AppCompatActivity {
      Fragment3 fragment3;
      FragmentManager fragmentManager = getSupportFragmentManager();
 
+    public void makefrag2(){
+        fragment2 = new Fragment2();
+        fragmentManager.beginTransaction().add(R.id.main_frame, fragment2).commit();
+        Toast.makeText(getApplicationContext(), "make frag2", Toast.LENGTH_LONG).show();
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
