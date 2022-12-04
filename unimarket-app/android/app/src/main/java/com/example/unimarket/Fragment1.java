@@ -125,6 +125,14 @@ public class Fragment1 extends Fragment {
             }
         });
 
+        Button filter = frag1V.findViewById(R.id.filter);
+        filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "필터클릭", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return frag1V;
     }
 
