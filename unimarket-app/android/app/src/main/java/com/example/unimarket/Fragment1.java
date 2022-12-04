@@ -112,6 +112,13 @@ public class Fragment1 extends Fragment {
                 Fragment1 fragment1 = ((MainActivity)getActivity()).fragment1;
                 Fragment2 fragment2 = ((MainActivity)getActivity()).fragment2;
 
+                if (fragment2!=null) {
+                    ((MainActivity)getActivity()).removefrag2();
+                }
+                ((MainActivity)getActivity()).makefrag2();
+                fragment2 = ((MainActivity)getActivity()).fragment2;
+                fragment2.setArguments(bundle); //번들을 프래그먼트2로 보냄
+
                 // 알림 탭으로 이동
                 fragmentManager.beginTransaction().hide(fragment1).commit();
                 fragmentManager.beginTransaction().show(fragment2).commit();
