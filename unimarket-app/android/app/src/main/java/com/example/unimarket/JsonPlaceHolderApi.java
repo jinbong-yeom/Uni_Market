@@ -9,4 +9,9 @@ public interface JsonPlaceHolderApi {
     @POST("post")
     Call<PostResponse> createPost(@Body PostData postData);
 
+<<<<<<< HEAD
+=======
+    @POST("notice")
+    Call<PostResponse> createNotice(@Body PostData postData);
+>>>>>>> Feature_Firebase_Test
 }
