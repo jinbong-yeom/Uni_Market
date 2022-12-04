@@ -107,21 +107,21 @@ public class Fragment1 extends Fragment {
                 PostData postData = new PostData(s, token, region);
 
 
-                Call<PostResponse> call = jsonPlaceHolderApi.createNotice(postData);
+                Call<NoticeResponse> call = jsonPlaceHolderApi.createNotice(postData);
 
-                call.enqueue(new Callback<PostResponse>() {
+                call.enqueue(new Callback<NoticeResponse>() {
                     @Override
-                    public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                    public void onResponse(Call<NoticeResponse> call, Response<NoticeResponse> response) {
                         if (!response.isSuccessful()) {
                             Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        PostResponse postResponse = response.body();
+                        NoticeResponse postResponse = response.body();
                     }
 
 
                     @Override
-                    public void onFailure(Call<PostResponse> call, Throwable t) {
+                    public void onFailure(Call<NoticeResponse> call, Throwable t) {
                         t.printStackTrace();
                         Toast.makeText(getActivity(), "오류", Toast.LENGTH_SHORT).show();
                     }

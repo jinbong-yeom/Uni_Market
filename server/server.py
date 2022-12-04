@@ -1,6 +1,6 @@
 from flask import Flask, make_response, jsonify, request, make_response
-from search import *
-from monitor import *
+from server.search import *
+from server.monitor import *
 import json
 
 app = Flask(__name__)
@@ -18,7 +18,8 @@ def post():
     result = search(title,Max,Min,Filter,region)
     print(result)
     return {"result":result}
-@app.route("/notice",methods=['NOTICE'])
+
+@app.route("/notice",methods=['POST'])
 def notice():
     params = request.get_json()
     print(params)
@@ -30,7 +31,7 @@ def notice():
     region=params['filteringData']['region']
     result = monitor(user,title,Max,Min,Filter,region)
     print(result)
-    return result
+    return {"Success": True}
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=60000)

@@ -2,7 +2,7 @@ from pymongo import MongoClient
 import json 
 from threading import Thread
 import time
-import send
+import server.send as send
 uri = "" % (
                 '', '', '')
 client=MongoClient(uri)
