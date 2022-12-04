@@ -1,7 +1,7 @@
 from pymongo import MongoClient 
 import json
-uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
-                'uni', 'uni1234', 'db.yoonleeverse.com')
+uri = "" % (
+                '', '', '')
 client=MongoClient(uri)
 def search(title,Max,Min,Filter,region):
       db=client['UniMarketDB']
