@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -142,6 +143,11 @@ public class Fragment1 extends Fragment {
         drawerLayout = (DrawerLayout) frag1V.findViewById(R.id.drawer);
         drawerView = (View) frag1V.findViewById(R.id.drawerView);
         drawerLayout.addDrawerListener(listener);;   //setDrawerListener deprecated
+
+        EditText filterv = frag1V.findViewById(R.id.filter_et1);
+        EditText minv = frag1V.findViewById(R.id.filter_et2);
+        EditText maxv = frag1V.findViewById(R.id.filter_et3);
+
 
 
         return frag1V;
