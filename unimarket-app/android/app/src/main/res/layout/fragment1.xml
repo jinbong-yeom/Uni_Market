@@ -42,12 +42,11 @@
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
-        android:layout_width="260dp"
+        android:layout_width="220dp"
         android:layout_height="match_parent"
-        android:layout_marginStart="211dp"
         android:background="#004682B4"
         android:orientation="vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <include layout="@layout/filter_drawer" />
