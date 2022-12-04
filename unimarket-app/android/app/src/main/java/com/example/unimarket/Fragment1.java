@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -33,6 +35,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Fragment1 extends Fragment {
 
     String srinput; // 검색 키워드드
+    private DrawerLayout drawerLayout;
+    private View drawerView;
 
    private final String BASEURL = "http://172.27.0.194:60000";
 
@@ -138,9 +142,26 @@ public class Fragment1 extends Fragment {
         });
 
 
-
         return frag1V;
     }
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+        }
+    };
+
 
 
 

@@ -39,7 +39,7 @@
         app:icon="@drawable/ic_filter_24"
         app:layout_constraintStart_toEndOf="@+id/searchView1"
         app:layout_constraintTop_toTopOf="parent" />
-    
+
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer"
         android:layout_width="260dp"
