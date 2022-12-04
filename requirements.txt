@@ -1,0 +1,4 @@
+Flask
+firebase-admin==6.0.1
+pymongo==4.2.0
+bs4==0.0.1

@@ -17,6 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Unimarket"
         tools:targetApi="31">
+
+        <service android:name=".Firebase"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity android:name=".IntroActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +36,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
     </application>
 
 </manifest>
