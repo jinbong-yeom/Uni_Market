@@ -51,7 +51,6 @@
 
         <include layout="@layout/filter_drawer" />
 
-
     </androidx.drawerlayout.widget.DrawerLayout>
 
 

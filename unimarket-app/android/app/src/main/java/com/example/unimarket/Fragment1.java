@@ -131,13 +131,12 @@ public class Fragment1 extends Fragment {
             }
         });
 
-        NavigationView navigationView = frag1V.findViewById(R.id.nav_view);
-
         Button filter = frag1V.findViewById(R.id.filter);
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(), "필터클릭", Toast.LENGTH_SHORT).show();
+                drawerLayout.openDrawer(drawerView);
             }
         });
         drawerLayout = (DrawerLayout) frag1V.findViewById(R.id.drawer);
