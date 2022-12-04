@@ -2,6 +2,7 @@ import firebase_admin
 import os
 from firebase_admin import credentials
 from firebase_admin import messaging
+
 def send(token):
     current_path = os.getcwd()
     cred_path = current_path+"/DataBase/unimarket_firebase.json"
@@ -19,3 +20,5 @@ def send(token):
 
     response = messaging.send(message)
     print('Successfully sent message:', response)
+
+    
