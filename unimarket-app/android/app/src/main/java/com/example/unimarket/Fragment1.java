@@ -38,7 +38,7 @@ public class Fragment1 extends Fragment {
     private DrawerLayout drawerLayout;
     private View drawerView;
 
-   private final String BASEURL = "http://172.27.0.194:60000";
+    private final String BASEURL = "http://172.27.0.194:60000";
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
 
@@ -140,6 +140,9 @@ public class Fragment1 extends Fragment {
                 Toast.makeText(getActivity(), "필터클릭", Toast.LENGTH_SHORT).show();
             }
         });
+        drawerLayout = (DrawerLayout) frag1V.findViewById(R.id.drawer);
+        drawerView = (View) frag1V.findViewById(R.id.drawerView);
+        drawerLayout.addDrawerListener(listener);;   //setDrawerListener deprecated
 
 
         return frag1V;
