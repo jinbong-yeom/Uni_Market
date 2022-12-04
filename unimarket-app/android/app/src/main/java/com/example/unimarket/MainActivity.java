@@ -15,19 +15,22 @@ public class MainActivity extends AppCompatActivity {
      Fragment1 fragment1;
      Fragment2 fragment2;
      Fragment3 fragment3;
+     FragmentManager fragmentManager = getSupportFragmentManager();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //프래그먼트생성
         fragment1 = new Fragment1();    // new 연산자 사용하더라도 바로 프래그먼트로 동작하는건 아님
-//        fragment2 = new Fragment2();
+        //fragment2 = new Fragment2();
 //        fragment3 = new Fragment3();
 
         //처음엔 검색탭에서 시작
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        //FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.main_frame, fragment1).commit();
         BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavi);
 

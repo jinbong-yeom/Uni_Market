@@ -12,6 +12,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -51,9 +52,9 @@ public class Fragment1 extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 srinput = s;
-                createPost(s);
+                //createPost(s);
                 // 입력받은 문자열 처리
-//                Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
                 return true;    //리스너로 처리할 떄 true반환?
             }
             @Override
@@ -99,18 +100,21 @@ public class Fragment1 extends Fragment {
         snbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),srinput +" fragment2로 전송", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),srinput +" fragment2로 전송", Toast.LENGTH_LONG).show();
 
                 //알림 설정하는 파트
 
                 // 번들 생성하여 검색어 fragment2에 넘기기 -  강제이동안되도록 수정 필요
                 Bundle bundle = new Bundle();
                 bundle.putString("srinput",srinput);
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                Fragment2 fragment2 = new Fragment2();//프래그먼트2 선언
-                fragment2.setArguments(bundle);//번들을 프래그먼트2로 보낼 준비
-                transaction.replace(R.id.main_frame, fragment2);
-                transaction.commit();
+
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                Fragment1 fragment1 = ((MainActivity)getActivity()).fragment1;
+                Fragment2 fragment2 = ((MainActivity)getActivity()).fragment2;
+                
+                // 알림 탭으로 이동
+                fragmentManager.beginTransaction().hide(fragment1).commit();
+                fragmentManager.beginTransaction().show(fragment2).commit();
             }
         });
 
