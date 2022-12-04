@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.JsonSyntaxException;
 
 import java.util.ArrayList;
@@ -125,6 +127,8 @@ public class Fragment1 extends Fragment {
             }
         });
 
+        NavigationView navigationView = frag1V.findViewById(R.id.nav_view);
+
         Button filter = frag1V.findViewById(R.id.filter);
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +136,8 @@ public class Fragment1 extends Fragment {
                 Toast.makeText(getActivity(), "필터클릭", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         return frag1V;
     }
