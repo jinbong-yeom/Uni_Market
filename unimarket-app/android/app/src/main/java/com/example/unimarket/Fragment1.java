@@ -36,6 +36,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Fragment1 extends Fragment {
 
     String srinput; // 검색 키워드드
+    String filterinput; // 필터단어
+    int minprice;
+    int maxprince;
+
     private DrawerLayout drawerLayout;
     private View drawerView;
 
@@ -152,7 +156,13 @@ public class Fragment1 extends Fragment {
         filterb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"적용버튼 클릭", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),"적용버튼 클릭", Toast.LENGTH_LONG).show();
+                filterinput = filterv.getText().toString();
+                minprice = Integer.parseInt(minv.getText().toString());
+                maxprince = Integer.parseInt(maxv.getText().toString());
+                Toast.makeText(getActivity(),filterinput+minprice+maxprince, Toast.LENGTH_LONG).show();
+                // 필터 적용 됬을 때 출력내용 바뀌거나 필터 값 전송되도록 ++++++++++++++++++++++++++++++++
+
             }
         });
 

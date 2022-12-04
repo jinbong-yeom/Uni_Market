@@ -31,6 +31,7 @@ public class Fragment3 extends Fragment {
                 regshow.setText(regstr);
 
                 ( (Globalstr) getActivity().getApplication() ).setregion1(regstr);
+                // 지역 스트링 전달되도록 하는 내용 필요 ++++++++++++++++++++++++++++++++++++
                 //Toast.makeText(getActivity(),( (Globalstr) getActivity().getApplication() ).getregion1(), Toast.LENGTH_LONG).show();
             }
         });
