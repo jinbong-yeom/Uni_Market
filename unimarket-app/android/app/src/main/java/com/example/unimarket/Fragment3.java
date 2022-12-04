@@ -34,6 +34,17 @@ public class Fragment3 extends Fragment {
             }
         });
 
+        Button email = frag3V.findViewById(R.id.report);
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"이메일 버튼 눌림", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+
         return frag3V;
     }
 
