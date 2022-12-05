@@ -30,6 +30,7 @@ def notice():
     Filter=params['filteringData']['excludeKeyword']
     region=params['filteringData']['region']
     thread = Thread(target=monitor, args=(user,title,Max,Min,Filter,region), daemon=True)
+    thread.start()
     return {"Success": True}
 
 if __name__ == '__main__':
