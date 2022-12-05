@@ -1,6 +1,7 @@
 from flask import Flask, make_response, jsonify, request, make_response
-from server.search import *
-from server.monitor import *
+from send import *
+from search import *
+from monitor import *
 import json
 
 app = Flask(__name__)
@@ -16,9 +17,8 @@ def post():
     Filter=params['filteringData']['excludeKeyword']
     region=params['filteringData']['region']
     result = search(title,Max,Min,Filter,region)
-    print(result)
     return {"result":result}
-
+    
 @app.route("/notice",methods=['POST'])
 def notice():
     params = request.get_json()
