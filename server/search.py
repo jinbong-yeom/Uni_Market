@@ -1,15 +1,16 @@
 from pymongo import MongoClient 
 import json
+import os
 uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
                 'uni', 'uni1234', 'db.yoonleeverse.com')
 client=MongoClient(uri)
-
 def search(title,Max,Min,Filter,region):
-      
       db=client['UniMarketDB']
       collection=db['data']
       item_id=[]# 기존 item_id
-      result=[]
+      send_list=[]
+      current_path = os.getcwd()
+      cred_path = current_path+"/server/item_id_list.txt"
       for i in collection.find():
             item_id.append(i['item_id'])
       with open('/server/item_id_list.txt','w',encoding='UTF-8')as f:
