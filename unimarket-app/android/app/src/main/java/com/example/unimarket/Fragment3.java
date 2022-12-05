@@ -50,6 +50,13 @@ public class Fragment3 extends Fragment {
             }
         });
 
+        Button checkupdate = frag3V.findViewById((R.id.frag3_button3));
+        checkupdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"업데이트 확인", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         return frag3V;
