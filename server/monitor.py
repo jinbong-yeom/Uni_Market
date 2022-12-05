@@ -2,15 +2,24 @@ from pymongo import MongoClient
 import json 
 from threading import Thread
 import time
-import server.send as send
+import send as send
+import os
 uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
                 'uni', 'uni1234', 'db.yoonleeverse.com')
 client=MongoClient(uri)
 def monitor(user,title,Max,Min,Filter,region):
     db=client['UniMarketDB']
     collection=db['data']
+
+    db=client['UniMarketDB']
+    monitor_collection=db['monitor']
+
     data=[]
-    f=open('/server/item_id_list.txt','r')
+    current_path = os.getcwd()
+    cred_path = current_path+"/server/item_id_list.txt"
+    print(cred_path)
+    f=open(cred_path,'r')
+
     while True:
         line=f.readline().rstrip()
         if not line:break
