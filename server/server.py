@@ -29,9 +29,13 @@ def notice():
     Min=params['filteringData']['minPrice']
     Filter=params['filteringData']['excludeKeyword']
     region=params['filteringData']['region']
-    thread = Thread(target=monitor, args=(user,title,Max,Min,Filter,region), daemon=True)
+    thread = Thread(target=monitor, args=(user,title,Max,Min,Filter[0],region[0]), daemon=True)
     thread.start()
     return {"Success": True}
 
 if __name__ == '__main__':
+    uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
+                    'uni', 'uni1234', 'db.yoonleeverse.com')
+    client=MongoClient(uri)
+
     app.run(host='0.0.0.0', port=60000)
