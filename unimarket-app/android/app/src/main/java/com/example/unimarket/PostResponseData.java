@@ -22,6 +22,15 @@ public class PostResponseData {
     @SerializedName("app_name")
     private String app_name;
 
+    @SerializedName("description")
+    private String description;
+
+    @SerializedName("date")
+    private String date;
+
+    @SerializedName("seller_info")
+    private String seller_info;
+
     public String getTitle() {
         return title;
     }
@@ -46,12 +55,27 @@ public class PostResponseData {
         return app_name;
     }
 
-    public PostResponseData(String title, String picture, String region, int price, String link, String app_name) {
+    public String getDescription() {
+        return description;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public String getSeller_info() {
+        return seller_info;
+    }
+
+    public PostResponseData(String title, String picture, String region, int price, String link, String app_name, String description, String date, String seller_info) {
         this.title = title;
         this.picture = picture;
         this.region = region;
         this.price = price;
         this.link = link;
         this.app_name = app_name;
+        this.description = description;
+        this.date = date;
+        this.seller_info = seller_info;
     }
 }
