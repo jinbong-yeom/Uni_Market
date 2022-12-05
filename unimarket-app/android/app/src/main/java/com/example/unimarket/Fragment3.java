@@ -1,5 +1,6 @@
 package com.example.unimarket;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,10 +27,30 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 regstr = reginput.getText().toString();
-                Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
                 regshow.setText(regstr);
+
+                ( (Globalstr) getActivity().getApplication() ).setregion1(regstr);
+                // 지역 스트링 전달되도록 하는 내용 필요 ++++++++++++++++++++++++++++++++++++
+                //Toast.makeText(getActivity(),( (Globalstr) getActivity().getApplication() ).getregion1(), Toast.LENGTH_LONG).show();
             }
         });
+
+        Button email = frag3V.findViewById(R.id.report);
+        email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(),"이메일 버튼 눌림", Toast.LENGTH_SHORT).show();
+                Intent mail_intent = new Intent(Intent.ACTION_SEND);
+                mail_intent .setType("*/*");
+                mail_intent.putExtra(Intent.EXTRA_EMAIL, "mingureion@gmail.com"); // 받는 사람 이메일
+                mail_intent.putExtra(Intent.EXTRA_SUBJECT, "Email Title"); // 메일 제목
+                mail_intent.putExtra(Intent.EXTRA_TEXT, "Email Text"); // 메일 내용
+                startActivity(mail_intent);
+            }
+        });
+
+
 
         return frag3V;
     }

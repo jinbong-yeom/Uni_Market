@@ -10,7 +10,7 @@
         android:id="@+id/reg_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="66dp"
         android:hint="지역을 입력하세요."
         android:inputType="text"
@@ -31,16 +31,50 @@
         android:id="@+id/regionplus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="222dp"
         android:layout_marginTop="66dp"
-        android:text="지역추가"
         android:fontFamily="@font/jua"
+        android:text="지역추가"
         android:textStyle="bold"
         app:icon="@drawable/ic_map"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="250dp"
+        android:background="#80000000"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/frag3_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="20dp"
+        android:text="버그 리포트"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line" />
+
+    <android.widget.Button
+        android:id="@+id/report"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="300dp"
+        android:background="@color/sky_"
+        android:drawableRight="@drawable/ic_mail_24"
+        android:text="유니마켓에 메일 보내기"
+        android:textStyle="bold"
+        android:paddingRight = "30dp"
+        android:paddingLeft  = "30dp"
+        app:icon="@drawable/ic_mail_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
