@@ -3,14 +3,14 @@ import json
 from threading import Thread
 import time
 import server.send as send
-uri = "" % (
-                '', '', '')
+uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
+                'uni', 'uni1234', 'db.yoonleeverse.com')
 client=MongoClient(uri)
 def monitor(user,title,Max,Min,Filter,region):
     db=client['UniMarketDB']
     collection=db['data']
     data=[]
-    f=open('./item_id_list.txt','r')
+    f=open('/server/item_id_list.txt','r')
     while True:
         line=f.readline().rstrip()
         if not line:break
@@ -21,8 +21,6 @@ def monitor(user,title,Max,Min,Filter,region):
         if i['item_id'] not in data:
                 send(user,i['title'])
                 # 알림 보내기
-                with open('item_id_list.txt','a',encoding='UTF-8')as f:#알림 보내고 리스트 파일 갱신
+                with open('/server/item_id_list.txt','a',encoding='UTF-8')as f:#알림 보내고 리스트 파일 갱신
                     f.write(i['item_id']+'\n')
-thread = Thread(target=monitor, args=(), daemon=True)
-thread.start()
-time.sleep(3)
+    time.sleep(3)
