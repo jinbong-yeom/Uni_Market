@@ -22,7 +22,8 @@ def monitor(user,title,Max,Min,Filter,region):
 
     while True:
         line=f.readline().rstrip()
-        if not line:break
+        if not line:
+            break
         data.append(line)
     for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},{"price":{"$gte":Min}},
     {"title":{"$regex":".*{}.*".format(title)}}]},{'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
@@ -30,6 +31,5 @@ def monitor(user,title,Max,Min,Filter,region):
         if i['item_id'] not in data:
                 send(user,i['title'])
                 # 알림 보내기
-                with open('/server/item_id_list.txt','a',encoding='UTF-8')as f:#알림 보내고 리스트 파일 갱신
+                with open('item_id_list.txt','a',encoding='UTF-8')as f:#알림 보내고 리스트 파일 갱신
                     f.write(i['item_id']+'\n')
-    time.sleep(3)
