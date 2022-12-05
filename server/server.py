@@ -29,8 +29,7 @@ def notice():
     Min=params['filteringData']['minPrice']
     Filter=params['filteringData']['excludeKeyword']
     region=params['filteringData']['region']
-    result = monitor(user,title,Max,Min,Filter,region)
-    print(result)
+    thread = Thread(target=monitor, args=(user,title,Max,Min,Filter,region), daemon=True)
     return {"Success": True}
 
 if __name__ == '__main__':
