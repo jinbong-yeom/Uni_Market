@@ -4,7 +4,7 @@ from firebase_admin import credentials
 from firebase_admin import messaging
 def send(token,title):
     current_path = os.getcwd()
-    cred_path = current_path+"/DataBase/unimarket_firebase.json"
+    cred_path = current_path+"/server/unimarket_firebase.json"
     cred = credentials.Certificate(cred_path)
     firebase_admin.initialize_app(cred)
 
