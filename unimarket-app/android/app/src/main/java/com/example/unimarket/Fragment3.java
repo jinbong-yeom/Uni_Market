@@ -20,7 +20,7 @@ public class Fragment3 extends Fragment {
         ViewGroup frag3V = (ViewGroup) inflater.inflate(R.layout.fragment3, container, false);
 
         EditText reginput = frag3V.findViewById(R.id.reg_input);
-        Button button1 = frag3V.findViewById(R.id.regionplus);
+        Button button1 = frag3V.findViewById(R.id.frag3_button1);
         TextView regshow = frag3V.findViewById(R.id.regshow);
 
         button1.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +36,7 @@ public class Fragment3 extends Fragment {
             }
         });
 
-        Button email = frag3V.findViewById(R.id.report);
+        Button email = frag3V.findViewById(R.id.frag3_button2);
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
