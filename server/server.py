@@ -18,7 +18,7 @@ def post():
     region=params['filteringData']['region']
     result = search(title,Max,Min,Filter,region)
     return {"result":result}
-    
+
 @app.route("/notice",methods=['POST'])
 def notice():
     params = request.get_json()
@@ -29,8 +29,18 @@ def notice():
     Min=params['filteringData']['minPrice']
     Filter=params['filteringData']['excludeKeyword']
     region=params['filteringData']['region']
-    thread = Thread(target=monitor, args=(user,title,Max,Min,Filter[0],region[0]), daemon=True)
-    thread.start()
+
+    db=client['UniMarketDB']
+    collection=db['monitor']
+    post={"user_id":str(user),
+                "title":str(title),
+                "max_price":int(Max),
+                "min_price":int(Min),
+                "filter_keyword":str(Filter),
+                "region":str(region)}
+    post_id=collection.insert_one(post).inserted_id
+
+
     return {"Success": True}
 
 if __name__ == '__main__':
