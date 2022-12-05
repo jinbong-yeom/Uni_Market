@@ -86,10 +86,22 @@ public class Fragment1 extends Fragment {
             private void createPost(String s) {
                 String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
 
+                List<String> excludeKeyword = new ArrayList<>();
                 List<String> region = new ArrayList<>();
+                excludeKeyword.add("note");
+                excludeKeyword.add("삽니다");
+
+                int max_price = 10000000;
+                int min_price = 0;
+
                 region.add("청주");
                 region.add("서울");
-                PostData postData = new PostData(s, android_id, region);
+
+
+                FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+
+
+                PostData postData = new PostData(s, android_id, filteringData);
 
 
                 Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
@@ -120,11 +132,22 @@ public class Fragment1 extends Fragment {
             }
 
             public void send(String s, String token){
+
+                List<String> excludeKeyword = new ArrayList<>();
                 List<String> region = new ArrayList<>();
+                excludeKeyword.add("note");
+                excludeKeyword.add("삽니다");
+                int max_price = 10000000;
+                int min_price = 0;
+
                 region.add("청주");
                 region.add("서울");
 
-                PostData postData = new PostData(s, token, region);
+
+                FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+
+
+                PostData postData = new PostData(s, token, filteringData);
 
 
                 Call<NoticeResponse> call = jsonPlaceHolderApi.createNotice(postData);

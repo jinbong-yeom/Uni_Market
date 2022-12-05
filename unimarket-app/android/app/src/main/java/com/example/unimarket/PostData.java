@@ -11,25 +11,24 @@ public class PostData {
     @SerializedName("userId")
     private String userId;
 
-    @SerializedName("region")
-    private List<String> region;
+    @SerializedName("filteringData")
+    private FilteringData filteringData;
 
-    public PostData(String title, String userId, List<String> region) {
+    public PostData(String title, String userId, FilteringData filteringData) {
         this.title = title;
         this.userId = userId;
-        this.region = region;
+        this.filteringData = filteringData;
     }
 
     public String getTitle() {
         return title;
     }
 
-
     public String getUserId() {
         return userId;
     }
 
-    public List<String> getRegion() {
-        return region;
+    public FilteringData getFilteringData() {
+        return filteringData;
     }
 }
