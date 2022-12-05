@@ -11,25 +11,25 @@ def search(title,Max,Min,Filter,region):
       send_list=[]
       current_path = os.getcwd()
       cred_path = current_path+"/server/item_id_list.txt"
+
       for i in collection.find():
             item_id.append(i['item_id'])
-      with open('/server/item_id_list.txt','w',encoding='UTF-8')as f:
+      with open(cred_path,'w',encoding='UTF-8')as f:
             for name in item_id:
                   f.write(name+'\n')
-      
-      for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},{"price":{"$gte":Min}},
-      {"title":{"$regex":".*{}.*".format(title)}}]},{'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
-      {"region":{"$regex":".*{}.*".format(region)}}]}]}).sort("price"):
-            temp_dict = {'title': i['title'], 
-                  'picture': i['picture'], 
-                  'region': i['region'],
-                  'price': i['price'], 
-                  'link':i['link'], 
-                  'app_name': i['app_name'], 
-                  'description': i['description'],
-                  'date': i['date'],
-                  'seller_info': i['seller_info']
-                  }
-            result.append(temp_dict)
-      print(result)
-      return result
+      for post in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},{"price":{"$gte":Min}},
+      {"title":{"$regex":".*{}.*".format(title)}}]},{'$nor':[{"title":{"$regex":".*{}.*".format(Filter[0])}},
+      {"region":{"$regex":".*{}.*".format(region[0])}}]}]}).sort("price"):
+            temp_dict = {'title': post['title'], 
+            'picture': post['picture'], 
+            'region': post['region'],
+            'price': post['price'], 
+            'link':post['link'], 
+            'app_name': post['app_name'], 
+            'description': post['description'],
+            'date': post['date'],
+            'seller_info': post['seller_info']
+            }
+            send_list.append(temp_dict)
+      print(send_list)
+      return send_list
