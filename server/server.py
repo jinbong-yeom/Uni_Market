@@ -45,7 +45,9 @@ def notice():
 
 if __name__ == '__main__':
     uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
-                    'uni', 'uni1234', 'db.yoonleeverse.com')
+                'uni', 'uni1234', 'db.yoonleeverse.com')
     client=MongoClient(uri)
-
     app.run(host='0.0.0.0', port=60000)
+
+    thread = Thread(target=monitor, daemon=True)
+    thread.start()
