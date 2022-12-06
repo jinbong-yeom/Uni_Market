@@ -75,6 +75,7 @@ public class Fragment1 extends Fragment {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
         SearchView searchBar = frag1V.findViewById(R.id.searchView1);
+        searchBar.bringToFront();   // 뷰 상단으로 올리기(드러워가 겹쳐도 터치 되도록)
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
