@@ -11,12 +11,13 @@ app.config['JSON_AS_ASCII'] = False
 def post():
     params = request.get_json()
     print(params)
+    user=params['userId']
     title = params['title']
     Max=params['filteringData']['maxPrice']
     Min=params['filteringData']['minPrice']
     Filter=params['filteringData']['excludeKeyword']
     region=params['filteringData']['region']
-    result = search(title,Max,Min,Filter,region)
+    result = search(user,title,Max,Min,Filter,region)
     return {"result":result}
 
 @app.route("/notice",methods=['POST'])
@@ -31,14 +32,14 @@ def notice():
     region=params['filteringData']['region']
 
     db=client['UniMarketDB']
-    collection=db['monitor']
-    post={"user_id":str(user),
-                "title":str(title),
-                "max_price":int(Max),
-                "min_price":int(Min),
-                "filter_keyword":str(Filter),
-                "region":str(region)}
-    post_id=collection.insert_one(post).inserted_id
+    collection=db['data']
+    collection2=db["{}".format(user)]
+    for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},
+    {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}}]},
+    {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
+    {"region":{"$regex":".*{}.*".format(region)}}]}]}):
+        collection2.insert_one(i['item_id'])
+
 
 
     return {"Success": True}
