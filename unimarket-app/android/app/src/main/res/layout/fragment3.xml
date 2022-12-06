@@ -44,7 +44,7 @@
         android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="240dp"
         android:background="#80000000"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,7 +80,7 @@
         android:id="@+id/line2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:background="#80000000"
         app:layout_constraintTop_toBottomOf="@+id/frag3_button2" />
 
@@ -117,7 +117,6 @@
         android:text="@string/app_version"
         android:textColor="#0000FF"
         android:textSize="33dp"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/frag3_title3" />
 
@@ -125,14 +124,14 @@
         android:id="@+id/frag3_button3"
         android:layout_width="188dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="33dp"
         android:text="업데이트확인"
         android:textStyle="bold"
         app:icon="@drawable/ic_update_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frag3_title3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 
 
