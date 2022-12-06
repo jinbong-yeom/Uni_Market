@@ -25,6 +25,7 @@ def notice():
     params = request.get_json()
     print(params)
     user=params['userId']
+    firebase_id = params['firebaseId']
     title = params['title']
     Max=params['filteringData']['maxPrice']
     Min=params['filteringData']['minPrice']
@@ -36,7 +37,7 @@ def notice():
     collection2=db["{}".format(user)]
     collection3=db['UserDB']
     post={"user_id":str(user),
-    "firebase_id":str(user),
+    "firebase_id":str(firebase_id),
                 "title":str(title),
                 "max_price":int(Max),
                 "min_price":int(Min),
