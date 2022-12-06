@@ -1,6 +1,7 @@
 package com.example.unimarket;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,12 +50,13 @@ public class Fragment3 extends Fragment {
                 startActivity(mail_intent);
             }
         });
-
+        // 클릭했을 때 히스토리 페이지로 이동
         Button checkupdate = frag3V.findViewById((R.id.frag3_button3));
         checkupdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"업데이트 확인", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(),"업데이트 확인", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).gohistory();
             }
         });
 

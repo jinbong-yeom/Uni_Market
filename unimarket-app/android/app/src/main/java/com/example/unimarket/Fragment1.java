@@ -69,8 +69,8 @@ public class Fragment1 extends Fragment {
             public boolean onQueryTextSubmit(String s) {
                 srinput = s;
 
-                createPost(s);
-                createNotice(s);
+                //createPost(s);
+                //createNotice(s);
 
                 // 입력받은 문자열 처리
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
