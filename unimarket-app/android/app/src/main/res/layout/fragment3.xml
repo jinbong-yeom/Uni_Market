@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="#00FFFFFF"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/reg_input"
@@ -133,16 +134,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+    <Button
+        android:id="@+id/frag3_button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        app:backgroundTint="#00000000"
-        app:srcCompat="@drawable/ic_wipe_24"
-        app:tint="@null"
-        tools:layout_editor_absoluteX="325dp"
-        tools:layout_editor_absoluteY="150dp" />
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="30dp"
+        android:background="#00FFFFFF"
+        android:foreground="@drawable/border_black"
+        android:text="지역 초기화"
+        android:textColor="#000000"
+        app:icon="@drawable/ic_wipe_24"
+        app:iconTint="#FF0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frag3_button1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

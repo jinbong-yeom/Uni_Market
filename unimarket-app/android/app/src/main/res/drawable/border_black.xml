@@ -1,9 +1,12 @@
-<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
 
-    <solid android:color="#fff" />
+<!--    circle은 없음-->
+
+    <solid android:color="#00000000" />
 
     <stroke
-        android:width="1dp"
+        android:width="5dp"
         android:color="#111" />
     <corners
         android:topLeftRadius="10dp"
