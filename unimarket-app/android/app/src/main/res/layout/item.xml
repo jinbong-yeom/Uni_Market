@@ -33,7 +33,7 @@
 
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/item_title"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
@@ -45,17 +45,17 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/item_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="10dp"
                 android:text="가격"
                 app:layout_constraintStart_toEndOf="@+id/imageView"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/item_title" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/platform"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -65,7 +65,7 @@
                 app:srcCompat="@drawable/ic_karrot_24dp" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/item_reg"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="180dp"
@@ -82,7 +82,7 @@
                 android:layout_marginBottom="3dp"
                 android:text="시간"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView5" />
+                app:layout_constraintStart_toEndOf="@+id/item_reg" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
