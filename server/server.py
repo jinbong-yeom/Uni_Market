@@ -34,6 +34,15 @@ def notice():
     db=client['UniMarketDB']
     collection=db['data']
     collection2=db["{}".format(user)]
+    collection3=db['UserDB']
+    post={"user_id":str(user),
+                "title":str(title),
+                "max_price":int(Max),
+                "min_price":int(Min),
+                "filter_keyword":str(Filter),
+                "region":str(region)}
+    collection3.insert_one(post)
+
     for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},
     {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}}]},
     {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
