@@ -1,15 +1,21 @@
 package com.example.unimarket;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class FilteringData {
 
+    @SerializedName("excludeKeyword")
     private List<String> excludeKeyword;
 
+    @SerializedName("maxPrice")
     private int maxPrice;
 
+    @SerializedName("minPrice")
     private int minPrice;
 
+    @SerializedName("region")
     private List<String> region;
 
     public FilteringData(List<String> excludeKeyword, int maxPrice, int minPrice, List<String> region) {

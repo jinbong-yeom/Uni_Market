@@ -39,7 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
 
-    String srinput; // 검색 키워드드
+    String srinput; // 검색 키워드
     String filterinput; // 필터단어
     int minprice;
     int maxprince;
@@ -47,7 +47,8 @@ public class Fragment1 extends Fragment {
     private DrawerLayout drawerLayout;
     private View drawerView;
 
-    private final String BASEURL = "http://115.85.181.251:60000";
+    //private final String BASEURL = "http://115.85.181.251:60000";
+    private final String BASEURL = "http://192.168.0.7:60000/";
 
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
@@ -67,13 +68,9 @@ public class Fragment1 extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                srinput = s;
-
                 createPost(s);
                 createNotice(s);
 
-                // 입력받은 문자열 처리
-                Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
                 return true;    //리스너로 처리할 떄 true반환?
             }
             @Override
@@ -86,10 +83,22 @@ public class Fragment1 extends Fragment {
             private void createPost(String s) {
                 String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
 
+                List<String> excludeKeyword = new ArrayList<>();
                 List<String> region = new ArrayList<>();
-                region.add("청주");
-                region.add("서울");
-                PostData postData = new PostData(s, android_id, region);
+                excludeKeyword.add(filterinput);
+
+                int max_price = maxprince;
+                int min_price = minprice;
+
+
+                region.add(((Globalstr) getActivity().getApplication() ).getregion1());
+
+
+
+                FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+
+
+                PostData postData = new PostData(s, android_id, filteringData);
 
 
                 Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
@@ -113,22 +122,42 @@ public class Fragment1 extends Fragment {
             }
 
             private void createNotice(String s) {
+                String token = new String();
                 //파이어베이스 토큰확인
-                String token = FirebaseMessaging.getInstance().getToken().getResult();
-                Toast.makeText(getActivity(),token, Toast.LENGTH_SHORT).show();
-                send(s, token);
-            }
+                try {
+                    srinput = s;
+                    Task<String> task = FirebaseMessaging.getInstance().getToken();
+                    while (!task.isSuccessful());
+                    token = task.getResult();
 
-            public void send(String s, String token){
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                //필터링 정보 만들기
+                List<String> excludeKeyword = new ArrayList<>();
                 List<String> region = new ArrayList<>();
+                excludeKeyword.add("note");
+                excludeKeyword.add("삽니다");
+                int max_price = 10000000;
+                int min_price = 0;
+
                 region.add("청주");
                 region.add("서울");
 
-                PostData postData = new PostData(s, token, region);
+
+                FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+
+                send(s, token, filteringData);
+            }
+
+            public void send(String s, String token, FilteringData filteringData){
+                String user_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
+                Boolean send = true;
+                NoticeData noticeData = new NoticeData(s, user_id, token, filteringData, send);
 
 
-                Call<NoticeResponse> call = jsonPlaceHolderApi.createNotice(postData);
-
+                Call<NoticeResponse> call = jsonPlaceHolderApi.createNotice(noticeData);
                 call.enqueue(new Callback<NoticeResponse>() {
                     @Override
                     public void onResponse(Call<NoticeResponse> call, Response<NoticeResponse> response) {
@@ -136,7 +165,8 @@ public class Fragment1 extends Fragment {
                             Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        NoticeResponse postResponse = response.body();
+                        NoticeResponse noticeResponse = response.body();
+
                     }
 
 
