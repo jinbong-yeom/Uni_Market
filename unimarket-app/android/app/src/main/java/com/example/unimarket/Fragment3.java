@@ -37,6 +37,15 @@ public class Fragment3 extends Fragment {
             }
         });
 
+        Button resetreg = frag3V.findViewById(R.id.frag3_button4);
+        resetreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                regshow.setText(null);
+                ( (Globalstr) getActivity().getApplication() ).setregion1(null);
+            }
+        });
+
         Button email = frag3V.findViewById(R.id.frag3_button2);
         email.setOnClickListener(new View.OnClickListener() {
             @Override
