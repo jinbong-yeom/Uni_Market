@@ -69,7 +69,7 @@ public class Fragment1 extends Fragment {
             public boolean onQueryTextSubmit(String s) {
                 srinput = s;
 
-                //createPost(s);
+                createPost(s);
                 //createNotice(s);
 
                 // 입력받은 문자열 처리
@@ -176,11 +176,10 @@ public class Fragment1 extends Fragment {
         snbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity(),srinput +" fragment2로 전송", Toast.LENGTH_LONG).show();
 
                 //알림 설정하는 파트
 
-                // 번들 생성하여 검색어 fragment2에 넘기기 -  강제이동안되도록 수정 필요
+                // 번들 생성하여 검색어 fragment2에 넘기기
                 Bundle bundle = new Bundle();
                 bundle.putString("srinput",srinput);
 
