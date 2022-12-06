@@ -50,6 +50,8 @@ public class Fragment1 extends Fragment {
     private View drawerView;
     RecyclerView recyclerView;
     ItemAdapter adapter;
+    PostResponseData i1;
+
 
 
     private final String BASEURL = "http://115.85.181.251:60000";
@@ -60,6 +62,9 @@ public class Fragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+
+        adapter = new ItemAdapter();
+        i1 = new PostResponseData("test_title",10000000);
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -74,12 +79,20 @@ public class Fragment1 extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
                 srinput = s;
+                Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
+
+
+                for (int i = 0; i < 10; i++) {
+                    adapter.addItem(i1);
+                }
+
+                adapter.notifyDataSetChanged();
+
 
                 //createPost(s);
                 //createNotice(s);
 
                 // 입력받은 문자열 처리
-                Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
                 return true;    //리스너로 처리할 떄 true반환?
             }
@@ -240,8 +253,6 @@ public class Fragment1 extends Fragment {
         recyclerView = frag1V.findViewById(R.id.recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new ItemAdapter();
         recyclerView.setAdapter(adapter);
 
         return frag1V;

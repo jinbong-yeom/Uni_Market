@@ -23,7 +23,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) { //인덱스에 맞는 객체를 찾는다?
+//        PostResponseData item1 = new PostResponseData("ta",10000);
         PostResponseData item = items.get(position);
         viewHolder.setItem(item);
     }
@@ -52,13 +53,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
 
-            titleView = itemView.findViewById(R.id.textView);
-            priceView = itemView.findViewById(R.id.textView2);
+            titleView = itemView.findViewById(R.id.item_title);
+            priceView = itemView.findViewById(R.id.item_price);
         }
 
         public void setItem(PostResponseData item) {
-            titleView.setText(item.getTitle());
-            priceView.setText(item.getPrice());
+            titleView.setText("test_title");
+            priceView.setText("test_price");
+
+//            titleView.setText(item.getTitle());
+//            priceView.setText(item.getPrice());
         }
 
     }
