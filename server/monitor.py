@@ -2,18 +2,30 @@ from pymongo import MongoClient
 import json 
 from threading import Thread
 import time
-import server.send as send
-uri = "" % (
-                '', '', '')
+import send as send
+import os
+uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
+                'uni', 'uni1234', 'db.yoonleeverse.com')
 client=MongoClient(uri)
-def monitor(user,title,Max,Min,Filter,region):
+
+def monitor(user, title, Max, Min, Filter, region):
     db=client['UniMarketDB']
     collection=db['data']
+
+    db=client['UniMarketDB']
+    monitor_collection=db['monitor']
+
+    
     data=[]
-    f=open('./item_id_list.txt','r')
+    current_path = os.getcwd()
+    cred_path = current_path+"/server/item_id_list.txt"
+    print(cred_path)
+    f=open(cred_path,'r')
+
     while True:
         line=f.readline().rstrip()
-        if not line:break
+        if not line:
+            break
         data.append(line)
     for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},{"price":{"$gte":Min}},
     {"title":{"$regex":".*{}.*".format(title)}}]},{'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
@@ -23,6 +35,5 @@ def monitor(user,title,Max,Min,Filter,region):
                 # 알림 보내기
                 with open('item_id_list.txt','a',encoding='UTF-8')as f:#알림 보내고 리스트 파일 갱신
                     f.write(i['item_id']+'\n')
-thread = Thread(target=monitor, args=(), daemon=True)
-thread.start()
-time.sleep(3)
+    
+  
