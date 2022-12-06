@@ -27,12 +27,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         PostResponseData item = items.get(position);
         viewHolder.setItem(item);
     }
-
+    // 받아온 상품 수
     @Override
     public int getItemCount() {
         return items.size();
     }
-
+    //리스트에 아이템 추가
     public void addItem(PostResponseData item) {
         items.add(item);
     }

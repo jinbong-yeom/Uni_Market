@@ -54,6 +54,7 @@
     </androidx.drawerlayout.widget.DrawerLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="626dp"
         android:layout_marginTop="10dp"

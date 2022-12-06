@@ -19,6 +19,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,6 +48,9 @@ public class Fragment1 extends Fragment {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
+    RecyclerView recyclerView;
+    ItemAdapter adapter;
+
 
     private final String BASEURL = "http://115.85.181.251:60000";
 
@@ -55,6 +60,7 @@ public class Fragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
@@ -66,14 +72,15 @@ public class Fragment1 extends Fragment {
         SearchView searchBar = frag1V.findViewById(R.id.searchView1);
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
+            public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
                 srinput = s;
 
-                createPost(s);
+                //createPost(s);
                 //createNotice(s);
 
                 // 입력받은 문자열 처리
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
+
                 return true;    //리스너로 처리할 떄 true반환?
             }
             @Override
@@ -230,8 +237,12 @@ public class Fragment1 extends Fragment {
             }
         });
 
+        recyclerView = frag1V.findViewById(R.id.recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
 
-
+        adapter = new ItemAdapter();
+        recyclerView.setAdapter(adapter);
 
         return frag1V;
     }
@@ -252,6 +263,7 @@ public class Fragment1 extends Fragment {
         public void onDrawerStateChanged(int newState) {
         }
     };
+
 
 
 
