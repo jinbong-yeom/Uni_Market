@@ -36,6 +36,7 @@ def notice():
     collection2=db["{}".format(user)]
     collection3=db['UserDB']
     post={"user_id":str(user),
+    "firebase_id":str(user),
                 "title":str(title),
                 "max_price":int(Max),
                 "min_price":int(Min),
