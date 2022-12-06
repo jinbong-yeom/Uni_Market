@@ -58,11 +58,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         }
 
         public void setItem(PostResponseData item) {
-            titleView.setText("test_title");
-            priceView.setText("test_price");
-
-//            titleView.setText(item.getTitle());
-//            priceView.setText(item.getPrice());
+            titleView.setText(item.getTitle());
+            priceView.setText(Integer.toString(item.getPrice()));
         }
 
     }
