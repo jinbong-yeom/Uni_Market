@@ -4,19 +4,10 @@ import os
 uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
                 'uni', 'uni1234', 'db.yoonleeverse.com')
 client=MongoClient(uri)
-def search(title,Max,Min,Filter,region):
+def search(user,title,Max,Min,Filter,region):
       db=client['UniMarketDB']
       collection=db['data']
-      item_id=[]# 기존 item_id
       send_list=[]
-      current_path = os.getcwd()
-      cred_path = current_path+"/server/item_id_list.txt"
-
-      for i in collection.find():
-            item_id.append(i['item_id'])
-      with open(cred_path,'w',encoding='UTF-8')as f:
-            for name in item_id:
-                  f.write(name+'\n')
       for post in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},{"price":{"$gte":Min}},
       {"title":{"$regex":".*{}.*".format(title)}}]},{'$nor':[{"title":{"$regex":".*{}.*".format(Filter[0])}},
       {"region":{"$regex":".*{}.*".format(region[0])}}]}]}).sort("price"):
