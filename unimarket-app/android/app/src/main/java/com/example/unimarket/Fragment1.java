@@ -82,19 +82,20 @@ public class Fragment1 extends Fragment {
                 srinput = s;
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
+                //createPost(s);
+                //createNotice(s);
 
-                for (int i = 0; i < 10; i++) {
+                // 받아온 상품
+                for (int i = 0; i < 3; i++) {
                     adapter.addItem(i1);
                 }
 
                 adapter.notifyDataSetChanged();
 
 
-                //createPost(s);
-                //createNotice(s);
 
                 // 입력받은 문자열 처리
-
+                frag1V.bringChildToFront(recyclerView); //리사이클러 위로 올리기
                 return true;    //리스너로 처리할 떄 true반환?
             }
             @Override
@@ -222,9 +223,10 @@ public class Fragment1 extends Fragment {
         });
 
         Button filter = frag1V.findViewById(R.id.filter);
-        filter.setOnClickListener(new View.OnClickListener() {
+        filter.setOnClickListener(new View.OnClickListener() { // 필터 레이아웃(드로어)펼치기
             @Override
             public void onClick(View view) {
+                frag1V.bringChildToFront(drawerLayout); //리사이클러때문에 터치안되는거 방지
                 Toast.makeText(getActivity(), "필터클릭", Toast.LENGTH_SHORT).show();
                 drawerLayout.openDrawer(drawerView);
             }

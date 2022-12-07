@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
+// 검색해서 받아온 상품 item.xml이랑 매칭
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     ArrayList<PostResponseData> items = new ArrayList<PostResponseData>();
 
@@ -60,6 +60,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         public void setItem(PostResponseData item) {
             titleView.setText(item.getTitle());
             priceView.setText(Integer.toString(item.getPrice()));
+            // 마켓 이미지 구분
+
+            // 상품 사진 넣기
         }
 
     }
