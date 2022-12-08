@@ -2,6 +2,7 @@ from flask import Flask, make_response, jsonify, request, make_response
 from send import *
 from search import *
 from monitor import *
+from deletedata import *
 import json
 
 app = Flask(__name__)
@@ -47,7 +48,7 @@ def notice():
         name.append(i['userId'])
     if post['user_id'] not in name:
         collection3.insert_one(post)
-        
+
     for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},
     {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}}]},
     {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
@@ -57,6 +58,12 @@ def notice():
 
 
     return {"Success": True}
+
+@app.route("/delete",methods=['POST'])
+def delete():
+    params = request.get_json()
+    User = params['userId']
+    deletedata(User)
 
 if __name__ == '__main__':
     uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
