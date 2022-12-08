@@ -89,7 +89,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             app_name = item.getApp_name();
             picture_link = item.getPicture();
 
-            Glide.with(itemView).load("https://dnvefa72aowie.cloudfront.net/origin/article/202212/AF4C3488A136918CB44DB26E99F4F00431E7215937F38DC10AC8E1BAAF8F2326.jpg?q=82&s=300x300&t=crop").into(pictureView);
+            Glide.with(itemView).load(picture_link).into(pictureView);
 
 
             switch(app_name){
