@@ -98,11 +98,12 @@ public class Fragment1 extends Fragment {
                 srinput = s;
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
+                if(postResponseData != null){
+                    postResponseData = new ArrayList<>();
+                }
                 createPost(s);
                 //createNotice(s);
 
-                String a =  Integer.toString(postResponseData.size());
-                System.out.println(a);
                 // 받아온 상품
                 for (int i = 0; i < postResponseData.size(); i++) {
                     PostResponseData tmpResponseData = postResponseData.get(i);
@@ -244,12 +245,15 @@ public class Fragment1 extends Fragment {
                     return;
                 }
                 PostResponse postResponse = response.body();
+                adapter.clear();
+
                 postResponseData.addAll(0, postResponse.getResult());
 
                 for(int i = 0; i< postResponseData.size();i++) {
                     PostResponseData tmpResponseData = postResponseData.get(i);
                     adapter.addItem(tmpResponseData);
                 }
+                postResponseData.clear();
                 adapter.notifyDataSetChanged();
             }
             @Override

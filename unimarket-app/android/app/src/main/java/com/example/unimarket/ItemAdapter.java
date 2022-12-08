@@ -105,10 +105,16 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             }
 
 
+
+
             // 마켓 이미지 구분
             // 상품 사진 넣기
         }
 
+    }
+
+    public void clear() {
+        this.items.clear();
     }
 
 }
