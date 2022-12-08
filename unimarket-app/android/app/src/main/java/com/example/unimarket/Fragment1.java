@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonSyntaxException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -97,6 +98,11 @@ public class Fragment1 extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
+                if (((Globalstr) getActivity().getApplication() ).getregion1()==null){
+                    Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_SHORT).show();
+                    return true;
+                }
+
                 srinput = s;
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
@@ -124,7 +130,8 @@ public class Fragment1 extends Fragment {
 
                 // 입력받은 문자열 처리
                 frag1V.bringChildToFront(recyclerView); //리사이클러 위로 올리기
-                return true;    //리스너로 처리할 떄 true반환?
+                return true;    //액션을 listener 로 handle 하는 경우  true 를 준다,
+
             }
             @Override
             public boolean onQueryTextChange(String s) {
