@@ -131,7 +131,7 @@ public class Fragment1 extends Fragment {
 //                }
 //                for (int i = 0; i < 10; i++) {      //test
 //                    //PostResponseData tmpResponseData = postResponseData.get(i);
-//                    adapter.addItem(t1);
+//                    adapterd.addItem(t1);
 //                }
 //                postResponseData.clear();
 //                adapter.notifyDataSetChanged();
