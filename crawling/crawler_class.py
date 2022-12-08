@@ -64,17 +64,17 @@ class Danngn(Crawler):
         if '일' in time:
             time = int(re.sub(r'[^0-9]', '', time))
             date = datetime.today() - timedelta(time)
-            date = date.strftime("%Y-%m-%d")
+            date = date.strftime("%Y-%m-%d %H:%M:%S")
 
         elif '시간' in time:
             time = int(re.sub(r'[^0-9]', '', time))
             date = datetime.today() - timedelta(hours=time)
-            date = date.strftime("%Y-%m-%d")
+            date = date.strftime("%Y-%m-%d %H:%M:%S")
             
         elif '분' in time:
             time = int(re.sub(r'[^0-9]', '', time))
             date = datetime.today() - timedelta(minutes=time)
-            date = date.strftime("%Y-%m-%d")
+            date = date.strftime("%Y-%m-%d %H:%M:%S")
 
 
         seller_info = soup.find('dd')
@@ -136,8 +136,10 @@ class Bunjang(Crawler):
         product = contents.get("product")
         
         date = product.get("updatedAt")
-        temp = date.find('T')
-        date = date[:temp]
+        tmp = date.find('.')
+        date = date[:tmp]
+        date = date.replace('T', ' ')
+        print(date)
         
         description = product.get("description")
         
@@ -237,8 +239,6 @@ class Joongna(Crawler):
         description = json_parser['productDescription']
         date = json_parser['sortDate']
 
-        temp = date.find(' ')
-        date = date[:temp]
 
         seller_info = json_parser['store']['levelName']
         detail_list = [description, date, seller_info]

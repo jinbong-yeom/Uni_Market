@@ -32,6 +32,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -101,16 +102,14 @@ public class Fragment1 extends Fragment {
                 //createNotice(s);
 
                 String a =  Integer.toString(postResponseData.size());
-                Log.d("TAG", a);
+                System.out.println(a);
                 // 받아온 상품
                 for (int i = 0; i < postResponseData.size(); i++) {
                     PostResponseData tmpResponseData = postResponseData.get(i);
-                    System.out.println(postResponseData.size());
                     adapter.addItem(tmpResponseData);
-                    System.out.println(adapter.getItemCount());
                 }
 
-                adapter.notifyDataSetChanged();
+
 
 
 
@@ -123,104 +122,6 @@ public class Fragment1 extends Fragment {
                 // 입력란의 문자열이 바뀔 때 처리
                 //Toast.makeText(getActivity(), "입력값 수정", Toast.LENGTH_LONG).show();
                 return false;
-            }
-
-            private void createPost(String s) {
-                String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
-
-                List<String> excludeKeyword = new ArrayList<>();
-                List<String> region = new ArrayList<>();
-                excludeKeyword.add(filterinput);
-
-                int max_price = maxprince;
-                int min_price = minprice;
-
-
-                region.add(((Globalstr) getActivity().getApplication() ).getregion1());
-
-
-
-                FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
-
-
-                PostData postData = new PostData(s, android_id, filteringData);
-
-
-                Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
-
-                call.enqueue(new Callback<PostResponse>() {
-
-                    @Override
-                    public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
-                        if (!response.isSuccessful()) {
-                            Toast.makeText(getActivity(),"없음", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        PostResponse postResponse = response.body();
-                        postResponseData.addAll(0, postResponse.getResult());
-                    }
-                    @Override
-                    public void onFailure(Call<PostResponse> call, Throwable t) {
-                        Toast.makeText(getActivity(), "없다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            private void createNotice(String s) {
-                String token = new String();
-                //파이어베이스 토큰확인
-                try {
-                    srinput = s;
-                    Task<String> task = FirebaseMessaging.getInstance().getToken();
-                    while (!task.isSuccessful());
-                    token = task.getResult();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                //필터링 정보 만들기
-                List<String> excludeKeyword = new ArrayList<>();
-                List<String> region = new ArrayList<>();
-                excludeKeyword.add("note");
-                excludeKeyword.add("삽니다");
-                int max_price = 10000000;
-                int min_price = 0;
-
-                region.add("청주");
-                region.add("서울");
-
-
-                FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
-
-                send(s, token, filteringData);
-            }
-
-            public void send(String s, String token, FilteringData filteringData){
-                String user_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
-                Boolean send = true;
-                NoticeData noticeData = new NoticeData(s, user_id, token, filteringData, send);
-
-
-                Call<NoticeResponse> call = jsonPlaceHolderApi.createNotice(noticeData);
-                call.enqueue(new Callback<NoticeResponse>() {
-                    @Override
-                    public void onResponse(Call<NoticeResponse> call, Response<NoticeResponse> response) {
-                        if (!response.isSuccessful()) {
-                            Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        NoticeResponse noticeResponse = response.body();
-
-                    }
-
-
-                    @Override
-                    public void onFailure(Call<NoticeResponse> call, Throwable t) {
-                        t.printStackTrace();
-                        Toast.makeText(getActivity(), "오류", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
         });
 
@@ -310,6 +211,110 @@ public class Fragment1 extends Fragment {
 
 
 
+
+    private void createPost(String s) {
+        String android_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
+
+        List<String> excludeKeyword = new ArrayList<>();
+        List<String> region = new ArrayList<>();
+        excludeKeyword.add(filterinput);
+
+        int max_price = maxprince;
+        int min_price = minprice;
+
+
+        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
+
+
+
+        FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+
+
+        PostData postData = new PostData(s, android_id, filteringData);
+
+
+        Call<PostResponse> call = jsonPlaceHolderApi.createPost(postData);
+
+        call.enqueue(new Callback<PostResponse>() {
+
+            @Override
+            public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getActivity(),"없음", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                PostResponse postResponse = response.body();
+                postResponseData.addAll(0, postResponse.getResult());
+
+                for(int i = 0; i< postResponseData.size();i++) {
+                    PostResponseData tmpResponseData = postResponseData.get(i);
+                    adapter.addItem(tmpResponseData);
+                }
+                adapter.notifyDataSetChanged();
+            }
+            @Override
+            public void onFailure(Call<PostResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), "없다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void createNotice(String s) {
+        String token = new String();
+        //파이어베이스 토큰확인
+        try {
+            srinput = s;
+            Task<String> task = FirebaseMessaging.getInstance().getToken();
+            while (!task.isSuccessful());
+            token = task.getResult();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //필터링 정보 만들기
+        List<String> excludeKeyword = new ArrayList<>();
+        List<String> region = new ArrayList<>();
+        excludeKeyword.add("note");
+        excludeKeyword.add("삽니다");
+        int max_price = 10000000;
+        int min_price = 0;
+
+        region.add("청주");
+        region.add("서울");
+
+
+        FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+
+        send(s, token, filteringData);
+    }
+
+    public void send(String s, String token, FilteringData filteringData){
+        String user_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
+        Boolean send = true;
+        NoticeData noticeData = new NoticeData(s, user_id, token, filteringData, send);
+
+
+        Call<NoticeResponse> call = jsonPlaceHolderApi.createNotice(noticeData);
+        call.enqueue(new Callback<NoticeResponse>() {
+            @Override
+            public void onResponse(Call<NoticeResponse> call, Response<NoticeResponse> response) {
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                NoticeResponse noticeResponse = response.body();
+
+            }
+
+
+            @Override
+            public void onFailure(Call<NoticeResponse> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getActivity(), "오류", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 
 }
