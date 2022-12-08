@@ -19,6 +19,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -46,6 +48,20 @@ public class Fragment1 extends Fragment {
 
     private DrawerLayout drawerLayout;
     private View drawerView;
+    RecyclerView recyclerView;
+
+    ItemAdapter adapter;
+    PostResponseData t1;
+    String tpic = "https://dnvefa72aowie.cloudfront.net/origin/article/202212/AF4C3488A136918CB44DB26E99F4F00431E7215937F38DC10AC8E1BAAF8F2326.jpg?q=82&s=300x300&t=crop";
+    String ttime = "1시간전";
+    String appname = "번개장터";
+    String treg = "복대동";
+    String tseller = "36.5";
+    String tdes="dddddddddddd";
+    String tlink = "aaa";
+
+    List<PostResponseData> postResponseData;
+
 
     //private final String BASEURL = "http://115.85.181.251:60000";
     private final String BASEURL = "http://192.168.0.7:60000/";
@@ -57,6 +73,12 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
 
+        ( (Globalstr) getActivity().getApplication() ).setregion1("청주");//
+
+        adapter = new ItemAdapter();
+
+        //t1 = new PostResponseData("test_title",tpic,treg,10000000,tdes,appname,ttime,tseller);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -65,12 +87,31 @@ public class Fragment1 extends Fragment {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
         SearchView searchBar = frag1V.findViewById(R.id.searchView1);
+        searchBar.bringToFront();   // 뷰 상단으로 올리기(드러워가 겹쳐도 터치 되도록)
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
+            public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
+                srinput = s;
+                Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
+
             public boolean onQueryTextSubmit(String s) {
                 createPost(s);
-                createNotice(s);
+                //createNotice(s);
 
+                String a =  Integer.toString(postResponseData.size());
+                Log.d("TAG", a);
+                // 받아온 상품
+                for (int i = 0; i < postResponseData.size(); i++) {
+                    Log.d("TAG", postResponseData.get(i).getTitle());
+                    adapter.addItem(postResponseData.get(i));
+                }
+
+                adapter.notifyDataSetChanged();
+
+
+
+                // 입력받은 문자열 처리
+                frag1V.bringChildToFront(recyclerView); //리사이클러 위로 올리기
                 return true;    //리스너로 처리할 떄 true반환?
             }
             @Override
@@ -113,6 +154,7 @@ public class Fragment1 extends Fragment {
                         }
                         PostResponse postResponse = response.body();
                         Toast.makeText(getActivity(),postResponse.getResult().get(0).getTitle(), Toast.LENGTH_SHORT).show();
+                        postResponseData = postResponse.getResult();
                     }
                     @Override
                     public void onFailure(Call<PostResponse> call, Throwable t) {
@@ -183,11 +225,10 @@ public class Fragment1 extends Fragment {
         snbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity(),srinput +" fragment2로 전송", Toast.LENGTH_LONG).show();
 
                 //알림 설정하는 파트
 
-                // 번들 생성하여 검색어 fragment2에 넘기기 -  강제이동안되도록 수정 필요
+                // 번들 생성하여 검색어 fragment2에 넘기기
                 Bundle bundle = new Bundle();
                 bundle.putString("srinput",srinput);
 
@@ -209,9 +250,10 @@ public class Fragment1 extends Fragment {
         });
 
         Button filter = frag1V.findViewById(R.id.filter);
-        filter.setOnClickListener(new View.OnClickListener() {
+        filter.setOnClickListener(new View.OnClickListener() { // 필터 레이아웃(드로어)펼치기
             @Override
             public void onClick(View view) {
+                frag1V.bringChildToFront(drawerLayout); //리사이클러때문에 터치안되는거 방지
                 Toast.makeText(getActivity(), "필터클릭", Toast.LENGTH_SHORT).show();
                 drawerLayout.openDrawer(drawerView);
             }
@@ -238,8 +280,10 @@ public class Fragment1 extends Fragment {
             }
         });
 
-
-
+        recyclerView = frag1V.findViewById(R.id.recycler);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
 
         return frag1V;
     }
@@ -260,6 +304,7 @@ public class Fragment1 extends Fragment {
         public void onDrawerStateChanged(int newState) {
         }
     };
+
 
 
 

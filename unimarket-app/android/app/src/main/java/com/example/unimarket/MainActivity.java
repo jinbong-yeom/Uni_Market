@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -28,6 +30,11 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "removefrag2", Toast.LENGTH_LONG).show();
         }
     }
+    public void gohistory() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_history)));
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

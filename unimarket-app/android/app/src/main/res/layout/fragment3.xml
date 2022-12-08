@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="#00FFFFFF"
+    android:orientation="vertical">
 
     <EditText
         android:id="@+id/reg_input"
@@ -28,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/reg_input" />
 
     <Button
-        android:id="@+id/regionplus"
+        android:id="@+id/frag3_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="222dp"
@@ -40,11 +41,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
+
     <View
-        android:id="@+id/line"
+        android:id="@+id/line1"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="240dp"
         android:background="#80000000"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,23 +62,106 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line" />
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <android.widget.Button
-        android:id="@+id/report"
+        android:id="@+id/frag3_button2"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="10dp"
         android:background="@color/sky_"
         android:drawableRight="@drawable/ic_mail_24"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:text="유니마켓에 메일 보내기"
         android:textStyle="bold"
-        android:paddingRight = "30dp"
-        android:paddingLeft  = "30dp"
         app:icon="@drawable/ic_mail_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/frag3_title2" />
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="80dp"
+        android:background="#80000000"
+        app:layout_constraintTop_toBottomOf="@+id/frag3_button2" />
+
+    <TextView
+        android:id="@+id/frag3_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="20dp"
+        android:text="버전 확인"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/line2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="23dp"
+        android:text="현재버전: "
+        android:textSize="33dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frag3_title3" />
+
+    <EditText
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:enabled="false"
+        android:inputType="text"
+        android:text="@string/app_version"
+        android:textColor="#0000FF"
+        android:textSize="33dp"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/frag3_title3" />
+
+    <Button
+        android:id="@+id/frag3_button3"
+        android:layout_width="188dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:text="업데이트확인"
+        android:textStyle="bold"
+        app:icon="@drawable/ic_update_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+<!--    <Button-->
+<!--        android:id="@+id/frag3_button4"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="42dp"-->
+<!--        android:layout_marginEnd="30dp"-->
+<!--        android:background="#00FFFFFF"-->
+<!--        android:foreground="@drawable/border_black"-->
+<!--        android:text="지역 초기화"-->
+<!--        android:textColor="#000000"-->
+<!--        app:icon="@drawable/ic_wipe_24"-->
+<!--        app:iconTint="#FF0000"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/frag3_button1" />-->
+
+    <Button
+        android:id="@+id/frag3_button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="30dp"
+        android:text="지역 초기화"
+        app:icon="@drawable/ic_reset_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frag3_button1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

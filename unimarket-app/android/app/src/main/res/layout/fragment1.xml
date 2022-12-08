@@ -53,8 +53,14 @@
 
     </androidx.drawerlayout.widget.DrawerLayout>
 
-
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="626dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchView1" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
