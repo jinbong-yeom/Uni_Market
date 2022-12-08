@@ -60,11 +60,14 @@ public class Fragment1 extends Fragment {
     String tdes="dddddddddddd";
     String tlink = "aaa";
 
-    List<PostResponseData> postResponseData;
+    public List<PostResponseData> getPostResponseData() {
+        return postResponseData;
+    }
+
+    List<PostResponseData> postResponseData = new ArrayList<>();
 
 
-    //private final String BASEURL = "http://115.85.181.251:60000";
-    private final String BASEURL = "http://192.168.0.7:60000/";
+    private final String BASEURL = "http://115.85.181.251:60000";
 
 
     private JsonPlaceHolderApi jsonPlaceHolderApi;
@@ -94,7 +97,6 @@ public class Fragment1 extends Fragment {
                 srinput = s;
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
-            public boolean onQueryTextSubmit(String s) {
                 createPost(s);
                 //createNotice(s);
 
@@ -102,8 +104,10 @@ public class Fragment1 extends Fragment {
                 Log.d("TAG", a);
                 // 받아온 상품
                 for (int i = 0; i < postResponseData.size(); i++) {
-                    Log.d("TAG", postResponseData.get(i).getTitle());
-                    adapter.addItem(postResponseData.get(i));
+                    PostResponseData tmpResponseData = postResponseData.get(i);
+                    System.out.println(postResponseData.size());
+                    adapter.addItem(tmpResponseData);
+                    System.out.println(adapter.getItemCount());
                 }
 
                 adapter.notifyDataSetChanged();
@@ -153,8 +157,7 @@ public class Fragment1 extends Fragment {
                             return;
                         }
                         PostResponse postResponse = response.body();
-                        Toast.makeText(getActivity(),postResponse.getResult().get(0).getTitle(), Toast.LENGTH_SHORT).show();
-                        postResponseData = postResponse.getResult();
+                        postResponseData.addAll(0, postResponse.getResult());
                     }
                     @Override
                     public void onFailure(Call<PostResponse> call, Throwable t) {
