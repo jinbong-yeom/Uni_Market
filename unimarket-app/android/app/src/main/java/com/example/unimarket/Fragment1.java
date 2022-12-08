@@ -99,7 +99,6 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View v) {
                 searchBar.setIconified(false); //전체영역 터치되도록(원래 아이콘영역만됬음)
-
             }
         });
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
