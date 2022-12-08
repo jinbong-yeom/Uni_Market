@@ -18,8 +18,8 @@ def monitor():
             for i in monitor_collection.find():
                 data.append(i)
             for i in collection.find({'$and':[{'$and':[{"price":{"$lte":post['max_price']}},{"price":{"$gte":post['min_price']}},
-            {"title":{"$regex":".*{}.*".format(post['title'])}}]},{'$nor':[{"title":{"$regex":".*{}.*".format(post['filter_keyword'])}},
-            {"region":{"$regex":".*{}.*".format(post['region'])}}]}]}):#갱신된 부분이 있는지 확인
+            {"title":{"$regex":".*{}.*".format(post['title'])}},{"region":{"$regex":".*{}.*".format(post['region'])}}]},
+            {'$nor':[{"title":{"$regex":".*{}.*".format(post['filter_keyword'])}}]}]}):#갱신된 부분이 있는지 확인
                 if i['item_id'] not in data:
                         send(post['firebase_id'],i['title'])
                         # 알림 보내기

@@ -9,8 +9,8 @@ def search(user,title,Max,Min,Filter,region):
       collection=db['data']
       send_list=[]
       for post in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},{"price":{"$gte":Min}},
-      {"title":{"$regex":".*{}.*".format(title)}}]},{'$nor':[{"title":{"$regex":".*{}.*".format(Filter[0])}},
-      {"region":{"$regex":".*{}.*".format(region[0])}}]}]}).sort("price"):
+      {"title":{"$regex":".*{}.*".format(title)}},{"region":{"$regex":".*{}.*".format(region[0])}}]},
+      {'$nor':[{"title":{"$regex":".*{}.*".format(Filter[0])}}]}]}).sort("price"):
             temp_dict = {'title': post['title'], 
             'picture': post['picture'], 
             'region': post['region'],
