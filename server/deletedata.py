@@ -9,7 +9,6 @@ def deletedata(user):
       collection=db['UserDB']
       collection2=db["{}".format(user)]
       collection2.drop()
-      for i in collection.find({"userId":{"$regex":".*{}.*".format(user)}}):
-        collection.delete_one(i)
+      collection.delete_one({"userId":{"$regex":".*{}.*".format(user)}})
 
 
