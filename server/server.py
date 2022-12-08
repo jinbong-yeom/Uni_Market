@@ -25,7 +25,6 @@ def notice():
     params = request.get_json()
     print(params)
     user=params['userId']
-    firebase_id = params['firebaseId']
     title = params['title']
     Max=params['filteringData']['maxPrice']
     Min=params['filteringData']['minPrice']
@@ -37,14 +36,18 @@ def notice():
     collection2=db["{}".format(user)]
     collection3=db['UserDB']
     post={"user_id":str(user),
-    "firebase_id":str(firebase_id),
+    "firebase_id":str(user),
                 "title":str(title),
                 "max_price":int(Max),
                 "min_price":int(Min),
                 "filter_keyword":str(Filter),
                 "region":str(region)}
-    collection3.insert_one(post)
-
+    name=[]
+    for i in collection3.find():
+        name.append(i['userId'])
+    if post['user_id'] not in name:
+        collection3.insert_one(post)
+        
     for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},
     {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}}]},
     {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
