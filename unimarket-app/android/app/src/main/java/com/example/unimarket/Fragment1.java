@@ -1,5 +1,6 @@
 package com.example.unimarket;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
 import static java.lang.Integer.MAX_VALUE;
 
 import android.provider.Settings.Secure;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -44,6 +46,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
+    // 키보드를 내려주기위한 inputMethodManger 객체
+
 
     String srinput; // 검색 키워드
     String filterinput; // 필터단어
@@ -79,6 +83,8 @@ public class Fragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
+
         t1 = new PostResponseData("Test_Title",tpic,treg,1000000,tlink,appname,tdes,ttime,tseller);
 
 
@@ -136,6 +142,8 @@ public class Fragment1 extends Fragment {
 
                 // 입력받은 문자열 처리
                 frag1V.bringChildToFront(recyclerView); //리사이클러 위로 올리기
+                searchBar.clearFocus(); //에딧 텍스트 포커스를 제거
+                imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0);
                 return true;    //액션을 listener 로 handle 하는 경우  true 를 준다,
 
             }

@@ -16,7 +16,9 @@
         android:hint="지역을 입력하세요."
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:imeOptions="actionDone" />
+
 
     <TextView
         android:id="@+id/regshow"
