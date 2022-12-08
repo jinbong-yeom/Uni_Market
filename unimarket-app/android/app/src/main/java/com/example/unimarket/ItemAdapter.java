@@ -3,6 +3,7 @@ package com.example.unimarket;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,19 +50,31 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleView;
         TextView priceView;
+        TextView timeview;
+        TextView regionview;
+        ImageView platformview;
+        String platform;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             titleView = itemView.findViewById(R.id.item_title);
             priceView = itemView.findViewById(R.id.item_price);
+            timeview = itemView.findViewById(R.id.item_time);
+            regionview = itemView.findViewById(R.id.item_reg);
+            platformview = itemView.findViewById(R.id.platform);
+
         }
 
         public void setItem(PostResponseData item) {
             titleView.setText(item.getTitle());
             priceView.setText(Integer.toString(item.getPrice()));
-            // 마켓 이미지 구분
+            timeview.setText(item.getDate());
+            regionview.setText(item.getRegion());
 
+            platform = item.getApp_name();
+
+            // 마켓 이미지 구분
             // 상품 사진 넣기
         }
 

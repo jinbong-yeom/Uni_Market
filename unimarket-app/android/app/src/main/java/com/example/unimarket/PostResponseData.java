@@ -85,9 +85,16 @@ public class PostResponseData {
 //        this.date = date;
 //        this.seller_info = seller_info;
 //    }
-    public PostResponseData(String title, int price) {
+    public PostResponseData(String title,String picture, String region, int price, String link, String app_name, String date) {
         this.title = title;
+        this.picture = picture;
+        this.region = region;
         this.price = price;
+        //this.link = link;
+        this.app_name = app_name;
+        //this.description = description;
+        this.date = date;
+        //this.seller_info = seller_info;
 
     }
 }
