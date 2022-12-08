@@ -49,8 +49,14 @@ public class Fragment1 extends Fragment {
     private DrawerLayout drawerLayout;
     private View drawerView;
     RecyclerView recyclerView;
+
     ItemAdapter adapter;
-    PostResponseData i1;
+    PostResponseData t1;
+    String tpic = "https://dnvefa72aowie.cloudfront.net/origin/article/202212/AF4C3488A136918CB44DB26E99F4F00431E7215937F38DC10AC8E1BAAF8F2326.jpg?q=82&s=300x300&t=crop";
+    String ttime = "1시간전";
+    String appname = "번개장터";
+    String treg = "복대동";
+    String tseller = "36.5";
 
 
 
@@ -64,8 +70,8 @@ public class Fragment1 extends Fragment {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
 
         adapter = new ItemAdapter();
-        i1 = new PostResponseData("test_title",10000000);
 
+        t1 = new PostResponseData("test_title",tpic,treg,10000000,appname,ttime,tseller);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
@@ -87,7 +93,7 @@ public class Fragment1 extends Fragment {
 
                 // 받아온 상품
                 for (int i = 0; i < 1; i++) {
-                    adapter.addItem(i1);
+                    adapter.addItem(t1);
                 }
 
                 adapter.notifyDataSetChanged();

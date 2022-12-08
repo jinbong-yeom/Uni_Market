@@ -16,7 +16,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) { //뷰홀더가 만들어질 때
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
         View itemView = inflater.inflate(R.layout.item, viewGroup, false);
 
@@ -24,8 +24,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) { //인덱스에 맞는 객체를 찾는다?
-//        PostResponseData item1 = new PostResponseData("ta",10000);
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) { //인덱스에 맞는 객체를 찾음
         PostResponseData item = items.get(position);
         viewHolder.setItem(item);
     }
@@ -52,8 +51,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         TextView priceView;
         TextView timeview;
         TextView regionview;
+        TextView sellerView;
+        TextView description;
+
         ImageView platformview;
-        String platform;
+        ImageView pictureView;
+
+        String picture_link;
+        String app_name;
+        String link;
+
+
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -62,7 +70,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             priceView = itemView.findViewById(R.id.item_price);
             timeview = itemView.findViewById(R.id.item_time);
             regionview = itemView.findViewById(R.id.item_reg);
+            sellerView = itemView.findViewById(R.id.item_seller);
+
             platformview = itemView.findViewById(R.id.platform);
+            pictureView = itemView.findViewById(R.id.item_picture);
 
         }
 
@@ -71,8 +82,22 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             priceView.setText(Integer.toString(item.getPrice()));
             timeview.setText(item.getDate());
             regionview.setText(item.getRegion());
+            sellerView.setText(item.getSeller_info());
 
-            platform = item.getApp_name();
+            app_name = item.getApp_name();
+            picture_link = item.getPicture();
+
+            switch(app_name){
+                case "당근마켓":
+                    platformview.setImageResource(R.drawable.ic_karrot_24dp);
+                    break;
+                case "중고나라":
+                    platformview.setImageResource(R.drawable.ic_joongna_24dp);
+                    break;
+                case "번개장터":
+                    platformview.setImageResource(R.drawable.ic_ightning_24dp);
+                    break;
+            }
 
             // 마켓 이미지 구분
             // 상품 사진 넣기

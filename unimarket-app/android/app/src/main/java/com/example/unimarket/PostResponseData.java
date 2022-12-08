@@ -67,13 +67,6 @@ public class PostResponseData {
         return seller_info;
     }
 
-    public void setTitle(String title1) {
-        this.title = title1;
-    }
-    public void setPrice(int price1){
-        this.price = price1;
-    }
-
 //    public PostResponseData(String title, String picture, String region, int price, String link, String app_name, String description, String date, String seller_info) {
 //        this.title = title;
 //        this.picture = picture;
@@ -85,7 +78,7 @@ public class PostResponseData {
 //        this.date = date;
 //        this.seller_info = seller_info;
 //    }
-    public PostResponseData(String title,String picture, String region, int price, String link, String app_name, String date) {
+    public PostResponseData(String title,String picture, String region, int price, String app_name, String date,String seller_info) {
         this.title = title;
         this.picture = picture;
         this.region = region;
@@ -94,7 +87,7 @@ public class PostResponseData {
         this.app_name = app_name;
         //this.description = description;
         this.date = date;
-        //this.seller_info = seller_info;
+        this.seller_info = seller_info;
 
     }
 }
