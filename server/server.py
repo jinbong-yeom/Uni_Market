@@ -50,9 +50,9 @@ def notice():
         collection3.insert_one(post)
 
     for i in collection.find({'$and':[{'$and':[{"price":{"$lte":Max}},
-    {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}}]},
-    {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}},
-    {"region":{"$regex":".*{}.*".format(region)}}]}]}):
+    {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}},
+    {"region":{"$regex":".*{}.*".format(region)}}]},
+    {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}}]}]}):
         collection2.insert_one(i['item_id'])
 
 
