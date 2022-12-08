@@ -99,13 +99,13 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
 
             switch(app_name){
-                case "당근마켓":
+                case "당근":
                     platformview.setImageResource(R.drawable.ic_karrot_24dp);
                     break;
-                case "중고나라":
+                case "중고":
                     platformview.setImageResource(R.drawable.ic_joongna_24dp);
                     break;
-                case "번개장터":
+                case "번개":
                     platformview.setImageResource(R.drawable.ic_ightning_24dp);
                     break;
             }

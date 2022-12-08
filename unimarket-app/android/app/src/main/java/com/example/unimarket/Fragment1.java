@@ -95,13 +95,20 @@ public class Fragment1 extends Fragment {
 
         SearchView searchBar = frag1V.findViewById(R.id.searchView1);
         searchBar.bringToFront();   // 뷰 상단으로 올리기(드러워가 겹쳐도 터치 되도록)
+        searchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchBar.setIconified(false); //전체영역 터치되도록(원래 아이콘영역만됬음)
+
+            }
+        });
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
-                if (((Globalstr) getActivity().getApplication() ).getregion1()==null){
-                    Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_SHORT).show();
-                    return true;
-                }
+//                if (((Globalstr) getActivity().getApplication() ).getregion1()==null){
+//                    Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_SHORT).show();
+//                    return true;
+//                }
 
                 srinput = s;
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
@@ -109,7 +116,7 @@ public class Fragment1 extends Fragment {
                 if(postResponseData != null){
                     postResponseData = new ArrayList<>();
                 }
-                //createPost(s);
+                createPost(s);
                 //createNotice(s);
 
                 // 받아온 상품
@@ -117,12 +124,12 @@ public class Fragment1 extends Fragment {
 //                    PostResponseData tmpResponseData = postResponseData.get(i);
 //                    adapter.addItem(tmpResponseData);
 //                }
-                for (int i = 0; i < 10; i++) {      //test
-                    //PostResponseData tmpResponseData = postResponseData.get(i);
-                    adapter.addItem(t1);
-                }
-                postResponseData.clear();
-                adapter.notifyDataSetChanged();
+//                for (int i = 0; i < 10; i++) {      //test
+//                    //PostResponseData tmpResponseData = postResponseData.get(i);
+//                    adapter.addItem(t1);
+//                }
+//                postResponseData.clear();
+//                adapter.notifyDataSetChanged();
 
 
 
