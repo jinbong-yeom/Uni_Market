@@ -1,5 +1,7 @@
 package com.example.unimarket;
 
+import static java.lang.Integer.MAX_VALUE;
+
 import android.provider.Settings.Secure;
 
 import android.os.Bundle;
@@ -44,8 +46,8 @@ public class Fragment1 extends Fragment {
 
     String srinput; // 검색 키워드
     String filterinput; // 필터단어
-    int minprice;
-    int maxprince;
+    int minprice = Integer.MAX_VALUE;
+    int maxprice = 0;
 
     private DrawerLayout drawerLayout;
     private View drawerView;
@@ -58,8 +60,8 @@ public class Fragment1 extends Fragment {
     String appname = "번개장터";
     String treg = "복대동";
     String tseller = "36.5";
-    String tdes="dddddddddddd";
-    String tlink = "aaa";
+    String tdes="ddddddddddddddddddddddddddddddddddddddddddd \n dddddddddddddddddddddddddddddddddd \n ";
+    String tlink = "https://www.daangn.com/articles/500321593";
 
     public List<PostResponseData> getPostResponseData() {
         return postResponseData;
@@ -76,8 +78,8 @@ public class Fragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+        t1 = new PostResponseData("Test_Title",tpic,treg,1000000,tlink,appname,tdes,ttime,tseller);
 
-        ( (Globalstr) getActivity().getApplication() ).setregion1("청주");//
 
         adapter = new ItemAdapter();
 
@@ -101,14 +103,20 @@ public class Fragment1 extends Fragment {
                 if(postResponseData != null){
                     postResponseData = new ArrayList<>();
                 }
-                createPost(s);
+                //createPost(s);
                 //createNotice(s);
 
                 // 받아온 상품
-                for (int i = 0; i < postResponseData.size(); i++) {
-                    PostResponseData tmpResponseData = postResponseData.get(i);
-                    adapter.addItem(tmpResponseData);
+//                for (int i = 0; i < postResponseData.size(); i++) {
+//                    PostResponseData tmpResponseData = postResponseData.get(i);
+//                    adapter.addItem(tmpResponseData);
+//                }
+                for (int i = 0; i < 10; i++) {      //test
+                    //PostResponseData tmpResponseData = postResponseData.get(i);
+                    adapter.addItem(t1);
                 }
+                postResponseData.clear();
+                adapter.notifyDataSetChanged();
 
 
 
@@ -178,8 +186,8 @@ public class Fragment1 extends Fragment {
                 //Toast.makeText(getActivity(),"적용버튼 클릭", Toast.LENGTH_LONG).show();
                 filterinput = filterv.getText().toString();
                 minprice = Integer.parseInt(minv.getText().toString());
-                maxprince = Integer.parseInt(maxv.getText().toString());
-                Toast.makeText(getActivity(),filterinput+minprice+maxprince, Toast.LENGTH_LONG).show();
+                maxprice = Integer.parseInt(maxv.getText().toString());
+                Toast.makeText(getActivity(),filterinput+minprice+maxprice, Toast.LENGTH_LONG).show();
                 // 필터 적용 됬을 때 출력내용 바뀌거나 필터 값 전송되도록 ++++++++++++++++++++++++++++++++
 
             }
@@ -218,17 +226,18 @@ public class Fragment1 extends Fragment {
 
         List<String> excludeKeyword = new ArrayList<>();
         List<String> region = new ArrayList<>();
-        excludeKeyword.add(filterinput);
 
-        int max_price = maxprince;
-        int min_price = minprice;
+//        excludeKeyword.add(filterinput);
+//        int max_price = maxprice;
+//        int min_price = minprice;
+//        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
+
+        excludeKeyword.add("거위");       //test
+        region.add("청주");
 
 
-        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
-
-
-
-        FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+        //FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+        FilteringData filteringData = new FilteringData(excludeKeyword, MAX_VALUE, 0, region);  //test
 
 
         PostData postData = new PostData(s, android_id, filteringData);

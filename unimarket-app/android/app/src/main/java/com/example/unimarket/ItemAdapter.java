@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 // 검색해서 받아온 상품 item.xml이랑 매칭
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     ArrayList<PostResponseData> items = new ArrayList<PostResponseData>();
+
 
     @NonNull
     @Override
@@ -62,6 +64,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         String picture_link;
         String app_name;
         String link;
+        String nunstr;
+        DecimalFormat decFormat = new DecimalFormat("###,###");
+
 
 
 
@@ -81,7 +86,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         public void setItem(PostResponseData item) {
             titleView.setText(item.getTitle());
-            priceView.setText(Integer.toString(item.getPrice()));
+            String nunstr = decFormat.format(item.getPrice());
+            priceView.setText(nunstr+" 원");
             timeview.setText(item.getDate());
             regionview.setText(item.getRegion());
             sellerView.setText(item.getSeller_info());
@@ -104,15 +110,10 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     break;
             }
 
-
-
-
-            // 마켓 이미지 구분
-            // 상품 사진 넣기
         }
 
     }
-
+    // 원래 뷰 삭제
     public void clear() {
         this.items.clear();
     }
