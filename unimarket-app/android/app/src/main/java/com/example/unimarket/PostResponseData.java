@@ -67,27 +67,27 @@ public class PostResponseData {
         return seller_info;
     }
 
-//    public PostResponseData(String title, String picture, String region, int price, String link, String app_name, String description, String date, String seller_info) {
-//        this.title = title;
-//        this.picture = picture;
-//        this.region = region;
-//        this.price = price;
-//        this.link = link;
-//        this.app_name = app_name;
-//        this.description = description;
-//        this.date = date;
-//        this.seller_info = seller_info;
-//    }
-    public PostResponseData(String title,String picture, String region, int price, String app_name, String date,String seller_info) {
+    public PostResponseData(String title, String picture, String region, int price, String link, String app_name, String description, String date, String seller_info) {
         this.title = title;
         this.picture = picture;
         this.region = region;
         this.price = price;
-        //this.link = link;
+        this.link = link;
         this.app_name = app_name;
-        //this.description = description;
+        this.description = description;
         this.date = date;
         this.seller_info = seller_info;
-
     }
+//    public PostResponseData(String title,String picture, String region, int price, String app_name, String date,String seller_info) {
+//        this.title = title;
+//        this.picture = picture;
+//        this.region = region;
+//        this.price = price;
+//        //this.link = link;
+//        this.app_name = app_name;
+//        //this.description = description;
+//        this.date = date;
+//        this.seller_info = seller_info;
+//
+//    }
 }

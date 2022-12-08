@@ -57,7 +57,10 @@ public class Fragment1 extends Fragment {
     String appname = "번개장터";
     String treg = "복대동";
     String tseller = "36.5";
+    String tdes="dddddddddddd";
+    String tlink = "aaa";
 
+    List<PostResponseData> postResponseData;
 
 
     private final String BASEURL = "http://115.85.181.251:60000";
@@ -69,9 +72,11 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
 
+        ( (Globalstr) getActivity().getApplication() ).setregion1("청주");//
+
         adapter = new ItemAdapter();
 
-        t1 = new PostResponseData("test_title",tpic,treg,10000000,appname,ttime,tseller);
+        //t1 = new PostResponseData("test_title",tpic,treg,10000000,tdes,appname,ttime,tseller);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
@@ -88,12 +93,15 @@ public class Fragment1 extends Fragment {
                 srinput = s;
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
-                //createPost(s);
+                createPost(s);
                 //createNotice(s);
 
+                String a =  Integer.toString(postResponseData.size());
+                Log.d("TAG", a);
                 // 받아온 상품
-                for (int i = 0; i < 1; i++) {
-                    adapter.addItem(t1);
+                for (int i = 0; i < postResponseData.size(); i++) {
+                    Log.d("TAG", postResponseData.get(i).getTitle());
+                    adapter.addItem(postResponseData.get(i));
                 }
 
                 adapter.notifyDataSetChanged();
@@ -144,6 +152,7 @@ public class Fragment1 extends Fragment {
                         }
                         PostResponse postResponse = response.body();
                         Toast.makeText(getActivity(),postResponse.getResult().get(0).getTitle(), Toast.LENGTH_SHORT).show();
+                        postResponseData = postResponse.getResult();
                     }
                     @Override
                     public void onFailure(Call<PostResponse> call, Throwable t) {

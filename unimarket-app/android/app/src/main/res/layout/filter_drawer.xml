@@ -47,6 +47,7 @@
             android:hint="필터 단어"
             android:inputType="text"
             android:maxLength="20"
+            android:text="가위"
             android:textColorHint="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/filter_text1" />
@@ -74,6 +75,7 @@
             android:ems="10"
             android:hint="최소 금액"
             android:inputType="number"
+            android:text="10"
             android:textColorHint="@color/gray"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/filter_text2" />
@@ -100,6 +102,7 @@
             android:ems="10"
             android:hint="최대 금액"
             android:inputType="number"
+            android:text="1000000"
             android:textColorHint="@color/gray"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/filter_et2" />

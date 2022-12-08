@@ -9,6 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 // 검색해서 받아온 상품 item.xml이랑 매칭
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
@@ -87,6 +89,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             app_name = item.getApp_name();
             picture_link = item.getPicture();
 
+            Glide.with(itemView).load("https://dnvefa72aowie.cloudfront.net/origin/article/202212/AF4C3488A136918CB44DB26E99F4F00431E7215937F38DC10AC8E1BAAF8F2326.jpg?q=82&s=300x300&t=crop").into(pictureView);
+
+
             switch(app_name){
                 case "당근마켓":
                     platformview.setImageResource(R.drawable.ic_karrot_24dp);
@@ -98,6 +103,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     platformview.setImageResource(R.drawable.ic_ightning_24dp);
                     break;
             }
+
 
             // 마켓 이미지 구분
             // 상품 사진 넣기
