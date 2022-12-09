@@ -7,8 +7,8 @@ client=MongoClient(uri)
 def deletedata(user):
       db=client['UniMarketDB']
       collection=db['UserDB']
-      collection2=db["{}".format(user)]
+      collection2=db["{}".format(str(user))]
       collection2.drop()
-      collection.delete_one({"userId":{"$regex":".*{}.*".format(user)}})
+      collection.delete_one({"user_id":{"$regex":".*{}.*".format(str(user))}})
 
 

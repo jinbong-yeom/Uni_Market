@@ -2,6 +2,7 @@ package com.example.unimarket;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PostResponse {
@@ -14,5 +15,12 @@ public class PostResponse {
 
     public List<PostResponseData> getResult() {
         return result;
+    }
+
+    public List<PostResponseData> SortedToTime(){
+        List<PostResponseData> sortedData = this.result;
+        Collections.sort(sortedData);
+
+        return sortedData;
     }
 }
