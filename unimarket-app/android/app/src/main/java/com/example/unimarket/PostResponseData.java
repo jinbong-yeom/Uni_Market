@@ -2,7 +2,13 @@ package com.example.unimarket;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PostResponseData {
+import java.security.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class PostResponseData implements Comparable<PostResponseData>{
 
     @SerializedName("title")
     private String title;
@@ -77,6 +83,16 @@ public class PostResponseData {
         this.description = description;
         this.date = date;
         this.seller_info = seller_info;
+    }
+
+    @Override
+    public int compareTo(PostResponseData postResponseData) {
+        if (postResponseData.date.compareTo(date) > 0) {
+            return 1;
+        } else if (postResponseData.date.compareTo(date) < 0) {
+            return -1;
+        }
+        return 0;
     }
 //    public PostResponseData(String title,String picture, String region, int price, String app_name, String date,String seller_info) {
 //        this.title = title;
