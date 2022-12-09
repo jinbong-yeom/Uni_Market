@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -60,6 +62,8 @@ public class Fragment1 extends Fragment {
 
     ItemAdapter adapter;
     PostResponseData t1;
+    Switch switchButton;
+
 
     public List<PostResponseData> getPostResponseData() {
         return postResponseData;
@@ -210,6 +214,22 @@ public class Fragment1 extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        // 스위치 버튼 눌렀을 때 정렬 방식 변경
+        switchButton = frag1V.findViewById(R.id.switch1);
+        switchButton.bringToFront();
+        switchButton.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
+                if (isChecked){
+                    switchButton.setText("시간정렬");
+
+                }else{
+                    switchButton.setText("가격정렬");
+                }
+            }
+        });
 
         return frag1V;
     }
