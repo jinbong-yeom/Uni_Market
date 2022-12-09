@@ -153,6 +153,7 @@ public class Fragment1 extends Fragment {
             public void onClick(View view) {
 
                 //알림 설정하는 파트
+                createNotice(srinput);
 
                 // 번들 생성하여 검색어 fragment2에 넘기기
                 Bundle bundle = new Bundle();
