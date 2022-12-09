@@ -219,14 +219,17 @@ public class Fragment1 extends Fragment {
         filterb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity(),"적용버튼 클릭", Toast.LENGTH_LONG).show();
-                filterinput = filterv.getText().toString();
-                minprice = Integer.parseInt(minv.getText().toString());
-                maxprice = Integer.parseInt(maxv.getText().toString());
-                Toast.makeText(getActivity(),filterinput+minprice+maxprice, Toast.LENGTH_LONG).show();
-                // 필터 적용 됐을 때 출력내용 바뀌거나 필터 값 전송되도록 ++++++++++++++++++++++++++++++++
+                if(filterv.getText().toString()!=null){filterinput = filterv.getText().toString();}
+                if(filterv.getText().toString()!=null){minv.getText().toString();}
+                if(filterv.getText().toString()!=null){maxv.getText().toString();}
 
+                //드로어 집어넣고 나머지 뷰 위로 올리기
+                drawerLayout.closeDrawers();
+                frag1V.bringChildToFront(searchBar);
+                frag1V.bringChildToFront(switchButton);
+                frag1V.bringChildToFront(recyclerView);
             }
+
         });
 
         recyclerView = frag1V.findViewById(R.id.recycler);
