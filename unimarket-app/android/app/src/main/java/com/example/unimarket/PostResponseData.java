@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class PostResponseData implements Comparable<PostResponseData>{
+public class PostResponseData implements Comparable<PostResponseData>, Cloneable{
 
     @SerializedName("title")
     private String title;
@@ -94,5 +94,11 @@ public class PostResponseData implements Comparable<PostResponseData>{
         }
         return 0;
     }
+    @Override
+    protected PostResponseData clone() throws CloneNotSupportedException {
+        return (PostResponseData) super.clone();
+    }
+
+
 
 }

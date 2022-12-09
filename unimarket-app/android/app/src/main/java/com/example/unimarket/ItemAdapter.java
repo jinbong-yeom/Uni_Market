@@ -89,6 +89,9 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         return items.get(position);
     }
 
+    public ArrayList<PostResponseData> getItems() {
+        return items;
+    }
 
     // 원래 뷰 삭제
     public void clear() {
@@ -99,8 +102,15 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //시간 순 정렬
     public ArrayList<PostResponseData> SortedToTime(){
         ArrayList<PostResponseData> sortedData = this.items;
+        Collections.sort(sortedData,Collections.reverseOrder());
+
+        return sortedData;
+    }
+    public ArrayList<PostResponseData> SortedByPrice(){
+        ArrayList<PostResponseData> sortedData = this.items;
         Collections.sort(sortedData);
 
         return sortedData;
     }
+
 }
