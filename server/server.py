@@ -56,9 +56,9 @@ def notice():
     {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}}]}]}):
         post2= {"item_id":str(i["item_id"])}
         collection2.insert_one(post2)
-
-
-
+    
+    thread = Thread(target=monitor, daemon=True)
+    thread.start()
     return {"Success": True}
 
 @app.route("/delete",methods=['POST'])
@@ -72,6 +72,3 @@ if __name__ == '__main__':
                 'uni', 'uni1234', 'db.yoonleeverse.com')
     client=MongoClient(uri)
     app.run(host='0.0.0.0', port=60000)
-
-    thread = Thread(target=monitor, daemon=True)
-    thread.start()
