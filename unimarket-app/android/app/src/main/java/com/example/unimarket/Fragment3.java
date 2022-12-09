@@ -30,19 +30,19 @@ public class Fragment3 extends Fragment {
                 regstr = reginput.getText().toString();
                 //Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
                 regshow.setText(regstr);
+                regshow.setVisibility(regshow.VISIBLE);
 
                 ( (Globalstr) getActivity().getApplication() ).setregion1(regstr);
-                // 지역 스트링 전달되도록 하는 내용 필요 ++++++++++++++++++++++++++++++++++++
-                //Toast.makeText(getActivity(),( (Globalstr) getActivity().getApplication() ).getregion1(), Toast.LENGTH_LONG).show();
             }
         });
 
-        Button resetreg = frag3V.findViewById(R.id.frag3_button4);
+        Button resetreg = frag3V.findViewById(R.id.frag3_button4);  //지역초기화
         resetreg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 regshow.setText(null);
                 ( (Globalstr) getActivity().getApplication() ).setregion1(null);
+                regshow.setVisibility(regshow.INVISIBLE);
             }
         });
 
