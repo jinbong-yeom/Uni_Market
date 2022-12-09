@@ -21,7 +21,7 @@ def monitor():
             {"title":{"$regex":".*{}.*".format(post['title'])}},{"region":{"$regex":".*{}.*".format(post['region'])}}]},
             {'$nor':[{"title":{"$regex":".*{}.*".format(post['filter_keyword'])}}]}]}):#갱신된 부분이 있는지 확인
                 if i['item_id'] not in data:
-                        send(post['firebase_id'])
+                        send(post['firebase_id'],i['title'])
                         # 알림 보내기
                         post2={"item_id":str(i["item_id"])}
                         monitor_collection.insert_one(post2)
