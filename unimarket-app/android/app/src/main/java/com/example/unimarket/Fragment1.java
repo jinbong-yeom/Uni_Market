@@ -246,7 +246,7 @@ public class Fragment1 extends Fragment {
 //        int min_price = minprice;
 //        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
 
-        excludeKeyword.add("거위");       //test
+        excludeKeyword.add("가위");       //test
         region.add("청주");
 
 
@@ -310,22 +310,18 @@ public class Fragment1 extends Fragment {
         //필터링 정보 만들기
         List<String> excludeKeyword = new ArrayList<>();
         List<String> region = new ArrayList<>();
-        excludeKeyword.add("note");
-        excludeKeyword.add("삽니다");
-        int max_price = 10000000;
-        int min_price = 0;
-
-        region.add("청주");
-        region.add("서울");
+        excludeKeyword.add(filterinput);
+        Globalstr globalstr = new Globalstr();
+        region.add(globalstr.getregion1());
 
 
-        FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+        FilteringData filteringData = new FilteringData(excludeKeyword, maxprice, minprice, region);
 
         send(s, token, filteringData);
     }
 
     public void send(String s, String token, FilteringData filteringData){
-        String user_id =Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
+        String user_id = Settings.Secure.getString(getContext().getContentResolver(), Secure.ANDROID_ID);
         Boolean send = true;
         NoticeData noticeData = new NoticeData(s, user_id, token, filteringData, send);
 
@@ -338,6 +334,7 @@ public class Fragment1 extends Fragment {
                     Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                     return;
                 }
+                Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                 NoticeResponse noticeResponse = response.body();
 
             }

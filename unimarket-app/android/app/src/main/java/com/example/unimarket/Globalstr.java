@@ -4,7 +4,7 @@ import android.app.Application;
 import java.util.List;
 
 public class Globalstr extends  Application {
-    private String region1;
+    private static String region1;
 //    private List<PostResponseData> region;
 
 //    private String region2;
