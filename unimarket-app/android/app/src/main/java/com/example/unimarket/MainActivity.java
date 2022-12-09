@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
      Fragment2 fragment2;
      Fragment3 fragment3;
      FragmentManager fragmentManager = getSupportFragmentManager();
+     public static Context context;
+
 
     public void makefrag2(){
         fragment2 = new Fragment2();
@@ -34,12 +37,17 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_history)));
         startActivity(intent);
     }
+    public void goToItem(String link) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        startActivity(intent);
+    }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
 
 
         //프래그먼트생성

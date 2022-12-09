@@ -60,13 +60,6 @@ public class Fragment1 extends Fragment {
 
     ItemAdapter adapter;
     PostResponseData t1;
-    String tpic = "https://dnvefa72aowie.cloudfront.net/origin/article/202212/AF4C3488A136918CB44DB26E99F4F00431E7215937F38DC10AC8E1BAAF8F2326.jpg?q=82&s=300x300&t=crop";
-    String ttime = "1시간전";
-    String appname = "번개장터";
-    String treg = "복대동";
-    String tseller = "36.5";
-    String tdes="ddddddddddddddddddddddddddddddddddddddddddd \n dddddddddddddddddddddddddddddddddd \n ";
-    String tlink = "https://www.daangn.com/articles/500321593";
 
     public List<PostResponseData> getPostResponseData() {
         return postResponseData;
@@ -85,7 +78,6 @@ public class Fragment1 extends Fragment {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
         InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
 
-        t1 = new PostResponseData("Test_Title",tpic,treg,1000000,tlink,appname,tdes,ttime,tseller);
 
 
         adapter = new ItemAdapter();
