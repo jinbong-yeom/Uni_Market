@@ -202,7 +202,7 @@ public class Fragment1 extends Fragment {
                 minprice = Integer.parseInt(minv.getText().toString());
                 maxprice = Integer.parseInt(maxv.getText().toString());
                 Toast.makeText(getActivity(),filterinput+minprice+maxprice, Toast.LENGTH_LONG).show();
-                // 필터 적용 됬을 때 출력내용 바뀌거나 필터 값 전송되도록 ++++++++++++++++++++++++++++++++
+                // 필터 적용 됐을 때 출력내용 바뀌거나 필터 값 전송되도록 ++++++++++++++++++++++++++++++++
 
             }
         });
