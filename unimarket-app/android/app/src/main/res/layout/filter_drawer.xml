@@ -6,7 +6,7 @@
     android:layout_width="220dp"
     android:layout_height="match_parent"
     android:layout_gravity="end"
-    android:background="@color/sky_t"
+    android:background="#E0DED8D0"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -83,8 +83,8 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="7dp"
             android:text="~"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
