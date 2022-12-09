@@ -65,6 +65,7 @@ def notice():
 def delete():
     params = request.get_json()
     User = params['userId']
+    event.set()
     deletedata(User)
 
 if __name__ == '__main__':

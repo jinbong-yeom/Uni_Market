@@ -1,14 +1,17 @@
 from pymongo import MongoClient 
 import json 
-from threading import Thread
+from threading import Thread,Event
 import time
 from send import send
 import os
 uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
                 'uni', 'uni1234', 'db.yoonleeverse.com')
 client=MongoClient(uri)
+event=Event()
 def monitor():
     while(True):
+        if event.is_set():
+            return
         db=client['UniMarketDB']
         collection=db['data']
         collection2=db['UserDB']
