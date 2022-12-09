@@ -4,14 +4,17 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.SparseBooleanArray;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,6 +30,8 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
     ImageView platformview;
     ImageView pictureView;
 
+    Button linkbutton;
+
     String picture_link;
     String app_name;
     String des;
@@ -36,8 +41,7 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
 
     OnViewHolderItemClickListener onViewHolderItemClickListener;
     LinearLayout linearlayout;
-
-    private Context context;
+    LinearLayout linearlayout2;
 
     public ViewHolderItem(@NonNull View itemView) {
         super(itemView);
@@ -52,13 +56,20 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
         desView = itemView.findViewById(R.id.item_des);
 
         linearlayout = itemView.findViewById(R.id.linearlayout);
+        linearlayout2 = itemView.findViewById(R.id.linearlayout2);
 
         linearlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                Toast.makeText(v.getContext(), "짧게 출력 Hello World!", Toast.LENGTH_SHORT).show();
                 onViewHolderItemClickListener.onViewHolderItemClick();
             }
         });
+
+
+        linkbutton = itemView.findViewById(R.id.item_go);
+
+
     }
 
     public void setItem(PostResponseData item, int position, SparseBooleanArray selectedItems) {
@@ -70,11 +81,18 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
         sellerView.setText(item.getSeller_info());
 
         des = item.getDescription();
-        desView.setText(des.replaceAll("\n\n","\n"));
+        desView.setText(des.replaceAll("\n\n","\n"));   //공백줄이기
         app_name = item.getApp_name();
         picture_link = item.getPicture();
 
         Glide.with(itemView).load(picture_link).into(pictureView);
+
+        linkbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "상품이동", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         switch(app_name){
             case "당근":
@@ -87,11 +105,9 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
                 platformview.setImageResource(R.drawable.ic_ightning_24dp);
                 break;
         }
+
         changeVisibility(selectedItems.get(position));
     }
-
-
-
 
 
     private void changeVisibility(final boolean isExpanded) { //접었다 펼치기
@@ -109,9 +125,9 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
                 int value = (int) animation.getAnimatedValue();
                 // TextView의 높이 변경
                 //desView.getLayoutParams().height = (int) animation.getAnimatedValue();
-                desView.requestLayout();
+                linearlayout2.requestLayout();
                 // TextView가 실제로 사라지게하는 부분
-                desView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
+                linearlayout2.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
             }
         });
         // Animation start
