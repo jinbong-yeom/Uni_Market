@@ -54,8 +54,8 @@ def notice():
     {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}},
     {"region":{"$regex":".*{}.*".format(region)}}]},
     {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}}]}]}):
-        post= {"item_id":str(i["item_id"])}
-        collection2.insert_one(post)
+        post2= {"item_id":str(i["item_id"])}
+        collection2.insert_one(post2)
 
 
 

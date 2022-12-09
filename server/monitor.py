@@ -23,5 +23,5 @@ def monitor():
                 if i['item_id'] not in data:
                         send(post['firebase_id'],i['title'])
                         # 알림 보내기
-                        post={"item_id":str(i["item_id"])}
-                        monitor_collection.insert_one(post)
+                        post2={"item_id":str(i["item_id"])}
+                        monitor_collection.insert_one(post2)
