@@ -3,12 +3,11 @@ import os
 from firebase_admin import credentials
 from firebase_admin import messaging
 def send(token,title):
-    
-    current_path = os.getcwd()
-    cred_path = current_path+"/unimarket_firebase.json"
-    cred = credentials.Certificate(cred_path)
-    firebase_admin.initialize_app(cred)
-
+    if not firebase_admin._apps:
+        current_path = os.getcwd()
+        cred_path = current_path+"/unimarket_firebase.json"
+        cred = credentials.Certificate(cred_path)
+        firebase_admin.initialize_app(cred)
     registration_token = token
     message = messaging.Message(
         notification = messaging.Notification(

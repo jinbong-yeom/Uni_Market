@@ -1,6 +1,5 @@
 from pymongo import MongoClient 
 import json 
-from threading import Thread,Event
 import time
 from send import send
 import os
@@ -10,7 +9,6 @@ event = Event()
 uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
                 'uni', 'uni1234', 'db.yoonleeverse.com')
 client=MongoClient(uri)
-event=Event()
 def monitor():
     while(True):
         if event.is_set():
@@ -29,5 +27,6 @@ def monitor():
                 if i['item_id'] not in data:
                     send(post['firebase_id'],i['title'])
                         # 알림 보내기
-                    post2={"item_id":str(i["item_id"])}
-                    monitor_collection.insert_one(post2)
+                    monitor_post={"item_id":i["item_id"]}
+                    monitor_collection.insert_one(monitor_post)
+        time.sleep(5)

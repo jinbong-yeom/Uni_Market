@@ -54,8 +54,8 @@ def notice():
     {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}},
     {"region":{"$regex":".*{}.*".format(region)}}]},
     {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}}]}]}):
-        post2= {"item_id":str(i["item_id"])}
-        collection2.insert_one(post2)
+        user_post= {"item_id":str(i["item_id"])}
+        collection2.insert_one(user_post)
     
     thread = Thread(target=monitor, daemon=True)
     thread.start()
