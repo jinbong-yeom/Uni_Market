@@ -36,7 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="222dp"
         android:layout_marginTop="66dp"
-        android:fontFamily="@font/jua"
         android:text="지역추가"
         android:textStyle="bold"
         app:icon="@drawable/ic_map"

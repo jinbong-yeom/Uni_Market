@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +38,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -59,13 +62,16 @@ public class Fragment1 extends Fragment {
     RecyclerView recyclerView;
 
     ItemAdapter adapter;
-    PostResponseData t1;
+    Switch switchButton;
+
 
     public List<PostResponseData> getPostResponseData() {
         return postResponseData;
     }
 
     List<PostResponseData> postResponseData = new ArrayList<>();
+    ArrayList<PostResponseData> temp = new ArrayList<>();    //정렬할 때 쓸 임시 리스트
+
 
 
     private final String BASEURL = "http://115.85.181.251:60000";
@@ -114,7 +120,23 @@ public class Fragment1 extends Fragment {
                     postResponseData = new ArrayList<>();
                 }
                 createPost(s);
-                //createNotice(s);
+//                if(postResponseData != null){
+//                    temp = adapter.getItems();
+//                }
+
+
+//                for (PostResponseData f : postResponseData) {
+//                    try {
+//                        temp.add(f.clone());
+//                    } catch (CloneNotSupportedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+
+
+
+
+
 
                 // 받아온 상품
 //                for (int i = 0; i < postResponseData.size(); i++) {
@@ -128,7 +150,7 @@ public class Fragment1 extends Fragment {
 //                postResponseData.clear();
 //                adapter.notifyDataSetChanged();
 
-
+    
 
 
 
@@ -187,7 +209,7 @@ public class Fragment1 extends Fragment {
         });
         drawerLayout = (DrawerLayout) frag1V.findViewById(R.id.drawer);
         drawerView = (View) frag1V.findViewById(R.id.drawerView);
-        drawerLayout.addDrawerListener(listener);;   //setDrawerListener deprecated
+        drawerLayout.addDrawerListener(listener);   //setDrawerListener deprecated
 
         EditText filterv = frag1V.findViewById(R.id.filter_et1);
         EditText minv = frag1V.findViewById(R.id.filter_et2);
@@ -211,6 +233,26 @@ public class Fragment1 extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        // 스위치 버튼 눌렀을 때 정렬 방식 변경
+        switchButton = frag1V.findViewById(R.id.switch1);
+        switchButton.bringToFront();
+        switchButton.setOnCheckedChangeListener(new Switch.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // 스위치 버튼이 체크되었는지 검사하여 텍스트뷰에 각 경우에 맞게 출력합니다.
+                if (isChecked){
+                    switchButton.setText("시간정렬");
+                    adapter.setItems(adapter.SortedToTime());
+                    adapter.notifyDataSetChanged();
+
+                }else{
+                    switchButton.setText("가격정렬");
+                    createPost(srinput);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
 
         return frag1V;
     }
@@ -281,8 +323,7 @@ public class Fragment1 extends Fragment {
                     PostResponseData tmpResponseData = postResponseData.get(i);
                     adapter.addItem(tmpResponseData);
 
-                    //시간 순 정렬
-                    //adapter.setItems(adapter.SortedToTime());
+
                 }
                 postResponseData.clear();
                 adapter.notifyDataSetChanged();
