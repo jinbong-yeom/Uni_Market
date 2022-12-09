@@ -1,7 +1,13 @@
 package com.example.unimarket;
 
+
+import static android.app.PendingIntent.getActivity;
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +26,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class ViewHolderItem extends RecyclerView.ViewHolder {
+    public static Context context;
+
     TextView titleView;
     TextView priceView;
     TextView timeview;
@@ -87,10 +95,14 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
 
         Glide.with(itemView).load(picture_link).into(pictureView);
 
+        link = item.getLink();
+
         linkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "상품이동", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(view.getContext(), "상품페이지로이동", Toast.LENGTH_SHORT).show();
+                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+                ((MainActivity)MainActivity.context).goToItem(link);
             }
         });
 
