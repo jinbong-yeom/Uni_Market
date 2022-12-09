@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 // 검색해서 받아온 상품 item.xml이랑 매칭
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     ArrayList<PostResponseData> items = new ArrayList<PostResponseData>();
+
 
     @NonNull
     @Override
@@ -62,6 +64,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         String picture_link;
         String app_name;
         String link;
+        String nunstr;
+        DecimalFormat decFormat = new DecimalFormat("###,###");
+
 
 
 
@@ -81,7 +86,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
 
         public void setItem(PostResponseData item) {
             titleView.setText(item.getTitle());
-            priceView.setText(Integer.toString(item.getPrice()));
+            String nunstr = decFormat.format(item.getPrice());
+            priceView.setText(nunstr+" 원");
             timeview.setText(item.getDate());
             regionview.setText(item.getRegion());
             sellerView.setText(item.getSeller_info());
@@ -89,30 +95,25 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             app_name = item.getApp_name();
             picture_link = item.getPicture();
 
-            Glide.with(itemView).load("https://dnvefa72aowie.cloudfront.net/origin/article/202212/AF4C3488A136918CB44DB26E99F4F00431E7215937F38DC10AC8E1BAAF8F2326.jpg?q=82&s=300x300&t=crop").into(pictureView);
+            Glide.with(itemView).load(picture_link).into(pictureView);
 
 
             switch(app_name){
-                case "당근마켓":
+                case "당근":
                     platformview.setImageResource(R.drawable.ic_karrot_24dp);
                     break;
-                case "중고나라":
+                case "중고":
                     platformview.setImageResource(R.drawable.ic_joongna_24dp);
                     break;
-                case "번개장터":
+                case "번개":
                     platformview.setImageResource(R.drawable.ic_ightning_24dp);
                     break;
             }
 
-
-
-
-            // 마켓 이미지 구분
-            // 상품 사진 넣기
         }
 
     }
-
+    // 원래 뷰 삭제
     public void clear() {
         this.items.clear();
     }

@@ -1,5 +1,8 @@
 package com.example.unimarket;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+import static java.lang.Integer.MAX_VALUE;
+
 import android.provider.Settings.Secure;
 
 import android.os.Bundle;
@@ -8,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SearchView;
@@ -25,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonSyntaxException;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,11 +46,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
+    // 키보드를 내려주기위한 inputMethodManger 객체
+
 
     String srinput; // 검색 키워드
     String filterinput; // 필터단어
-    int minprice;
-    int maxprince;
+    int minprice = Integer.MAX_VALUE;
+    int maxprice = 0;
 
     private DrawerLayout drawerLayout;
     private View drawerView;
@@ -58,8 +65,8 @@ public class Fragment1 extends Fragment {
     String appname = "번개장터";
     String treg = "복대동";
     String tseller = "36.5";
-    String tdes="dddddddddddd";
-    String tlink = "aaa";
+    String tdes="ddddddddddddddddddddddddddddddddddddddddddd \n dddddddddddddddddddddddddddddddddd \n ";
+    String tlink = "https://www.daangn.com/articles/500321593";
 
     public List<PostResponseData> getPostResponseData() {
         return postResponseData;
@@ -76,8 +83,10 @@ public class Fragment1 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup frag1V = (ViewGroup) inflater.inflate(R.layout.fragment1, container, false);
+        InputMethodManager imm = (InputMethodManager) getActivity().getApplicationContext().getSystemService(INPUT_METHOD_SERVICE);
 
-        ( (Globalstr) getActivity().getApplication() ).setregion1("청주");//
+        t1 = new PostResponseData("Test_Title",tpic,treg,1000000,tlink,appname,tdes,ttime,tseller);
+
 
         adapter = new ItemAdapter();
 
@@ -92,9 +101,20 @@ public class Fragment1 extends Fragment {
 
         SearchView searchBar = frag1V.findViewById(R.id.searchView1);
         searchBar.bringToFront();   // 뷰 상단으로 올리기(드러워가 겹쳐도 터치 되도록)
+        searchBar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchBar.setIconified(false); //전체영역 터치되도록(원래 아이콘영역만됬음)
+            }
+        });
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
+//                if (((Globalstr) getActivity().getApplication() ).getregion1()==null){
+//                    Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_SHORT).show();
+//                    return true;
+//                }
+
                 srinput = s;
                 Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
@@ -105,10 +125,16 @@ public class Fragment1 extends Fragment {
                 //createNotice(s);
 
                 // 받아온 상품
-                for (int i = 0; i < postResponseData.size(); i++) {
-                    PostResponseData tmpResponseData = postResponseData.get(i);
-                    adapter.addItem(tmpResponseData);
-                }
+//                for (int i = 0; i < postResponseData.size(); i++) {
+//                    PostResponseData tmpResponseData = postResponseData.get(i);
+//                    adapter.addItem(tmpResponseData);
+//                }
+//                for (int i = 0; i < 10; i++) {      //test
+//                    //PostResponseData tmpResponseData = postResponseData.get(i);
+//                    adapterd.addItem(t1);
+//                }
+//                postResponseData.clear();
+//                adapter.notifyDataSetChanged();
 
 
 
@@ -116,7 +142,10 @@ public class Fragment1 extends Fragment {
 
                 // 입력받은 문자열 처리
                 frag1V.bringChildToFront(recyclerView); //리사이클러 위로 올리기
-                return true;    //리스너로 처리할 떄 true반환?
+                searchBar.clearFocus(); //에딧 텍스트 포커스를 제거
+                imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0);
+                return true;    //액션을 listener 로 handle 하는 경우  true 를 준다,
+
             }
             @Override
             public boolean onQueryTextChange(String s) {
@@ -178,8 +207,8 @@ public class Fragment1 extends Fragment {
                 //Toast.makeText(getActivity(),"적용버튼 클릭", Toast.LENGTH_LONG).show();
                 filterinput = filterv.getText().toString();
                 minprice = Integer.parseInt(minv.getText().toString());
-                maxprince = Integer.parseInt(maxv.getText().toString());
-                Toast.makeText(getActivity(),filterinput+minprice+maxprince, Toast.LENGTH_LONG).show();
+                maxprice = Integer.parseInt(maxv.getText().toString());
+                Toast.makeText(getActivity(),filterinput+minprice+maxprice, Toast.LENGTH_LONG).show();
                 // 필터 적용 됬을 때 출력내용 바뀌거나 필터 값 전송되도록 ++++++++++++++++++++++++++++++++
 
             }
@@ -218,17 +247,18 @@ public class Fragment1 extends Fragment {
 
         List<String> excludeKeyword = new ArrayList<>();
         List<String> region = new ArrayList<>();
-        excludeKeyword.add(filterinput);
 
-        int max_price = maxprince;
-        int min_price = minprice;
+//        excludeKeyword.add(filterinput);
+//        int max_price = maxprice;
+//        int min_price = minprice;
+//        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
+
+        excludeKeyword.add("거위");       //test
+        region.add("청주");
 
 
-        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
-
-
-
-        FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+        //FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
+        FilteringData filteringData = new FilteringData(excludeKeyword, MAX_VALUE, 0, region);  //test
 
 
         PostData postData = new PostData(s, android_id, filteringData);
