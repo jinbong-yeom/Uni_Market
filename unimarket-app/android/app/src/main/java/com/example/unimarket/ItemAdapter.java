@@ -102,7 +102,7 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //시간 순 정렬
     public ArrayList<PostResponseData> SortedToTime(){
         ArrayList<PostResponseData> sortedData = this.items;
-        Collections.sort(sortedData,Collections.reverseOrder());
+        Collections.sort(sortedData);
 
         return sortedData;
     }
