@@ -26,7 +26,7 @@ def notice():
     params = request.get_json()
     print(params)
     user=params['userId']
-    firebaseid=params['firebase_id']
+    firebaseid=params['firebaseid']
     title = params['title']
     Max=params['filteringData']['maxPrice']
     Min=params['filteringData']['minPrice']
