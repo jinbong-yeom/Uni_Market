@@ -13,6 +13,9 @@ import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 // 검색해서 받아온 상품 item.xml이랑 매칭
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     ArrayList<PostResponseData> items = new ArrayList<PostResponseData>();
@@ -118,4 +121,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         this.items.clear();
     }
 
+
+    //시간 순 정렬
+    public ArrayList<PostResponseData> SortedToTime(){
+        ArrayList<PostResponseData> sortedData = this.items;
+        Collections.sort(sortedData);
+
+        return sortedData;
+    }
 }

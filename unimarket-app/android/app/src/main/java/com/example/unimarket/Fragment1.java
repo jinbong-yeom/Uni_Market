@@ -277,11 +277,19 @@ public class Fragment1 extends Fragment {
                 PostResponse postResponse = response.body();
                 adapter.clear();
 
+
                 postResponseData.addAll(0, postResponse.getResult());
 
+                //시간 순으로 정렬
+                //PostResponse tmpResponse = new PostResponse(postResponseData);
+                //postResponseData = tmpResponse.SortedToTime();
+                //
                 for(int i = 0; i< postResponseData.size();i++) {
                     PostResponseData tmpResponseData = postResponseData.get(i);
                     adapter.addItem(tmpResponseData);
+
+                    //시간 순 정렬
+                    //adapter.setItems(adapter.SortedToTime());
                 }
                 postResponseData.clear();
                 adapter.notifyDataSetChanged();
