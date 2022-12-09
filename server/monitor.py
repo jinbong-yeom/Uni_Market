@@ -16,7 +16,7 @@ def monitor():
             monitor_collection=db["{}".format(str(post['user_id']))]
             data=[]
             for i in monitor_collection.find():
-                data.append(i)
+                data.append(i["item_id"])
             for i in collection.find({'$and':[{'$and':[{"price":{"$lte":post['max_price']}},{"price":{"$gte":post['min_price']}},
             {"title":{"$regex":".*{}.*".format(post['title'])}},{"region":{"$regex":".*{}.*".format(post['region'])}}]},
             {'$nor':[{"title":{"$regex":".*{}.*".format(post['filter_keyword'])}}]}]}):#갱신된 부분이 있는지 확인
