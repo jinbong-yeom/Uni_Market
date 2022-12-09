@@ -13,7 +13,7 @@ def monitor():
         collection=db['data']
         collection2=db['UserDB']
         for post in collection2.find():
-            monitor_collection=db["{}".format(post['user_id'])]
+            monitor_collection=db["{}".format(str(post['user_id']))]
             data=[]
             for i in monitor_collection.find():
                 data.append(i)
@@ -23,4 +23,5 @@ def monitor():
                 if i['item_id'] not in data:
                         send(post['firebase_id'],i['title'])
                         # 알림 보내기
-                        monitor_collection.insert_one(i['item_id'])
+                        post={"item_id":i["item_id"]}
+                        monitor_collection.insert_one(post)

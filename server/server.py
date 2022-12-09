@@ -35,7 +35,7 @@ def notice():
 
     db=client['UniMarketDB']
     collection=db['data']
-    collection2=db["{}".format(user)]
+    collection2=db["{}".format(str(user))]
     collection3=db['UserDB']
     post={"user_id":str(user),
     "firebase_id":str(firebaseid),
@@ -46,7 +46,7 @@ def notice():
                 "region":str(region)}
     name=[]
     for i in collection3.find():
-        name.append(i['userId'])
+        name.append(i['user_id'])
     if post['user_id'] not in name:
         collection3.insert_one(post)
 
@@ -54,7 +54,8 @@ def notice():
     {"price":{"$gte":Min}},{"title":{"$regex":".*{}.*".format(title)}},
     {"region":{"$regex":".*{}.*".format(region)}}]},
     {'$nor':[{"title":{"$regex":".*{}.*".format(Filter)}}]}]}):
-        collection2.insert_one(i['item_id'])
+        post= {"item_id":i["item_id"]}
+        collection2.insert_one(post)
 
 
 
