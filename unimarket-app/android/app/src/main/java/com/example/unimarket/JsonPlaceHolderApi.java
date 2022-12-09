@@ -11,4 +11,7 @@ public interface JsonPlaceHolderApi {
 
     @POST("notice")
     Call<NoticeResponse> createNotice(@Body NoticeData noticeData);
+
+    @POST("delete")
+    Call<DeleteResponse> deleteNotice(@Body DeleteData deleteData);
 }
