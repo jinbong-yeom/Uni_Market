@@ -110,7 +110,11 @@ public class Fragment1 extends Fragment {
                     //Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_LONG).show();
                     Toast.makeText(getActivity(), "지역을 추가해주세요", Toast.LENGTH_LONG).show();
 
+
                     return true;
+                }
+                if(postResponseData != null){
+                    Snackbar.make(frag1V,"찾는 상품 없음", Snackbar.LENGTH_LONG).show();
                 }
 
                 srinput = s;
@@ -119,9 +123,6 @@ public class Fragment1 extends Fragment {
                     postResponseData = new ArrayList<>();
                 }
                 createPost(s);
-
-
-
 
                 // 입력받은 문자열 처리
                 frag1V.bringChildToFront(recyclerView); //리사이클러 위로 올리기
