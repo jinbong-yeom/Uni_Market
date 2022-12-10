@@ -9,12 +9,12 @@
 
 ## __의존성__
 #### python 3.6.9  
-* #### for server
+* #### __For Server__
 #### Flask
 #### firebase-admin 6.0.1
 #### pymongo 4.2.0
 #### bs4 0.0.1
-* #### for app
+* #### __For App__
 #### retrofit2 2.9.0
 #### firebase-messaging 23.1.0
 #### firebase-analytics 21.2.0
