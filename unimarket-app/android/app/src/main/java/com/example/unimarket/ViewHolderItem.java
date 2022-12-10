@@ -100,8 +100,7 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
         linkbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(view.getContext(), "상품페이지로이동", Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+
                 ((MainActivity)MainActivity.context).goToItem(link);
             }
         });
@@ -123,9 +122,6 @@ public class ViewHolderItem extends RecyclerView.ViewHolder {
 
 
     private void changeVisibility(final boolean isExpanded) { //접었다 펼치기
-//        int dpValue = 150;
-//        float d = context.getResources().getDisplayMetrics().density;
-//        int height = (int) (dpValue * d);
 
         // ValueAnimator.ofInt(int... values)는 View가 변할 값을 지정, 인자는 int 배열
         ValueAnimator va = isExpanded ? ValueAnimator.ofInt(0, 500) : ValueAnimator.ofInt(500, 0);

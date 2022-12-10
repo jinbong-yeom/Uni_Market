@@ -52,7 +52,7 @@ public class Fragment1 extends Fragment {
 
 
     String srinput; // 검색 키워드
-    String filterinput=null; // 필터단어
+    String filterinput="쒥뀁"; // 필터단어
     int minprice = Integer.MAX_VALUE;
     int maxprice = 0;
 
@@ -71,7 +71,6 @@ public class Fragment1 extends Fragment {
 
     List<PostResponseData> postResponseData = new ArrayList<>();
     ArrayList<PostResponseData> temp = new ArrayList<>();    //정렬할 때 쓸 임시 리스트
-
 
 
     private final String BASEURL = "http://115.85.181.251:60000";
@@ -183,12 +182,13 @@ public class Fragment1 extends Fragment {
         EditText maxv = frag1V.findViewById(R.id.filter_et3);
 
         Button filterb = frag1V.findViewById(R.id.filter_button1);
-        filterb.setOnClickListener(new View.OnClickListener() {
+        filterb.setOnClickListener(new View.OnClickListener() { //필터버튼 터치시
             @Override
             public void onClick(View view) {
                 if(filterv.getText().toString()!=null){filterinput = filterv.getText().toString();}
                 if(filterv.getText().toString()!=null){minv.getText().toString();}
                 if(filterv.getText().toString()!=null){maxv.getText().toString();}
+                filterinput = "쒥뀁";
 
                 //드로어 집어넣고 나머지 뷰 위로 올리기
                 drawerLayout.closeDrawers();
@@ -284,10 +284,7 @@ public class Fragment1 extends Fragment {
 
                 postResponseData.addAll(0, postResponse.getResult());
 
-                //시간 순으로 정렬
-                //PostResponse tmpResponse = new PostResponse(postResponseData);
-                //postResponseData = tmpResponse.SortedToTime();
-                //
+
                 for(int i = 0; i< postResponseData.size();i++) {
                     PostResponseData tmpResponseData = postResponseData.get(i);
                     adapter.addItem(tmpResponseData);
@@ -344,7 +341,6 @@ public class Fragment1 extends Fragment {
                     //Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                 NoticeResponse noticeResponse = response.body();
 
             }
