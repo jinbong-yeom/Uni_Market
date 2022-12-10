@@ -8,7 +8,13 @@
 <br />
 
 ## __의존성__
-#### python 3.X  
+#### python 3.6.9  
+* for server
+#### Flask
+#### firebase-admin 6.0.1
+#### pymongo 4.2.0
+#### bs4 0.0.1
+* for app
 #### retrofit2 2.9.0
 #### firebase-messaging 23.1.0
 #### firebase-analytics 21.2.0
@@ -20,8 +26,7 @@
 #### Android Studio Dolphin | 2021.3.1
 #### junit 4.13.2
 #### com.github.bumptech.glide 4.11.0
-
-* JDK version 11.0.13
+#### JDK version 11.0.13
 
 <br/>
 
