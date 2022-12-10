@@ -13,6 +13,7 @@ def monitor():
     while(True):
         if event.is_set():
             return
+        print("모니터링 중")
         db=client['UniMarketDB']
         collection=db['data']
         collection2=db['UserDB']
@@ -27,7 +28,7 @@ def monitor():
                 if i['item_id'] not in data:
                     send(post['firebase_id'],i['title'])
                     time.sleep(5)
-                        # 알림 보내기
+                    # 알림 보내기
                     monitor_post={"item_id":i["item_id"]}
                     monitor_collection.insert_one(monitor_post)
         time.sleep(5)
