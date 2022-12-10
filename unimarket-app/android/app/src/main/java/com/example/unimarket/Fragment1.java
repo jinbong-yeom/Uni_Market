@@ -53,8 +53,8 @@ public class Fragment1 extends Fragment {
 
     String srinput; // 검색 키워드
     String filterinput="쒥뀁"; // 필터단어
-    int minprice = Integer.MAX_VALUE;
-    int maxprice = 0;
+    int maxprice = Integer.MAX_VALUE;
+    int minprice = 0;
 
     private DrawerLayout drawerLayout;
     private View drawerView;
@@ -183,11 +183,22 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View view) {
                 if(filterv.getText().toString()!=null || filterv.getText().toString()!=""){filterinput = filterv.getText().toString();}
-                if (filterinput==""){   filterinput="쒭띡팖"; }
-                Log.d("hhhhhh",filterinput );
+                if (filterinput==""){   filterinput="쒥뀁"; }
+                //Log.d("hhhhhh",filterinput );
 
-                if(filterv.getText().toString()!=null){minv.getText().toString();}
-                if(filterv.getText().toString()!=null){maxv.getText().toString();}
+                if ( minv.getText().toString().length() != 0 ){
+                    minprice = Integer.valueOf(minv.getText().toString());
+                }
+                if ( maxv.getText().toString().length() != 0 ){
+                    maxprice = Integer.valueOf(maxv.getText().toString());
+                }
+//                if(filterv.getText().toString()!=null){
+//                    minprice = Integer.valueOf(minv.getText().toString());
+//                }
+//                if(filterv.getText().toString()!=null){
+//                    maxprice = Integer.valueOf(maxv.getText().toString());
+//                }
+
 
                 //드로어 집어넣고 나머지 뷰 위로 올리기
                 drawerLayout.closeDrawers();
@@ -266,7 +277,7 @@ public class Fragment1 extends Fragment {
 
 
 
-        FilteringData filteringData = new FilteringData(excludeKeyword, min_price, max_price, region);
+        FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
         //FilteringData filteringData = new FilteringData(excludeKeyword, MAX_VALUE, 0, region);  //test
 
 
