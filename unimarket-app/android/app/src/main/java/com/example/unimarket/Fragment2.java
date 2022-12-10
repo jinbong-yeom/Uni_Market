@@ -54,6 +54,7 @@ public class Fragment2 extends Fragment {
             if (trans!="") {
                 nkeyword.setVisibility(nkeyword.VISIBLE);
                 gifimg.setVisibility(nkeyword.VISIBLE);
+                monitoring.setVisibility(monitoring.VISIBLE);
             }
         }
 
@@ -64,6 +65,8 @@ public class Fragment2 extends Fragment {
                 deleteNotice();
                 nkeyword.setText(null);
                 nkeyword.setVisibility(nkeyword.INVISIBLE);
+                nkeyword.setVisibility(nkeyword.INVISIBLE);
+                gifimg.setVisibility(nkeyword.INVISIBLE);
             }
         });
 
