@@ -10,6 +10,7 @@
 <br />
 
 ## __설치방법__
+download unimarket.apk
 
 ## __의존성__
 
