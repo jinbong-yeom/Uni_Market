@@ -1,13 +1,11 @@
 # __유니마켓__
-#### __- 중고거래 앱 통합 서비스__ 
+#### __중고거래 앱 통합 서비스__ 
 ####
 ## __설치방법__  
-***
 #### pip install -r requirement.txt  
 <br />
 
 ## __의존성__
-***
 
 ### __- For Server__ 
 
@@ -37,15 +35,15 @@
 ## __사용방법__
 ### server
 ***
-* crawler
-cd crawling/
-python3 crawler.py -t 1
-python3 crawler.py -t 2
-python3 crawler.py -t 3
+* crawler<br>
+cd crawling/<br>
+python3 crawler.py -t 1<br>
+python3 crawler.py -t 2<br>
+python3 crawler.py -t 3<br>
 
-* server
-cd server/
-python3 server.py
+* server<br>
+cd server/<br>
+python3 server.py<br>
 
 <br/>
 
