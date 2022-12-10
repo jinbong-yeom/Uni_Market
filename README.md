@@ -10,7 +10,7 @@
 <br />
 
 ## __설치방법__
-download unimarket.apk
+[download unimarket](https://github.com/jinbong-yeom/Uni_Market/blob/main/unimarket-app/unimarket.apk)
 
 ## __의존성__
 
