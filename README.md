@@ -3,7 +3,7 @@
 ####
 ## __설치방법__  
 ***
-### TBD  
+#### pip install -r requirement.txt  
 <br />
 
 ## __의존성__
@@ -18,7 +18,6 @@
 #### bs4 0.0.1
 
 ### __- For App__
-***
 
 #### retrofit2 2.9.0
 #### firebase-messaging 23.1.0
@@ -36,7 +35,18 @@
 <br/>
 
 ## __사용방법__
-### TBD
+### server
+***
+* crawler
+cd crawling/
+python3 crawler.py -t 1
+python3 crawler.py -t 2
+python3 crawler.py -t 3
+
+* server
+cd server/
+python3 server.py
+
 <br/>
 
 ## __라이선스__
