@@ -112,9 +112,6 @@ public class Fragment1 extends Fragment {
 
                     return true;
                 }
-                if(postResponseData == null){
-                    Snackbar.make(frag1V,"찾는 상품 없음", Snackbar.LENGTH_LONG).show();
-                }
 
                 srinput = s;
 
@@ -185,13 +182,16 @@ public class Fragment1 extends Fragment {
         filterb.setOnClickListener(new View.OnClickListener() { //필터버튼 터치시
             @Override
             public void onClick(View view) {
-                if(filterv.getText().toString()!=null){filterinput = filterv.getText().toString();}
+                if(filterv.getText().toString()!=null || filterv.getText().toString()!=""){filterinput = filterv.getText().toString();}
+                if (filterinput==""){   filterinput="쒭띡팖"; }
+                Log.d("hhhhhh",filterinput );
+
                 if(filterv.getText().toString()!=null){minv.getText().toString();}
                 if(filterv.getText().toString()!=null){maxv.getText().toString();}
-                filterinput = "쒥뀁";
 
                 //드로어 집어넣고 나머지 뷰 위로 올리기
                 drawerLayout.closeDrawers();
+                createPost(srinput);
             }
 
         });
@@ -253,7 +253,12 @@ public class Fragment1 extends Fragment {
         List<String> excludeKeyword = new ArrayList<>();
         List<String> region = new ArrayList<>();
 
-        excludeKeyword.add(filterinput);
+        if (filterinput == null){
+            excludeKeyword.add("뷁");
+        }
+        else{
+            excludeKeyword.add(filterinput);
+        }
         int max_price = maxprice;
         int min_price = minprice;
         region.add(((Globalstr) getActivity().getApplication() ).getregion1());
@@ -279,6 +284,9 @@ public class Fragment1 extends Fragment {
                     return;
                 }
                 PostResponse postResponse = response.body();
+//                if(postResponse.getResult() == null){
+//                    Toast.makeText(getActivity(),"찾는 상품 없음", Toast.LENGTH_SHORT).show();
+//                }
                 adapter.clear();
 
 
@@ -296,7 +304,7 @@ public class Fragment1 extends Fragment {
             }
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "연결 실패.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "찾는 상품 없음", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -53,7 +53,7 @@ public class Fragment2 extends Fragment {
             nkeyword.setText(trans);
             if (trans!="") {
                 nkeyword.setVisibility(nkeyword.VISIBLE);
-                gifimg.setVisibility(nkeyword.VISIBLE);
+                gifimg.setVisibility(gifimg.VISIBLE);
                 monitoring.setVisibility(monitoring.VISIBLE);
             }
         }
@@ -61,12 +61,12 @@ public class Fragment2 extends Fragment {
         Button resetreg = frag2V.findViewById(R.id.button2);
         resetreg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {    //알림해제했을 때 모니터링 종료를 표시
                 deleteNotice();
                 nkeyword.setText(null);
                 nkeyword.setVisibility(nkeyword.INVISIBLE);
-                nkeyword.setVisibility(nkeyword.INVISIBLE);
-                gifimg.setVisibility(nkeyword.INVISIBLE);
+                monitoring.setVisibility(monitoring.INVISIBLE);
+                gifimg.setVisibility(gifimg.INVISIBLE);
             }
         });
 
