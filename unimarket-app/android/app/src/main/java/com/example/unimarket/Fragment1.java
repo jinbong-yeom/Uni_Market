@@ -49,7 +49,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
-    // 키보드를 내려주기위한 inputMethodManger 객체
 
 
     String srinput; // 검색 키워드
@@ -134,24 +133,6 @@ public class Fragment1 extends Fragment {
 //                    }
 //                }
 
-
-
-
-
-
-                // 받아온 상품
-//                for (int i = 0; i < postResponseData.size(); i++) {
-//                    PostResponseData tmpResponseData = postResponseData.get(i);
-//                    adapter.addItem(tmpResponseData);
-//                }
-//                for (int i = 0; i < 10; i++) {      //test
-//                    //PostResponseData tmpResponseData = postResponseData.get(i);
-//                    adapterd.addItem(t1);
-//                }
-//                postResponseData.clear();
-//                adapter.notifyDataSetChanged();
-
-    
 
 
 
