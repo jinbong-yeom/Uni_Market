@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +44,16 @@ public class Fragment2 extends Fragment {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
+        ImageView gifimg = frag2V.findViewById((R.id.imageView4));
+        TextView monitoring = frag2V.findViewById((R.id.frag2_textView3));
+        Glide.with(this).load(R.raw.monitor).into(gifimg);
+
         if (getArguments() != null ) {
             trans = getArguments().getString("srinput"); // 프래그먼트1에서 받아온 값 넣기
             nkeyword.setText(trans);
             if (trans!="") {
                 nkeyword.setVisibility(nkeyword.VISIBLE);
+                gifimg.setVisibility(nkeyword.VISIBLE);
             }
         }
 
