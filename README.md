@@ -31,10 +31,8 @@ firebase-messaging 23.1.0<br>
 firebase-analytics 21.2.0<br>
 android.material 1.6.1<br>
 androidx.appcompat 1.5.1<br>
-androidx.constraintlayout 2.1.4<br>
 androidx.test.ext 1.1.3<br>
 androidx.test.espresso-core 3.4.0<br>
-Android Studio Dolphin | 2021.3.1<br>
 junit 4.13.<br>
 com.github.bumptech.glide 4.11.0<br>
 JDK version 11.0.13<br>
@@ -54,6 +52,25 @@ python3 crawler.py -t 3 //중고 매물 크롤링
 * server<br>
 cd server<br>
 python3 server.py<br>
+
+## __실행방법(어플)__
+***
+
+* 어플<br>
+#### 검색
+
+#### 필터링
+
+#### 정렬
+
+#### 상세페이지 & 원래 플랫폼으로 이동
+
+#### 알림설정 & 해제
+
+
+
+
+
 
 <br/>
 
