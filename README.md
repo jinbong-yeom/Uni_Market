@@ -10,7 +10,12 @@
 <br />
 
 ## __설치방법__
+
 [download unimarket](https://github.com/jinbong-yeom/Uni_Market/blob/main/unimarket-app/unimarket.apk)
+<br><br>
+![install1](https://user-images.githubusercontent.com/100690081/206860944-cec92626-f23d-45ae-b506-d35d7d7b0065.jpg)
+![install2](https://user-images.githubusercontent.com/100690081/206860946-dc691c1a-acde-4d5d-b339-de251d4ac230.jpg)
+![install3](https://user-images.githubusercontent.com/100690081/206860942-586f9229-4564-41d6-b130-c0904ec89598.jpg)
 
 ## __의존성__
 
