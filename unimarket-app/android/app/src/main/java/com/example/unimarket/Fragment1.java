@@ -52,7 +52,7 @@ public class Fragment1 extends Fragment {
 
 
     String srinput; // 검색 키워드
-    String filterinput="뷁"; // 필터단어
+    String filterinput=null; // 필터단어
     int minprice = Integer.MAX_VALUE;
     int maxprice = 0;
 
@@ -88,8 +88,6 @@ public class Fragment1 extends Fragment {
 
         adapter = new ItemAdapter();
 
-        //t1 = new PostResponseData("test_title",tpic,treg,10000000,tdes,appname,ttime,tseller);
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -121,18 +119,6 @@ public class Fragment1 extends Fragment {
                     postResponseData = new ArrayList<>();
                 }
                 createPost(s);
-//                if(postResponseData != null){
-//                    temp = adapter.getItems();
-//                }
-
-
-//                for (PostResponseData f : postResponseData) {
-//                    try {
-//                        temp.add(f.clone());
-//                    } catch (CloneNotSupportedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
 
 
 
@@ -145,9 +131,7 @@ public class Fragment1 extends Fragment {
 
             }
             @Override
-            public boolean onQueryTextChange(String s) {
-                // 입력란의 문자열이 바뀔 때 처리
-                //Toast.makeText(getActivity(), "입력값 수정", Toast.LENGTH_LONG).show();
+            public boolean onQueryTextChange(String s) { // 입력란의 문자열이 바뀔 때 처리
                 return false;
             }
         });
@@ -207,9 +191,6 @@ public class Fragment1 extends Fragment {
 
                 //드로어 집어넣고 나머지 뷰 위로 올리기
                 drawerLayout.closeDrawers();
-//                frag1V.bringChildToFront(searchBar);
-//                frag1V.bringChildToFront(switchButton);
-//                frag1V.bringChildToFront(recyclerView);
             }
 
         });
@@ -293,7 +274,7 @@ public class Fragment1 extends Fragment {
             @Override
             public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(),"없음", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"issuccesf", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 PostResponse postResponse = response.body();
@@ -317,7 +298,7 @@ public class Fragment1 extends Fragment {
             }
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "없다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "연결 실패.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -359,10 +340,10 @@ public class Fragment1 extends Fragment {
             @Override
             public void onResponse(Call<NoticeResponse> call, Response<NoticeResponse> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                 NoticeResponse noticeResponse = response.body();
 
             }
