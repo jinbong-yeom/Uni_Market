@@ -69,7 +69,8 @@ python3 server.py<br>
 ![3필터링](https://user-images.githubusercontent.com/100690081/206858945-f811f2c6-d5c4-4ad6-beb4-8d151b149d1a.gif)
 
 #### 상세페이지 & 원래 플랫폼으로 이동
-![4 상세페이지](https://user-images.githubusercontent.com/100690081/206858947-7669e532-83e1-45c5-a257-be7fa2c2ef51.gif)
+![4페이지이동](https://user-images.githubusercontent.com/100690081/206861181-035daeb5-aefd-4828-8439-93156e3f6df0.gif)
+
 
 #### 알림설정 & 해제
 ![5알림](https://user-images.githubusercontent.com/100690081/206858969-5cd465d8-1109-415e-8c3c-159bd9a7a41a.gif)
