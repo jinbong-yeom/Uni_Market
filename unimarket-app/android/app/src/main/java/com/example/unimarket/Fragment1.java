@@ -112,7 +112,7 @@ public class Fragment1 extends Fragment {
 
                     return true;
                 }
-                if(postResponseData != null){
+                if(postResponseData == null){
                     Snackbar.make(frag1V,"찾는 상품 없음", Snackbar.LENGTH_LONG).show();
                 }
 
