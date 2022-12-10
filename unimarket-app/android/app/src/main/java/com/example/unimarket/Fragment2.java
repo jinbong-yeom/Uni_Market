@@ -41,10 +41,12 @@ public class Fragment2 extends Fragment {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
-        if (getArguments() != null) {
+        if (getArguments() != null ) {
             trans = getArguments().getString("srinput"); // 프래그먼트1에서 받아온 값 넣기
-            //Toast.makeText(getActivity(),trans +"넘겨받은 문자열", Toast.LENGTH_LONG).show();
             nkeyword.setText(trans);
+            if (trans!="") {
+                nkeyword.setVisibility(nkeyword.VISIBLE);
+            }
         }
 
         Button resetreg = frag2V.findViewById(R.id.button2);
@@ -52,8 +54,8 @@ public class Fragment2 extends Fragment {
             @Override
             public void onClick(View view) {
                 deleteNotice();
-                Toast.makeText(getActivity(),trans +"넘겨받은 문자열", Toast.LENGTH_LONG).show();
-
+                nkeyword.setText(null);
+                nkeyword.setVisibility(nkeyword.INVISIBLE);
             }
         });
 

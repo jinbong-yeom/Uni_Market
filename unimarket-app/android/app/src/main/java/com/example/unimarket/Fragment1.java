@@ -53,7 +53,7 @@ public class Fragment1 extends Fragment {
 
 
     String srinput; // 검색 키워드
-    String filterinput; // 필터단어
+    String filterinput="뷁"; // 필터단어
     int minprice = Integer.MAX_VALUE;
     int maxprice = 0;
 
@@ -108,13 +108,14 @@ public class Fragment1 extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) { // 검색 눌렀을 때
-//                if (((Globalstr) getActivity().getApplication() ).getregion1()==null){
-//                    Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_SHORT).show();
-//                    return true;
-//                }
+                if (((Globalstr) getActivity().getApplication() ).getregion1()==null){
+                    //Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "지역을 추가해주세요", Toast.LENGTH_LONG).show();
+
+                    return true;
+                }
 
                 srinput = s;
-                Toast.makeText(getActivity(),s+"입력", Toast.LENGTH_SHORT).show();
 
                 if(postResponseData != null){
                     postResponseData = new ArrayList<>();
@@ -203,7 +204,6 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View view) {
                 frag1V.bringChildToFront(drawerLayout); //리사이클러때문에 터치안되는거 방지
-                Toast.makeText(getActivity(), "필터클릭", Toast.LENGTH_SHORT).show();
                 drawerLayout.openDrawer(drawerView);
             }
         });
@@ -219,14 +219,17 @@ public class Fragment1 extends Fragment {
         filterb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(getActivity(),"적용버튼 클릭", Toast.LENGTH_LONG).show();
-                filterinput = filterv.getText().toString();
-                minprice = Integer.parseInt(minv.getText().toString());
-                maxprice = Integer.parseInt(maxv.getText().toString());
-                Toast.makeText(getActivity(),filterinput+minprice+maxprice, Toast.LENGTH_LONG).show();
-                // 필터 적용 됐을 때 출력내용 바뀌거나 필터 값 전송되도록 ++++++++++++++++++++++++++++++++
+                if(filterv.getText().toString()!=null){filterinput = filterv.getText().toString();}
+                if(filterv.getText().toString()!=null){minv.getText().toString();}
+                if(filterv.getText().toString()!=null){maxv.getText().toString();}
 
+                //드로어 집어넣고 나머지 뷰 위로 올리기
+                drawerLayout.closeDrawers();
+                frag1V.bringChildToFront(searchBar);
+                frag1V.bringChildToFront(switchButton);
+                frag1V.bringChildToFront(recyclerView);
             }
+
         });
 
         recyclerView = frag1V.findViewById(R.id.recycler);
@@ -283,17 +286,16 @@ public class Fragment1 extends Fragment {
         List<String> excludeKeyword = new ArrayList<>();
         List<String> region = new ArrayList<>();
 
-//        excludeKeyword.add(filterinput);
-//        int max_price = maxprice;
-//        int min_price = minprice;
-//        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
-
-        excludeKeyword.add("가위");       //test
-        region.add("청주");
+        excludeKeyword.add(filterinput);
+        int max_price = maxprice;
+        int min_price = minprice;
+        region.add(((Globalstr) getActivity().getApplication() ).getregion1());
 
 
-        //FilteringData filteringData = new FilteringData(excludeKeyword, max_price, min_price, region);
-        FilteringData filteringData = new FilteringData(excludeKeyword, MAX_VALUE, 0, region);  //test
+
+
+        FilteringData filteringData = new FilteringData(excludeKeyword, min_price, max_price, region);
+        //FilteringData filteringData = new FilteringData(excludeKeyword, MAX_VALUE, 0, region);  //test
 
 
         PostData postData = new PostData(s, android_id, filteringData);
