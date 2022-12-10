@@ -274,7 +274,7 @@ public class Fragment1 extends Fragment {
             @Override
             public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(),"issuccesf", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"response.NotSuccessful", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 PostResponse postResponse = response.body();

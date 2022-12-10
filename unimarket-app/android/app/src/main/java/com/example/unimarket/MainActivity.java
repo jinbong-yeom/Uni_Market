@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     public void sendmail(){
         Intent mail_intent = new Intent(Intent.ACTION_SEND);
         mail_intent.setType("plain/Text");
-        mail_intent.putExtra(Intent.EXTRA_EMAIL, "Edit email"); // 받는 사람 이메일
+        //mail_intent.putExtra(Intent.EXTRA_EMAIL, "Edit email"); // 받는 사람 이메일
+        mail_intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { "seokbeom0912@gmail.com" });
         mail_intent.putExtra(Intent.EXTRA_SUBJECT, "Email Title"); // 메일 제목
         mail_intent.putExtra(Intent.EXTRA_TEXT, "Email Text"); // 메일 내용
         startActivity(mail_intent);
