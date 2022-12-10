@@ -9,6 +9,8 @@
  
 <br />
 
+## __설치방법__
+
 ## __의존성__
 
 ### For Server
@@ -55,19 +57,20 @@ python3 server.py<br>
 
 ## __실행방법(어플)__
 ***
-
-* 어플<br>
-#### 검색
-
-#### 필터링
-
-#### 정렬
+#### 검색 & 필터링 & 정렬
+![1검색](https://user-images.githubusercontent.com/100690081/206858931-a69e25ab-77ec-425b-94e3-7144d233606d.gif)
+![2정렬](https://user-images.githubusercontent.com/100690081/206858942-28238fc8-fbfd-4753-a4e9-5d7d2fe753c0.gif)
+![3필터링](https://user-images.githubusercontent.com/100690081/206858945-f811f2c6-d5c4-4ad6-beb4-8d151b149d1a.gif)
 
 #### 상세페이지 & 원래 플랫폼으로 이동
+![4 상세페이지](https://user-images.githubusercontent.com/100690081/206858947-7669e532-83e1-45c5-a257-be7fa2c2ef51.gif)
 
 #### 알림설정 & 해제
+![5알림](https://user-images.githubusercontent.com/100690081/206858969-5cd465d8-1109-415e-8c3c-159bd9a7a41a.gif)
 
 
+#### 지역설정 & 개발자문의 & 버전확인
+![Screenshot_20221210-222043 (1)](https://user-images.githubusercontent.com/100690081/206859142-3cbcd1f6-d0ff-40d5-b1ec-aaceac859d92.jpg)
 
 
 
