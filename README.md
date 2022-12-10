@@ -50,13 +50,14 @@ JDK version 11.0.13<br>
 ### server
 ***
 * crawler<br>
-cd crawling/<br>
-python3 crawler.py -t 1<br>
-python3 crawler.py -t 2<br>
-python3 crawler.py -t 3<br>
-
+cd crawling<br>
+```
+python3 crawler.py -t 1 //당근 매물 크롤링
+python3 crawler.py -t 2 //번개 매물 크롤링 
+python3 crawler.py -t 3 //중고 매물 크롤링 
+```
 * server<br>
-cd server/<br>
+cd server<br>
 python3 server.py<br>
 
 <br/>
