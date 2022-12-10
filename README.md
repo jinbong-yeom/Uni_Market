@@ -1,34 +1,39 @@
 # __유니마켓__
-#### __중고거래 앱 통합 서비스__ 
-####
+### 서비스 설명
+*** 
+* 해당 서비스, 중고거래 앱 통합 서비스는 사용 자의 이용용의성을 도모하기 위해 다양한 중고거래 앱을 통합하여 편의기능과 함께 제공하는 안드로이드 기반 앱이다.<br>
+<ol>
+<li>사용자에게 입력받은 키워드를 이용하여 통합된 중고 매물의 리스트를 제공한다. 이때 일부 중고거래 앱은 사용자의 동네 인증을 필요로 하므로 지역 이름을 키워드와 함께 입력으로 받는다. 지정한 동네와 키워드를 조건으로 하여 데이터베이스에서 알맞은 매물들을 추출하고 매물의 이름, 사진, 가격, 지역, 상세 페이지 정보 등의 매물 정보를 제공한다.</li>
+<li>사용자는 필터링 1번의 입력과 제목에서 제외하고 싶은 단어를 필터링 키워드로 하고 가격 범위를 설정하여 알람기능을 제공받을 수 있다. 조건에 맞는 새로운 매물이 등록되면 모니터링에 의해서 알람을 받을 수 있다.</li>
+</ol>
 ## __설치방법__  
 #### pip install -r requirement.txt  
 <br />
 
 ## __의존성__
 
-### __- For Server__ 
+### For Server
+*** 
+* python 3.6.9<br>  
+Flask<br>
+firebase-admin 6.0.1<br>
+pymongo 4.2.0<br>
+bs4 0.0.1<br>
 
-#### python 3.6.9  
-#### Flask
-#### firebase-admin 6.0.1
-#### pymongo 4.2.0
-#### bs4 0.0.1
-
-### __- For App__
-
-#### retrofit2 2.9.0
-#### firebase-messaging 23.1.0
-#### firebase-analytics 21.2.0
-#### android.material 1.6.1
-#### androidx.appcompat 1.5.1
-#### androidx.constraintlayout 2.1.4
-#### androidx.test.ext 1.1.3
-#### androidx.test.espresso-core 3.4.0
-#### Android Studio Dolphin | 2021.3.1
-#### junit 4.13.2
-#### com.github.bumptech.glide 4.11.0
-#### JDK version 11.0.13
+### For App
+***
+* retrofit2 2.9.0<br>
+firebase-messaging 23.1.0<br>
+firebase-analytics 21.2.0<br>
+android.material 1.6.1<br>
+androidx.appcompat 1.5.1<br>
+androidx.constraintlayout 2.1.4<br>
+androidx.test.ext 1.1.3<br>
+androidx.test.espresso-core 3.4.0<br>
+Android Studio Dolphin | 2021.3.1<br>
+junit 4.13.<br>
+com.github.bumptech.glide 4.11.0<br>
+JDK version 11.0.13<br>
 
 <br/>
 
