@@ -1,7 +1,7 @@
 # __유니마켓__
 #### __- 중고거래 앱 통합 서비스__ 
 ***
-
+####
 ## __설치방법__  
 
 ### TBD  
@@ -9,8 +9,8 @@
 
 ## __의존성__
 
-<h3> For Server </h3>
-<hr class="one">
+#### __- For Server__ 
+***
 
 #### python 3.6.9  
 #### Flask
@@ -18,8 +18,8 @@
 #### pymongo 4.2.0
 #### bs4 0.0.1
 
-<h3> For App </h3>
-<hr class="two">
+#### __- For App__
+***
 
 #### retrofit2 2.9.0
 #### firebase-messaging 23.1.0
