@@ -11,7 +11,7 @@
 ***
 
 ## __설치방법__  
-#### pip install -r requirement.txt  
+ 
 <br />
 
 ## __의존성__
@@ -23,6 +23,11 @@ Flask<br>
 firebase-admin 6.0.1<br>
 pymongo 4.2.0<br>
 bs4 0.0.1<br>
+
+* 설치방법
+     ```
+      pip install -r requirements.txt
+    ```
 
 ### For App
 ***
