@@ -9,8 +9,18 @@
 
 ## __의존성__
 #### python 3.X  
-
+#### retrofit2 2.9.0
+#### firebase-messaging 23.1.0
+#### firebase-analytics 21.2.0
+#### android.material 1.6.1
+#### androidx.appcompat 1.5.1
+#### androidx.constraintlayout 2.1.4
+#### androidx.test.ext 1.1.3
+#### androidx.test.espresso-core 3.4.0
 #### Android Studio Dolphin | 2021.3.1
+#### junit 4.13.2
+#### com.github.bumptech.glide 4.11.0
+
 * JDK version 11.0.13
 
 <br/>
