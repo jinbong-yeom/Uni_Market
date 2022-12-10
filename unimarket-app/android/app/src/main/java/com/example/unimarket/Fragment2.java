@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,21 +44,29 @@ public class Fragment2 extends Fragment {
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
 
+        ImageView gifimg = frag2V.findViewById((R.id.imageView4));
+        TextView monitoring = frag2V.findViewById((R.id.frag2_textView3));
+        Glide.with(this).load(R.raw.monitor).into(gifimg);
+
         if (getArguments() != null ) {
             trans = getArguments().getString("srinput"); // 프래그먼트1에서 받아온 값 넣기
             nkeyword.setText(trans);
             if (trans!="") {
                 nkeyword.setVisibility(nkeyword.VISIBLE);
+                gifimg.setVisibility(gifimg.VISIBLE);
+                monitoring.setVisibility(monitoring.VISIBLE);
             }
         }
 
         Button resetreg = frag2V.findViewById(R.id.button2);
         resetreg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {    //알림해제했을 때 모니터링 종료를 표시
                 deleteNotice();
                 nkeyword.setText(null);
                 nkeyword.setVisibility(nkeyword.INVISIBLE);
+                monitoring.setVisibility(monitoring.INVISIBLE);
+                gifimg.setVisibility(gifimg.INVISIBLE);
             }
         });
 

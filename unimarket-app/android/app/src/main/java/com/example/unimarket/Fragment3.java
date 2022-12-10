@@ -28,7 +28,6 @@ public class Fragment3 extends Fragment {
             @Override
             public void onClick(View view) {
                 regstr = reginput.getText().toString();
-                //Toast.makeText(getActivity(),regstr, Toast.LENGTH_LONG).show();
                 regshow.setText(regstr);
                 regshow.setVisibility(regshow.VISIBLE);
 
@@ -50,13 +49,7 @@ public class Fragment3 extends Fragment {
         email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"이메일 버튼 눌림", Toast.LENGTH_SHORT).show();
-                Intent mail_intent = new Intent(Intent.ACTION_SEND);
-                mail_intent .setType("*/*");
-                mail_intent.putExtra(Intent.EXTRA_EMAIL, "mingureion@gmail.com"); // 받는 사람 이메일
-                mail_intent.putExtra(Intent.EXTRA_SUBJECT, "Email Title"); // 메일 제목
-                mail_intent.putExtra(Intent.EXTRA_TEXT, "Email Text"); // 메일 내용
-                startActivity(mail_intent);
+                ((MainActivity)getActivity()).sendmail();
             }
         });
         // 클릭했을 때 히스토리 페이지로 이동

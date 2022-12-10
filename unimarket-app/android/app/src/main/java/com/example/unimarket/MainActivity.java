@@ -26,17 +26,26 @@ public class MainActivity extends AppCompatActivity {
     public void makefrag2(){
         fragment2 = new Fragment2();
         fragmentManager.beginTransaction().add(R.id.main_frame, fragment2).commit();
-        Toast.makeText(getApplicationContext(), "make frag2", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "make frag2", Toast.LENGTH_LONG).show();
     }
     public void removefrag2() {
         if (fragment2 != null) {
             fragmentManager.beginTransaction().remove(fragment2).commit();
-            Toast.makeText(getApplicationContext(), "removefrag2", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "removefrag2", Toast.LENGTH_LONG).show();
         }
     }
     public void gohistory() {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.app_history)));
         startActivity(intent);
+    }
+    public void sendmail(){
+        Intent mail_intent = new Intent(Intent.ACTION_SEND);
+        mail_intent.setType("plain/Text");
+        //mail_intent.putExtra(Intent.EXTRA_EMAIL, "Edit email"); // 받는 사람 이메일
+        mail_intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[] { "seokbeom0912@gmail.com" });
+        mail_intent.putExtra(Intent.EXTRA_SUBJECT, "Email Title"); // 메일 제목
+        mail_intent.putExtra(Intent.EXTRA_TEXT, "Email Text"); // 메일 내용
+        startActivity(mail_intent);
     }
     public void goToItem(String link) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -77,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                         if (fragment1 == null) {
                             fragment1 = new Fragment1();
                             fragmentManager.beginTransaction().add(R.id.main_frame, fragment1).commit();
-                            Toast.makeText(getApplicationContext(), "frag1add", Toast.LENGTH_LONG).show();
                         }
                         if (fragment1 != null) fragmentManager.beginTransaction().show(fragment1).commit();
 
@@ -92,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                         if (fragment2 == null) {
                             fragment2 = new Fragment2();
                             fragmentManager.beginTransaction().add(R.id.main_frame, fragment2).commit();
-                            Toast.makeText(getApplicationContext(), "frag2add", Toast.LENGTH_LONG).show();
                         }
                         if (fragment2 != null) fragmentManager.beginTransaction().show(fragment2).commit();
 
@@ -107,7 +114,6 @@ public class MainActivity extends AppCompatActivity {
                         if (fragment3 == null) {
                             fragment3 = new Fragment3();
                             fragmentManager.beginTransaction().add(R.id.main_frame, fragment3).commit();
-                            Toast.makeText(getApplicationContext(), "frag3add", Toast.LENGTH_LONG).show();
                         }
                         if (fragment3 != null) fragmentManager.beginTransaction().show(fragment3).commit();
 

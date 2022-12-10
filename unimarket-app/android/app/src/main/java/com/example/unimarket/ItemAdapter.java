@@ -30,8 +30,6 @@ public class ItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // 직전에 클릭됐던 Item의 position
     private int prePosition = -1;
 
-    //private Context context;
-
 
     @NonNull
     @Override

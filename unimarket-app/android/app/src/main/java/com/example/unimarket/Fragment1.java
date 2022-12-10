@@ -49,17 +49,17 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Fragment1 extends Fragment {
-    // 키보드를 내려주기위한 inputMethodManger 객체
 
 
     String srinput; // 검색 키워드
-    String filterinput="뷁"; // 필터단어
+    String filterinput="쒥뀁"; // 필터단어
     int minprice = Integer.MAX_VALUE;
     int maxprice = 0;
 
     private DrawerLayout drawerLayout;
     private View drawerView;
     RecyclerView recyclerView;
+    SearchView searchBar;
 
     ItemAdapter adapter;
     Switch switchButton;
@@ -71,7 +71,6 @@ public class Fragment1 extends Fragment {
 
     List<PostResponseData> postResponseData = new ArrayList<>();
     ArrayList<PostResponseData> temp = new ArrayList<>();    //정렬할 때 쓸 임시 리스트
-
 
 
     private final String BASEURL = "http://115.85.181.251:60000";
@@ -88,8 +87,6 @@ public class Fragment1 extends Fragment {
 
         adapter = new ItemAdapter();
 
-        //t1 = new PostResponseData("test_title",tpic,treg,10000000,tdes,appname,ttime,tseller);
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -97,7 +94,7 @@ public class Fragment1 extends Fragment {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        SearchView searchBar = frag1V.findViewById(R.id.searchView1);
+        searchBar = frag1V.findViewById(R.id.searchView1);
         searchBar.bringToFront();   // 뷰 상단으로 올리기(드러워가 겹쳐도 터치 되도록)
         searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +109,7 @@ public class Fragment1 extends Fragment {
                     //Snackbar.make(frag1V,"지역을 추가해주세요", Snackbar.LENGTH_LONG).show();
                     Toast.makeText(getActivity(), "지역을 추가해주세요", Toast.LENGTH_LONG).show();
 
+
                     return true;
                 }
 
@@ -121,39 +119,6 @@ public class Fragment1 extends Fragment {
                     postResponseData = new ArrayList<>();
                 }
                 createPost(s);
-//                if(postResponseData != null){
-//                    temp = adapter.getItems();
-//                }
-
-
-//                for (PostResponseData f : postResponseData) {
-//                    try {
-//                        temp.add(f.clone());
-//                    } catch (CloneNotSupportedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-
-
-
-
-
-
-                // 받아온 상품
-//                for (int i = 0; i < postResponseData.size(); i++) {
-//                    PostResponseData tmpResponseData = postResponseData.get(i);
-//                    adapter.addItem(tmpResponseData);
-//                }
-//                for (int i = 0; i < 10; i++) {      //test
-//                    //PostResponseData tmpResponseData = postResponseData.get(i);
-//                    adapterd.addItem(t1);
-//                }
-//                postResponseData.clear();
-//                adapter.notifyDataSetChanged();
-
-    
-
-
 
                 // 입력받은 문자열 처리
                 frag1V.bringChildToFront(recyclerView); //리사이클러 위로 올리기
@@ -163,9 +128,7 @@ public class Fragment1 extends Fragment {
 
             }
             @Override
-            public boolean onQueryTextChange(String s) {
-                // 입력란의 문자열이 바뀔 때 처리
-                //Toast.makeText(getActivity(), "입력값 수정", Toast.LENGTH_LONG).show();
+            public boolean onQueryTextChange(String s) { // 입력란의 문자열이 바뀔 때 처리
                 return false;
             }
         });
@@ -216,18 +179,19 @@ public class Fragment1 extends Fragment {
         EditText maxv = frag1V.findViewById(R.id.filter_et3);
 
         Button filterb = frag1V.findViewById(R.id.filter_button1);
-        filterb.setOnClickListener(new View.OnClickListener() {
+        filterb.setOnClickListener(new View.OnClickListener() { //필터버튼 터치시
             @Override
             public void onClick(View view) {
-                if(filterv.getText().toString()!=null){filterinput = filterv.getText().toString();}
+                if(filterv.getText().toString()!=null || filterv.getText().toString()!=""){filterinput = filterv.getText().toString();}
+                if (filterinput==""){   filterinput="쒭띡팖"; }
+                Log.d("hhhhhh",filterinput );
+
                 if(filterv.getText().toString()!=null){minv.getText().toString();}
                 if(filterv.getText().toString()!=null){maxv.getText().toString();}
 
                 //드로어 집어넣고 나머지 뷰 위로 올리기
                 drawerLayout.closeDrawers();
-                frag1V.bringChildToFront(searchBar);
-                frag1V.bringChildToFront(switchButton);
-                frag1V.bringChildToFront(recyclerView);
+                createPost(srinput);
             }
 
         });
@@ -269,7 +233,10 @@ public class Fragment1 extends Fragment {
         }
 
         @Override
-        public void onDrawerClosed(@NonNull View drawerView) {
+        public void onDrawerClosed(@NonNull View drawerView) { //드로어 닫으면 나머지 뷰 앞으로
+            searchBar.bringToFront();
+            switchButton.bringToFront();
+            recyclerView.bringToFront();
         }
 
         @Override
@@ -286,7 +253,12 @@ public class Fragment1 extends Fragment {
         List<String> excludeKeyword = new ArrayList<>();
         List<String> region = new ArrayList<>();
 
-        excludeKeyword.add(filterinput);
+        if (filterinput == null){
+            excludeKeyword.add("뷁");
+        }
+        else{
+            excludeKeyword.add(filterinput);
+        }
         int max_price = maxprice;
         int min_price = minprice;
         region.add(((Globalstr) getActivity().getApplication() ).getregion1());
@@ -308,19 +280,19 @@ public class Fragment1 extends Fragment {
             @Override
             public void onResponse(Call<PostResponse> call, Response<PostResponse> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(),"없음", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),"response.NotSuccessful", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 PostResponse postResponse = response.body();
+//                if(postResponse.getResult() == null){
+//                    Toast.makeText(getActivity(),"찾는 상품 없음", Toast.LENGTH_SHORT).show();
+//                }
                 adapter.clear();
 
 
                 postResponseData.addAll(0, postResponse.getResult());
 
-                //시간 순으로 정렬
-                //PostResponse tmpResponse = new PostResponse(postResponseData);
-                //postResponseData = tmpResponse.SortedToTime();
-                //
+
                 for(int i = 0; i< postResponseData.size();i++) {
                     PostResponseData tmpResponseData = postResponseData.get(i);
                     adapter.addItem(tmpResponseData);
@@ -332,7 +304,7 @@ public class Fragment1 extends Fragment {
             }
             @Override
             public void onFailure(Call<PostResponse> call, Throwable t) {
-                Toast.makeText(getActivity(), "없다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "찾는 상품 없음", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -374,10 +346,9 @@ public class Fragment1 extends Fragment {
             @Override
             public void onResponse(Call<NoticeResponse> call, Response<NoticeResponse> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(getActivity(),s, Toast.LENGTH_SHORT).show();
                 NoticeResponse noticeResponse = response.body();
 
             }
