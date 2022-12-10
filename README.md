@@ -8,14 +8,16 @@
 <br />
 
 ## __의존성__
-#### python 3.6.9  
+
 <h3> For Server </h3>
 <hr class="one">
 
+#### python 3.6.9  
 #### Flask
 #### firebase-admin 6.0.1
 #### pymongo 4.2.0
 #### bs4 0.0.1
+
 <h3> For App </h3>
 <hr class="two">
 
