@@ -59,6 +59,7 @@ public class Fragment1 extends Fragment {
     private DrawerLayout drawerLayout;
     private View drawerView;
     RecyclerView recyclerView;
+    SearchView searchBar;
 
     ItemAdapter adapter;
     Switch switchButton;
@@ -96,7 +97,7 @@ public class Fragment1 extends Fragment {
 
         jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
 
-        SearchView searchBar = frag1V.findViewById(R.id.searchView1);
+        searchBar = frag1V.findViewById(R.id.searchView1);
         searchBar.bringToFront();   // 뷰 상단으로 올리기(드러워가 겹쳐도 터치 되도록)
         searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -206,9 +207,9 @@ public class Fragment1 extends Fragment {
 
                 //드로어 집어넣고 나머지 뷰 위로 올리기
                 drawerLayout.closeDrawers();
-                frag1V.bringChildToFront(searchBar);
-                frag1V.bringChildToFront(switchButton);
-                frag1V.bringChildToFront(recyclerView);
+//                frag1V.bringChildToFront(searchBar);
+//                frag1V.bringChildToFront(switchButton);
+//                frag1V.bringChildToFront(recyclerView);
             }
 
         });
@@ -250,7 +251,10 @@ public class Fragment1 extends Fragment {
         }
 
         @Override
-        public void onDrawerClosed(@NonNull View drawerView) {
+        public void onDrawerClosed(@NonNull View drawerView) { //드로어 닫으면 나머지 뷰 앞으로
+            searchBar.bringToFront();
+            switchButton.bringToFront();
+            recyclerView.bringToFront();
         }
 
         @Override
