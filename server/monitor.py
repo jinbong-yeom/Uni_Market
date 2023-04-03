@@ -6,8 +6,8 @@ import os
 from threading import Thread, Event
 
 event = Event()
-uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
-                'uni', 'uni1234', 'db.yoonleeverse.com')
+        uri = " " % (
+                ' ', ' ', ' ')
 client=MongoClient(uri)
 def monitor():
     while(True):
