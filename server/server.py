@@ -76,7 +76,7 @@ def delete():
     return {"Success": True}
 
 if __name__ == '__main__':
-    uri = "mongodb://%s:%s@%s/?authMechanism=DEFAULT&authSource=UniMarketDB" % (
-                'uni', 'uni1234', 'db.yoonleeverse.com')
+    uri = " " % (
+                ' ', ' ', ' ')
     client=MongoClient(uri)
     app.run(host='0.0.0.0', port=60000)
